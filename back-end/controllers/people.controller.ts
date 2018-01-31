@@ -15,12 +15,12 @@ export class PeopleController {
 
 	@Get("one")
 	async getOne(): Promise<IPeople> {
-		return await this.peopleService.find();
+		return await this.peopleService.find("marvio.bezerra@gmail.com");
 	}
 
 	@Get("new")
 	create(): string {
-		this.peopleService.create({ age: 10, name: "Marvio", breed: "Teste" });
+		this.peopleService.create({ _id: "fabiocicone@msn.com", age: 5, name: "Fabio", breed: "May" });
 		return "OK";
 	}
 }

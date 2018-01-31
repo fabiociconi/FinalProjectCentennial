@@ -1,5 +1,5 @@
 require("ts-node/register");
-require("./back-end/src/main");
+require("./back-end/main");
 
 
 

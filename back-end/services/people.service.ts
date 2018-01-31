@@ -16,7 +16,7 @@ export class PeopleService {
 		return await this.peopleModel.find().exec();
 	}
 
-	async find(): Promise<IPeople> {
-		return await this.peopleModel.findOne().exec();
+	async find(email: string): Promise<IPeople> {
+		return await this.peopleModel.findById(email).exec();
 	}
 }

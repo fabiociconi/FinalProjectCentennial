@@ -11,7 +11,7 @@
         "tslint.json": true,
 		"package-lock.json": true,
 		"config": true,
-		"nodemon.json": true,
+		"nodemon.json": false,
 		"README.md": true
     },
     "autoimport.doubleQuotes": true,
