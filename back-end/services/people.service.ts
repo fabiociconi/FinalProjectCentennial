@@ -13,7 +13,8 @@ export class PeopleService {
 	}
 
 	async findAll(): Promise<IPeople[]> {
-		return await this.peopleModel.find().exec();
+		const result = await this.peopleModel.find().exec();
+		return result;
 	}
 
 	async find(email: string): Promise<IPeople> {
