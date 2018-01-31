@@ -1,0 +1,23 @@
+{
+    "files.exclude": {
+        ".editorconfig": true,
+        "wwwroot": true,
+        "tsconfig*.json": true,
+        "webpack.config.ts": true,
+        "**/.git*": true,
+        ".npmignore": false,
+        "**/.svn": true,
+        "**/.hg": true,
+        "node_modules": true,
+        "tslint.json": true,
+		"package-lock.json": true,
+		"config": true,
+		"nodemon.json": true,
+		"README.md": true
+    },
+    "autoimport.doubleQuotes": true,
+    "editor.autoIndent": true,
+    "editor.insertSpaces": false,
+    "editor.detectIndentation": false,    
+    "typescript.tsdk": "./node_modules/typescript/lib",
+}

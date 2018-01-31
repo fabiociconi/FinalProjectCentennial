@@ -1,0 +1,17 @@
+@import "~xcommon/styles/layout-full.scss";
+@import "app-theme.scss";
+
+@include xcommon-reset();
+@include xcommon-layout-full();
+@include xcommon-fullbody();
+
+body {
+	font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+/*Angular*/
+router-outlet[root] + * {
+	display: flex;
+	flex-direction: column;
+	flex: 1 0 0;
+}

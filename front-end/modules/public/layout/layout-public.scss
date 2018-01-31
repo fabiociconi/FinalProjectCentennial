@@ -1,0 +1,19 @@
+.layout-public {
+	.header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 50px;
+		line-height: 50px;
+		width: 100%;
+
+		a {
+			width: 70px;
+			margin-left: 10px;
+		}
+	}
+
+	router-outlet {
+		padding-top: 52px;
+	}
+}

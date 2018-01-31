@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+	<base href="/">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel=icon href="/assets/favicon.png" type="image/png">
+	<title>eWorkshop</title>
+</head>
+<body layout="column" flex>
+	<app layout="column" flex>Loading...</app>
+	<% if (htmlWebpackPlugin.options.production) { %>
+	<script>"serviceWorker" in navigator ? navigator.serviceWorker.register("/sw.js").then(function (e) { console.log("Service worker registration succeeded") }).catch(function (e) { console.log("Service worker registration failed") }) : console.log("Service workers are not supported.");</script>
+	<% } else { %>
+		<script type="text/javascript" src="http://localhost:35729/livereload.js" async></script>
+		<script type="text/javascript" src="/dist/AngularStuff.dll.js"></script>
+	<% } %>
+</body>
+</html>
