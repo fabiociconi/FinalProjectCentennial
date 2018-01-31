@@ -5,7 +5,6 @@
         "tsconfig*.json": true,
         "webpack.config.ts": true,
         "**/.git*": true,
-        ".npmignore": false,
         "**/.svn": true,
         "**/.hg": true,
         "node_modules": true,

@@ -225,6 +225,7 @@ Thumbs.db
 
 dist
 tmp
+wwwroot/
 /styles
 
 *.map.js
