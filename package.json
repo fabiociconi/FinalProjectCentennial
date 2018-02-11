@@ -42,6 +42,7 @@
 		"@nestjs/common": "^4.5.9",
 		"@nestjs/core": "^4.5.10",
 		"@nestjs/mongoose": "^3.0.1",
+		"@nestjs/swagger": "^1.1.4",
 		"core-js": "^2.5.3",
 		"hammerjs": "^2.0.8",
 		"ie-shim": "^0.1.0",

@@ -1,23 +1,27 @@
 import { Model, Document } from "mongoose";
 import { Component } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { PeopleSchema, IPeople } from "../schemas/people.schema";
+import { PeopleSchema, PeopleEntity } from "../schemas/people.schema";
 
 @Component()
 export class PeopleService {
-	constructor( @InjectModel(PeopleSchema) private readonly peopleModel: Model<IPeople & Document>) { }
+	constructor( @InjectModel(PeopleSchema) private readonly peopleModel: Model<PeopleEntity & Document>) { }
 
-	async create(people: IPeople): Promise<IPeople> {
+	async create(people: PeopleEntity): Promise<PeopleEntity> {
 		const createdCat = new this.peopleModel(people);
 		return await createdCat.save();
 	}
 
-	async findAll(): Promise<IPeople[]> {
+	async findAll(): Promise<PeopleEntity[]> {
 		const result = await this.peopleModel.find().exec();
 		return result;
 	}
 
-	async find(email: string): Promise<IPeople> {
+	async find(email: string): Promise<PeopleEntity> {
 		return await this.peopleModel.findById(email).exec();
+	}
+
+	async findB(email: string): Promise<PeopleEntity[]> {
+		return await this.peopleModel.find({ _id: email }).exec();
 	}
 }
