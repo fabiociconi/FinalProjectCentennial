@@ -1,53 +1,24 @@
-import { Get, Controller } from "@nestjs/common";
+import { Get, Post, Controller, Param } from "@nestjs/common";
 import { PeopleService } from "../services/people.service";
 import { PeopleEntity } from "../schemas/people.schema";
 
 @Controller("api/people")
 export class PeopleController {
 	constructor(private peopleService: PeopleService) {
-
 	}
 
 	@Get()
 	async getAll(): Promise<PeopleEntity[]> {
-		return await this.peopleService.findB("marvio.bezerra@gmail.com");
+		return await this.peopleService.findAll();
 	}
 
-	@Get("one")
-	async getOne(): Promise<PeopleEntity> {
-		return await this.peopleService.find("marvio.bezerra@gmail.com");
+	@Get(":id")
+	async getOne(@Param() params): Promise<PeopleEntity> {
+		return await this.peopleService.find(params.id);
 	}
 
-	@Get("onex")
-	getOneX(): PeopleEntity {
-		return {
-			_id: "marvio.bezerra@gmail.com",
-			age: 37,
-			name: "Marvio",
-			breed: "April",
-			address: [{
-				_id: null,
-				city: "Paris",
-				number: "3",
-				street: "Jack"
-			}]
-		};
-	}
-
-	@Get("new")
-	create(): string {
-		this.peopleService.create({
-			_id: "marvio.bezerra@gmail.com",
-			age: 37,
-			name: "Marvio",
-			breed: "April",
-			address: [{
-				_id: null,
-				city: "Paris",
-				number: "3",
-				street: "Jack"
-			}]
-		});
-		return "OK";
+	@Post()
+	async save(): Promise<PeopleEntity> {
+		return null;
 	}
 }

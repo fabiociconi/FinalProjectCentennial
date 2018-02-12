@@ -1,6 +1,7 @@
-import { HomePulicComponent, LayoutPublicComponent } from "./layout";
+import { HomePulicComponent, LayoutPublicComponent, BrunoComponent } from "./layout";
 
 export const PublicComponents = [
 	HomePulicComponent,
-	LayoutPublicComponent
+	LayoutPublicComponent,
+	BrunoComponent
 ];
