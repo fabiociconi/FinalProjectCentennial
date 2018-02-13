@@ -3,35 +3,32 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { Stream } from "stream";
 import { ApiModelProperty } from "@nestjs/swagger";
 
-export class PeopleEntity {
-	@ApiModelProperty()
-	_id: string;
-
-	@ApiModelProperty()
-	name: string;
-
-	@ApiModelProperty()
-	age: number;
-	
-	@ApiModelProperty()
-	breed: string;
-
-	@ApiModelProperty()
+export interface PeopleEntity {
+	_id: string,
+	name: string,
+	age: number,
+	breed: string,
 	address: AddressEntity[];
 }
 
-export class AddressEntity {
-	@ApiModelProperty()	
+export interface AddressEntity {
 	_id: string;
+	street: string,
+	number: string,
+	city: string
+}
 
-	@ApiModelProperty()	
-	street: string;
+export interface WorkshopEntity {
+	_id: string,
+	name: string,
+	workingHours: string,
+	address: [AddressEntity]
+}
 
-	@ApiModelProperty()	
-	number: string;
-
-	@ApiModelProperty()	
-	city: string;
+export interface AppointmentEntity {
+	workshopName: string,
+	time: string,
+	address: AddressEntity
 }
 
 export const AddressSchema = new mongoose.Schema(
@@ -54,6 +51,29 @@ export const PeopleSchema = new mongoose.Schema(
 		_id: false
 	});
 
+export const WorkshopSchema = new mongoose.Schema(
+	{
+		_id: String,
+		name: String,
+		workingHours: String,
+		address: [AddressSchema]
+	},
+	{
+		_id: false
+	});
+
+export const AppointmentSchema = new mongoose.Schema(
+	{
+		workshopName: String,
+		time: String,
+		address: AddressSchema
+	});
+
+
+
 export const SchemaFeatures = MongooseModule.forFeature([
-	{ name: "People", schema: PeopleSchema }
+	{ name: "People", schema: PeopleSchema },
+	{ name: "Workshop", schema: WorkshopSchema },
+	{ name: "Appointment", schema: AppointmentSchema },
+
 ]);
