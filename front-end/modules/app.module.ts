@@ -3,6 +3,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
 import { CustomFormsModule  } from "ng2-validation";
+import { XCommonAutoFormModule, XCommonModule  } from "xcommon";
 
 import { AppRouteModule } from "./route";
 import { AdminModule } from "./admin";
@@ -16,6 +17,8 @@ import "./app.files";
 
 @NgModule({
 	imports: [
+		XCommonAutoFormModule,
+		XCommonModule,
 		AppRouteModule,
 		BrowserModule,
 		BrowserAnimationsModule,
