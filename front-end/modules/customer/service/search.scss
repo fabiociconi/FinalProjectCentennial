@@ -1,0 +1,47 @@
+.search {
+	padding: 10px;
+
+	.search-box {
+		height: 55px;
+
+		.mat-input-underline,
+		.mat-form-field-underline {
+			background-color: none !important;
+		}
+	}
+
+	.search-result {
+		margin-top: 10px;
+		min-height: 100%;
+
+		.search-map {
+			flex-grow: 1 !important;
+		}
+
+		.search-filter {
+			width: 250px;
+			padding: 10px;
+
+			.search-filter-location {
+			}
+
+			.search-filter-services {
+
+				ul {
+					li {
+						max-width: 230px;
+						overflow: hidden;
+					}
+				}
+			}
+
+			.search-filter-distance {
+				width: 100%;
+
+				mat-slider {
+					width: 100%;
+				}
+			}
+		}
+	}
+}

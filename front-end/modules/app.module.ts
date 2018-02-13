@@ -1,31 +1,36 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations"; 
-
 import { BrowserModule } from "@angular/platform-browser";
-import { XCommonAutoFormModule } from "xcommon";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { FormsModule } from "@angular/forms";
+import { CustomFormsModule  } from "ng2-validation";
 
-import "./assets";
-
+import { AppRouteModule } from "./route";
+import { AdminModule } from "./admin";
+import { PublicModule } from "./public";
+import { WorkshopModule } from "./workshop";
+import { CustomerModule } from "./customer";
+import { ServiceModule } from "./service";
+import { MaterialModule, SharedModule } from "./shared";
 import { AppComponent } from "./app.component";
-import { PublicModule } from "./public/public.module";
-import { RoutesModule } from "./routes/routes.module";
+import "./app.files";
 
 @NgModule({
-    imports: [
-		CommonModule,
+	imports: [
+		AppRouteModule,
 		BrowserModule,
 		BrowserAnimationsModule,
-		ReactiveFormsModule,
-		FormsModule,
+		MaterialModule,
+		ServiceModule,
+		SharedModule,
 		PublicModule,
-		RoutesModule,
-		XCommonAutoFormModule
-    ],
-    declarations: [
-        AppComponent
-    ],
-    bootstrap: [AppComponent]
+		AdminModule,
+		WorkshopModule,
+		CustomerModule,
+		FormsModule
+	],
+	declarations: [
+		AppComponent
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

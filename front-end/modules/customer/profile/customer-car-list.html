@@ -1,0 +1,22 @@
+<div class="customer-car-list">
+	<div class="title">
+		Your cars
+	</div>
+	<div class="form-viewer" *ngIf="!Ready">
+		Loading...
+	</div>
+	<div class="form-viewer list" *ngIf="Ready">
+		<h2>Cars registered: {{Cars.length}}</h2>
+		<br />
+		<ul class="carList">
+			<li class="carItem" *ngFor="let car of Cars" layout="row">
+				<icon icon="car"></icon>
+				<span>{{car.Brand}} {{car.Model}} {{car.Year}}</span>
+				<button mat-raised-button color="accent" [routerLink]="['/customer/profile/car/', car.IdCar]">Edit</button>
+				<button mat-raised-button color="warn" [routerLink]="['/customer/profile/car/', car.IdCar]">Delete</button>	
+			</li>
+		</ul>
+		<br />
+		<button mat-raised-button color="primary" [routerLink]="['/customer/profile/car/', 'newcar']">New Car</button>
+	</div>
+</div>

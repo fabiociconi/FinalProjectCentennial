@@ -1,0 +1,32 @@
+<div class="workshop-price-detail">
+	<div class="title">
+		Service Detail
+	</div>
+	<div *ngIf="!Ready">
+		Loading...
+	</div>
+	<form *ngIf="Ready" class="form-viewer" [formGroup]="ServiceDetailForm" (ngSubmit)="Save(ServiceDetailForm.value)" layout="column">
+
+		<div layout="row" flex>
+			<mat-form-field flex>
+				<mat-select formControlName="IdService" placeholder="Service Name">
+					<mat-option *ngFor="let service of FilteredServices" [value]="service.IdService">
+						{{service.Name}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+
+		<div layout="row" flex>
+			<mat-form-field flex>
+				<input matInput formControlName="Price" placeholder="Price">
+			</mat-form-field>
+		</div>
+
+		<div layout="row" flex content="end">
+			<button mat-raised-button color="secundary" type="button" (click)="Back()">Back</button>
+			<button mat-raised-button color="warn" type="button" (click)="Delete()">Delete</button>
+			<button mat-raised-button color="primary" type="submit" [disabled]="!ServiceDetailForm.valid">Save</button>
+		</div>
+	</form>
+</div>

@@ -1,19 +1,33 @@
+:host {
+	background: url('/assets/bgLogin.jpg') no-repeat center center fixed;
+	background-size: cover;	
+}
+
 .layout-public {
 	.header {
 		position: fixed;
-		top: 0;
 		left: 0;
-		height: 50px;
-		line-height: 50px;
+		top: 0;
+		height: 56px;
+		line-height: 56px;
 		width: 100%;
+		background-color: rgba(160, 160, 160, 0.65);
 
-		a {
-			width: 70px;
-			margin-left: 10px;
+		.menu {
+			a {
+				display: inline-block;
+				width: 110px;
+				color: #fff;
+				text-align: center;
+
+				&:hover {
+					background-color: rgba(0, 0, 0, 0.2);
+				}
+			}
 		}
 	}
 
 	router-outlet {
-		padding-top: 52px;
+		margin-top: 56px;
 	}
 }

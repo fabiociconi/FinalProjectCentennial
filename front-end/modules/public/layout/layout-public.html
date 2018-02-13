@@ -1,8 +1,23 @@
 <div class="layout-public" layout="column" flex>
-	<div class="header" layout="row" shadow="2">
-		<a routerLink="/">Home</a>
-		<div flex></div>
-		<a>Sign in</a>
+	<div class="header">
+		<div class="menu" layout="row">
+			<a routerLink="/">
+				Home
+			</a>
+			<div flex></div>
+			<a routerLink="/about">
+				About Us
+			</a>
+			<a *ngIf="!IsAuthenticated" routerLink="/account/sign-in">
+				Sign In
+			</a>
+			<a *ngIf="!IsAuthenticated" routerLink="/account/sign-up">
+				Sign Up
+			</a>
+			<a *ngIf="IsAuthenticated" (click)="Redirect()">
+				Hi {{Name}}
+			</a>
+		</div>
 	</div>
 	<router-outlet root></router-outlet>
 </div>

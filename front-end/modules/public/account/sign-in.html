@@ -1,0 +1,38 @@
+<div class="sign-in" layout="column" flex content="center start">
+	<form *ngIf="Ready" [formGroup]="SignInForm" (ngSubmit)="SignIn(SignInForm.value)" layout="column">
+		<div class="logo" layout="column" content="center start">
+			<img src="/assets/carBlack.png" />
+			<span>
+				eWorkshop
+			</span>
+		</div>
+		<div>
+			<div layout="row">
+				<mat-form-field>
+					<input matInput formControlName="Email" type="email" placeholder="Email">
+				</mat-form-field>
+			</div>
+
+			<div layout="row">
+				<mat-form-field>
+					<input matInput formControlName="Password" type="password" placeholder="Password">
+				</mat-form-field>
+			</div>
+
+			<div layout="row" content="center">
+				<mat-checkbox formControlName="RememberMe">Remember me</mat-checkbox>
+				<div flex></div>
+				<button mat-raised-button color="primary" type="submit" [disabled]="!SignInForm.valid">Sign In</button>
+			</div>
+
+			<div class="links" layout="column" content="center">
+				<a routerLink="/account/sign-up">Create your account as customer</a>
+				<a routerLink="/account/sign-up-workshop">Create your account as Workshop</a>
+			</div>
+
+			<div *ngIf="ShowMessage" class="error-message">
+				{{Message}}
+			</div>
+		</div>
+	</form>
+</div>

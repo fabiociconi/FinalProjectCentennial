@@ -1,0 +1,13 @@
+@import "~xcommon/styles/functions.scss";
+
+.home-public {
+	.title-name {
+		background-color: transparent;
+		font-size: 200px;
+		color: rgba(244, 244, 244, 0.80);
+
+		@include respond-to($device-small) {
+			font-size: 50px;
+		}
+	}
+}

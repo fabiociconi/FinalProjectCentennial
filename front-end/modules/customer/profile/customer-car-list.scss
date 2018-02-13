@@ -1,0 +1,19 @@
+.customer-car-list {
+	margin: 10px;
+
+	button {
+		margin-left: 5px;
+	}
+
+	.carList {
+		max-width: 500px;
+
+		.carItem {
+			margin-top: 10px;
+
+			span {
+				margin: 8px 10px;
+			}
+		}
+	}
+}

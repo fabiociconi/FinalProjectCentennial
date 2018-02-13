@@ -1,7 +1,7 @@
 import * as mongoose from "mongoose";
 import { MongooseModule } from "@nestjs/mongoose";
 import { Stream } from "stream";
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiModelProperty } from "@nestjs/swagger";
 
 export class PeopleEntity {
 	@ApiModelProperty()

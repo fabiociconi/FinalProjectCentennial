@@ -1,0 +1,54 @@
+<div class="workshop-appointment-detail">
+	<div class="title">
+		Appointment Detail
+	</div>
+	<div *ngIf="!Ready">
+		Loading...
+	</div>
+	<form *ngIf="Ready" class="form-viewer" [formGroup]="AppointmentForm" (ngSubmit)="SaveChanges(AppointmentForm.value)" layout="column">
+		<div layout="row" flex>
+			<mat-form-field flex>
+				<input formControlName="AppointmentDate" matInput [matDatepicker]="picker" placeholder="Choose a date">
+				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+				<mat-datepicker #picker></mat-datepicker>
+			</mat-form-field>
+		</div>
+		<div layout="row" flex>
+			<mat-form-field flex>
+				<mat-select formControlName="Status" placeholder="Status">
+					<mat-option [value]="1">Aberto</mat-option>
+					<mat-option [value]="2">Encerrado</mat-option>
+					<mat-option [value]="3">Cancelado</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+		<div layout="row" flex>
+			<mat-form-field flex>
+				<input matInput placeholder="Car" value=" {{Appointment.Car.Brand}}, {{Appointment.Car.Model}}" readonly>
+			</mat-form-field>
+		</div>
+		<div layout="row" flex>
+			<mat-form-field flex>
+				<input matInput placeholder="Customer" value=" {{Appointment.Customer.LastName}}, {{Appointment.Customer.FirstName}}" readonly>
+			</mat-form-field>
+		</div>
+		<div layout="row" flex>
+			<mat-form-field flex>
+				<input matInput placeholder="Customer Email" value=" {{Appointment.Customer.Email}}" readonly>
+			</mat-form-field>
+		</div>
+		<div class="services" formArrayName="Services">
+			<div *ngFor="let service of AppointmentForm.get('Services').controls; let i=index" [formGroup]="service">
+				<div formGroupName="Service">
+					<mat-checkbox formControlName="Selected">{{service.controls.Service.controls.Name.value}}</mat-checkbox>
+				</div>
+			</div>
+		</div>
+		<div layout="row" flex content="end">
+			<button mat-raised-button color="secundary" type="button" (click)="Back()">Back</button>
+			<button mat-raised-button color="warn" type="button" (click)="Delete()">Delete</button>
+			<button mat-raised-button color="primary" type="submit" [disabled]="!AppointmentForm.valid">Save</button>
+		</div>
+
+	</form>
+</div>
