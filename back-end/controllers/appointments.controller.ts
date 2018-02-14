@@ -13,7 +13,7 @@ export class AppointmentController {
 	}
 
 	@Get(":id")
-	async getOne( @Param() params): Promise<AppointmentEntity> {
+	async getOne(@Param() params): Promise<AppointmentEntity> {
 		return await this.appoitService.find(params.id);
 	}
 
