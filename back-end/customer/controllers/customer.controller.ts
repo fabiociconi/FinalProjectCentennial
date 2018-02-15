@@ -1,27 +1,31 @@
 import { Get, Post, Controller, Param, Body } from "@nestjs/common";
-import { ApiBearerAuth } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiUseTags, ApiResponse } from "@nestjs/swagger";
 
-import { ICustomerEntity, IAddressEntity } from "../../../entity";
+import { CustomerEntity, AddressEntity } from "../../../entity";
 import { CustomerService } from "../services/customer.service";
 
 @ApiBearerAuth()
-@Controller("api/customer/profile")
+@ApiUseTags("customer")
+@Controller("api/customer")
 export class ProfilerController {
 	constructor(private customerService: CustomerService) {
 	}
 
 	@Get()
-	async getAll(): Promise<ICustomerEntity[]> {
+	@ApiResponse({ status: 200, type: CustomerEntity, isArray: true })
+	async getAll(): Promise<CustomerEntity[]> {
 		return await this.customerService.findAll();
 	}
 
 	@Get(":id")
-	async getOne(@Param("id") id: string): Promise<ICustomerEntity> {
+	@ApiResponse({ status: 200, type: CustomerEntity })
+	async getOne(@Param("id") id: string): Promise<CustomerEntity> {
 		return await this.customerService.find(id);
 	}
 
-	@Get("save")
-	async save(@Body() customer: ICustomerEntity): Promise<ICustomerEntity> {
+	@Post()
+	@ApiResponse({ status: 200, type: CustomerEntity })
+	async save(@Body() customer: CustomerEntity): Promise<CustomerEntity> {
 		return this.customerService.create(customer);
 	}
 }

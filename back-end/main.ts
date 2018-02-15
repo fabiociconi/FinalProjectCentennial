@@ -10,8 +10,8 @@ async function bootstrap() {
 		.setTitle("eWorkshop 2.0")
 		.setDescription("eWorkshop 2.0 API description")
 		.setVersion("1.0")
+		.setBasePath("/api")
 		.addBearerAuth("Authorization", "header")
-		.addTag("eWorkshop")
 		.build();
 
 	const document = SwaggerModule.createDocument(app, options);

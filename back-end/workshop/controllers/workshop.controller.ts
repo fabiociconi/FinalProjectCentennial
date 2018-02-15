@@ -1,27 +1,32 @@
 import { Get, Post, Controller, Param, Body } from "@nestjs/common";
-import { ApiBearerAuth } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiUseTags, ApiResponse } from "@nestjs/swagger";
 
-import { IWorkshopEntity, IAddressEntity } from "../../../entity";
+import { WorkshopEntity, AddressEntity } from "../../../entity";
+import { Execute } from "../../../entity/execute";
 import { WorkshopService } from "../services/workshop.service";
 
 @ApiBearerAuth()
-@Controller("api/workshop/profile")
+@ApiUseTags("workshop")
+@Controller("api/workshop")
 export class WorkshopController {
 	constructor(private workshopService: WorkshopService) {
 	}
 
 	@Get()
-	async getAll(): Promise<IWorkshopEntity[]> {
+	@ApiResponse({ status: 200, type: WorkshopEntity, isArray: true })
+	async getAll(): Promise<WorkshopEntity[]> {
 		return await this.workshopService.findAll();
 	}
 
 	@Get(":id")
-	async getOne(@Param("id") id: string): Promise<IWorkshopEntity> {
+	@ApiResponse({ status: 200, type: WorkshopEntity })
+	async getOne(@Param("id") id: string): Promise<WorkshopEntity> {
 		return await this.workshopService.find(id);
 	}
 
-	@Get("save")
-	async save(@Body() workshop: IWorkshopEntity): Promise<IWorkshopEntity> {
+	@Post()
+	@ApiResponse({ status: 200, type: WorkshopEntity })
+	async save(@Body() workshop: WorkshopEntity): Promise<WorkshopEntity> {
 		return this.workshopService.create(workshop);
 	}
 }
