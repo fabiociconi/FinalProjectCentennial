@@ -10,6 +10,7 @@ async function bootstrap() {
 		.setTitle("eWorkshop 2.0")
 		.setDescription("eWorkshop 2.0 API description")
 		.setVersion("1.0")
+		.addBearerAuth("Authorization", "header")
 		.addTag("eWorkshop")
 		.build();
 
