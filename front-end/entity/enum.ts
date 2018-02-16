@@ -26,4 +26,3 @@ export enum EntityAction {
 	Update = 2,
 	Delete = 3
 }
-
