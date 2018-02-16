@@ -1,7 +1,7 @@
 import { Module, NestModule, MiddlewaresConsumer } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 
-import { DataBaseSchemas } from "../schema/register.schema";
+import { DataBaseSchemas } from "../schema/";
 import { CustomerService } from "./customer.service";
 import { WorkshopService } from "./workshop.service";
 import { AuthService } from "./auth.service";

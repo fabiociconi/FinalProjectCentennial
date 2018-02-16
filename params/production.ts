@@ -1,3 +1,5 @@
 export class ApplicationConfig {
-	TokenSecret = "pqVCfoil@?N@0";
+	public static TokenSecret = "pqVCfoil@?N@0";
+	public static DataBaseUri = "mongodb://localhost/eworkshop";
+	public static Production = true;
 }

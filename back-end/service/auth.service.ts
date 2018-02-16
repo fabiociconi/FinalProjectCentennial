@@ -3,10 +3,10 @@ import { Model, Document } from "mongoose";
 import { Component } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 
-import { TokenResultEntity, UserEntity, LoginEntity, TokenPayload } from "../../entity";
-import { Execute, MessageType } from "../../entity/execute";
+import { UserEntity, TokenResultEntity, SingUpEntity, SingInEntity, TokenPayload } from "../../entity";
+import { Execute, MessageType, RoleType } from "../../entity";
 import { ApplicationConfig } from "../../params";
-import { UserSchema } from "../schema/register.schema";
+import { UserSchema } from "../schema/";
 import { CustomerService } from "./customer.service";
 import { WorkshopService } from "./workshop.service";
 import { ExecuteMessageType } from "xcommon";
@@ -18,45 +18,59 @@ export class AuthService {
 		private customerService: CustomerService,
 		private workshopService: WorkshopService) { }
 
-	public async signup(user: UserEntity): Promise<Execute<TokenResultEntity>> {
+	public async signup(singUp: SingUpEntity): Promise<Execute<TokenResultEntity>> {
 		const result = new Execute<TokenResultEntity>();
-		const check = await this.customerService.find(user._id);
+		const check = await this.userModel.findById(singUp.email).exec();
 
 		if (check) {
 			result.addMessage(MessageType.Error, "User already exists");
 			return result;
 		}
 
+		const user: UserEntity = {
+			_id: singUp.email,
+			role: singUp.role,
+			name: `${singUp.firstName} ${singUp.lastName}`,
+			passowrd: singUp.passowrd
+		};
+
 		const userSaveResult = await new this.userModel(user).save();
 
-		if (user.role === 2) {
+		if (singUp.role === 2) {
 			const customerSaveResult = await this.customerService.create({
-				_id: user._id,
-				firstName: user.firstName,
-				lastName: user.lastName,
-				address: []
+				_id: singUp.email,
+				person: {
+					firstName: singUp.firstName,
+					lastName: singUp.lastName,
+					email: singUp.email,
+					birthDay: new Date()
+				},
+				address: [],
+				cars: []
 			});
 		}
 
-		if (user.role === 3) {
+		if (singUp.role === 3) {
 			const workshopSaveResult = await this.workshopService.create({
-				_id: user._id,
-				legalName: user.firstName,
-				comertialName: user.lastName,
+				_id: singUp.email,
+				company: {
+					legalName: singUp.firstName,
+					comertialName: singUp.lastName
+				},
 				address: []
 			});
 		}
 
 		result.entity = await this.createToken({
-			email: user._id,
-			name: user.firstName,
-			role: 1
+			email: singUp.email,
+			name: singUp.firstName,
+			role: singUp.role
 		});
 
 		return result;
 	}
 
-	public async signin(login: LoginEntity): Promise<Execute<TokenResultEntity>> {
+	public async signin(login: SingInEntity): Promise<Execute<TokenResultEntity>> {
 
 		const result = new Execute<TokenResultEntity>();
 		const user = await this.userModel.findById(login.email).exec();
@@ -69,7 +83,7 @@ export class AuthService {
 		result.entity = await this.createToken({
 			email: user._id,
 			role: user.role,
-			name: user.firstName
+			name: user.name
 		});
 
 		return result;
