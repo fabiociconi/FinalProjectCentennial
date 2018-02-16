@@ -8,16 +8,16 @@ import { WorkshopSchema, AddressSchema } from "../schema/register.schema";
 export class WorkshopService {
 	constructor(@InjectModel(WorkshopSchema) private readonly workshopModel: Model<WorkshopEntity & Document>) { }
 
-	async create(appointment: WorkshopEntity): Promise<WorkshopEntity> {
-		const createdCat = new this.workshopModel(appointment);
-		return await createdCat.save();
+	public async create(workshop: WorkshopEntity): Promise<WorkshopEntity> {
+		const model = new this.workshopModel(workshop);
+		return await model.save();
 	}
 
-	async findAll(): Promise<WorkshopEntity[]> {
+	public async findAll(): Promise<WorkshopEntity[]> {
 		return await this.workshopModel.find().exec();
 	}
 
-	async find(id: string): Promise<WorkshopEntity> {
+	public async find(id: string): Promise<WorkshopEntity> {
 		return await this.workshopModel.findById(id).exec();
 	}
 }

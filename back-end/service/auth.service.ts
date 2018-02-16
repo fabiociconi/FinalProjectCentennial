@@ -4,10 +4,12 @@ import { Component } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 
 import { TokenResultEntity, UserEntity, LoginEntity, TokenPayload } from "../../entity";
+import { Execute, MessageType } from "../../entity/execute";
 import { ApplicationConfig } from "../../params";
 import { UserSchema } from "../schema/register.schema";
 import { CustomerService } from "./customer.service";
 import { WorkshopService } from "./workshop.service";
+import { ExecuteMessageType } from "xcommon";
 
 @Component()
 export class AuthService {
@@ -16,79 +18,74 @@ export class AuthService {
 		private customerService: CustomerService,
 		private workshopService: WorkshopService) { }
 
-	public async signup(user: UserEntity): Promise<UserEntity> {
+	public async signup(user: UserEntity): Promise<Execute<TokenResultEntity>> {
+		const result = new Execute<TokenResultEntity>();
+		const check = await this.customerService.find(user._id);
 
-this.userModel.f
+		if (check) {
+			result.addMessage(MessageType.Error, "User already exists");
+			return result;
+		}
 
-		return new Promise<UserEntity>(async (resolve, reject) => {
+		const userSaveResult = await new this.userModel(user).save();
 
-			const check = await this.customerService.find(user._id);
-
-			if (check) {
-				reject("User already exists");
-				return;
-			}
-
-			const userSaveResult = await new this.userModel(user).save();
-
-			if (user.role === 2) {
-				const customerSaveResult = await this.customerService.create({
-					_id: user._id,
-					firstName: user.firstName,
-					lastName: user.lastName,
-					address: []
-				});
-			}
-
-			if (user.role === 3) {
-				const workshopSaveResult = await this.workshopService.create({
-					_id: user._id,
-					legalName: user.firstName,
-					comertialName: user.lastName,
-					address: []
-				});
-			}
-
-			const result = this.createToken({
-				email: user._id,
-				name: user.firstName,
-				role: 1
+		if (user.role === 2) {
+			const customerSaveResult = await this.customerService.create({
+				_id: user._id,
+				firstName: user.firstName,
+				lastName: user.lastName,
+				address: []
 			});
+		}
 
-			resolve(result);
+		if (user.role === 3) {
+			const workshopSaveResult = await this.workshopService.create({
+				_id: user._id,
+				legalName: user.firstName,
+				comertialName: user.lastName,
+				address: []
+			});
+		}
+
+		result.entity = await this.createToken({
+			email: user._id,
+			name: user.firstName,
+			role: 1
 		});
+
+		return result;
 	}
 
-	public async signin(login: LoginEntity): Promise<TokenResultEntity> {
+	public async signin(login: LoginEntity): Promise<Execute<TokenResultEntity>> {
 
-		const promise = this.userModel.findById(login.email).exec();
+		const result = new Execute<TokenResultEntity>();
+		const user = await this.userModel.findById(login.email).exec();
+
+		if (!user || user.passowrd !== login.password) {
+			result.addMessage(MessageType.Error, "Invalid user name and/or passowrd");
+			return result;
+		}
+
+		result.entity = await this.createToken({
+			email: user._id,
+			role: user.role,
+			name: user.firstName
+		});
+
+		return result;
+	}
+
+	private createToken(payload: TokenPayload): Promise<TokenResultEntity> {
 
 		return new Promise<TokenResultEntity>((resolve, reject) => {
+			const expires = 60 * 60;
+			const token = jwt.sign(payload, ApplicationConfig.TokenSecret, { expiresIn: expires });
 
-			promise.then(user => {
-				if (!user || user.passowrd !== login.password) {
-					reject("Invalid User");
-					return;
-				}
-
-				resolve(this.createToken({
-					email: user._id,
-					role: user.role,
-					name: user.firstName
-				}));
+			resolve({
+				expires,
+				token
 			});
-
 		});
-	}
-
-	private createToken(payload: TokenPayload): TokenResultEntity {
-		const expires = 60 * 60;
-		const token = jwt.sign(payload, ApplicationConfig.TokenSecret, { expiresIn: expires });
-
-		return {
-			expires,
-			token
-		};
 	}
 
 	async validateUser(signedUser): Promise<boolean> {
