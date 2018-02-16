@@ -1,7 +1,8 @@
 import * as passport from "passport";
 import { ExtractJwt, Strategy, VerifiedCallback, StrategyOptions } from "passport-jwt";
 import { Component, Inject } from "@nestjs/common";
-import { AuthService } from "../services/auth.service";
+import { AuthService } from "../../service/auth.service";
+import { ApplicationConfig } from "../../../params";
 import { NextFunction } from "express-serve-static-core";
 
 @Component()
@@ -11,7 +12,7 @@ export class JwtStrategy extends Strategy {
 		super({
 			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 			passReqToCallback: true,
-			secretOrKey: "secret"
+			secretOrKey: ApplicationConfig.TokenSecret
 		},
 			(req, payload, done) => this.verify(req, payload, done)
 		);

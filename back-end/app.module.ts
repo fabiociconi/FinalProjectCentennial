@@ -7,15 +7,14 @@ import { ServeStaticMiddleware } from "@nest-middlewares/serve-static";
 import { AuthModule } from "./auth/auth.module";
 import { CustomerModule } from "./customer/customer.module";
 import { WorkshopModule } from "./workshop/workshop.module";
-import { RegisterFeatures } from "./schema/register.schema";
+import { ServiceModule } from "./service/service.module";
 
 @Module({
 	imports: [
-		MongooseModule.forRoot("mongodb://localhost/eworkshop"),
-		RegisterFeatures,
 		AuthModule,
 		CustomerModule,
-		WorkshopModule
+		WorkshopModule,
+		ServiceModule
 	]
 })
 export class ApplicationModule implements NestModule {

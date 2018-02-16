@@ -1,9 +1,8 @@
 import { Get, Post, Controller, Param, Body } from "@nestjs/common";
 import { ApiBearerAuth, ApiUseTags, ApiResponse } from "@nestjs/swagger";
 
-import { WorkshopEntity, AddressEntity } from "../../../entity";
-import { Execute } from "../../../entity/execute";
-import { WorkshopService } from "../services/workshop.service";
+import { WorkshopEntity, AddressEntity } from "../../entity";
+import { WorkshopService } from "../service/workshop.service";
 
 @ApiBearerAuth()
 @ApiUseTags("workshop")

@@ -1,8 +1,8 @@
-import { Get, Post, Controller, Param, Body } from "@nestjs/common";
+import { Get, Post, Controller, Param, Body, Req } from "@nestjs/common";
 import { ApiBearerAuth, ApiUseTags, ApiResponse } from "@nestjs/swagger";
 
-import { CustomerEntity, AddressEntity } from "../../../entity";
-import { CustomerService } from "../services/customer.service";
+import { CustomerEntity, AddressEntity, TokenPayload } from "../../entity";
+import { CustomerService } from "../service/customer.service";
 
 @ApiBearerAuth()
 @ApiUseTags("customer")
@@ -12,15 +12,10 @@ export class ProfilerController {
 	}
 
 	@Get()
-	@ApiResponse({ status: 200, type: CustomerEntity, isArray: true })
-	async getAll(): Promise<CustomerEntity[]> {
-		return await this.customerService.findAll();
-	}
-
-	@Get(":id")
 	@ApiResponse({ status: 200, type: CustomerEntity })
-	async getOne(@Param("id") id: string): Promise<CustomerEntity> {
-		return await this.customerService.find(id);
+	async getOne(@Req() req: any): Promise<CustomerEntity> {
+		const user: TokenPayload = req.user;
+		return await this.customerService.find(user.email);
 	}
 
 	@Post()
