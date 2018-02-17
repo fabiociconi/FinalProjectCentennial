@@ -4,7 +4,7 @@ export const UserSchema = new mongoose.Schema(
 	{
 		_id: String,
 		name: String,
-		passowrd: String,
+		password: String,
 		role: Number
 	},
 	{
@@ -13,10 +13,12 @@ export const UserSchema = new mongoose.Schema(
 
 export const AddressSchema = new mongoose.Schema(
 	{
+		unity: Number,
+		number: Number,
 		street: String,
-		number: String,
 		city: String,
 		province: String,
-		postalcode: String
+		country: String,
+		postalCode: String
 	}
 );

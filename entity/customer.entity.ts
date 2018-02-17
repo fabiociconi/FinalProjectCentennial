@@ -12,6 +12,9 @@ export class PersonEntity extends EntityBase {
 	email: string;
 
 	@ApiModelProperty()
+	phone: number;
+
+	@ApiModelProperty()
 	birthDay: Date;
 }
 
