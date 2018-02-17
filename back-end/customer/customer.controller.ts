@@ -33,10 +33,17 @@ export class ProfilerController {
 		return this.customerService.findCars(user.email);
 	}
 
+	@Get("car/:id")
+	@ApiResponse({ status: 200, type: CarEntity })
+	public async getCar(@Req() req: any, @Param("id") idCar: string): Promise<CarEntity> {
+		const user: TokenPayload = req.user;
+		return this.customerService.findCar(user.email, idCar);
+	}
+
 	@Post("car")
 	@ApiResponse({ status: 200, type: CarEntity })
 	public async postCar(@Req() req: any, @Body() car: CarEntity): Promise<CarEntity> {
 		const user: TokenPayload = req.user;
-		return this.customerService.saveCars(user.email, car);
+		return this.customerService.saveCar(user.email, car);
 	}
 }

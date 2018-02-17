@@ -11,12 +11,6 @@ export class WorkshopController {
 	constructor(private workshopService: WorkshopService) {
 	}
 
-	/*@Get()
-	@ApiResponse({ status: 200, type: WorkshopEntity, isArray: true })
-	async getAll(): Promise<WorkshopEntity[]> {
-		return await this.workshopService.findAll();
-	}*/
-
 	@Get(":id")
 	@ApiResponse({ status: 200, type: WorkshopEntity })
 	async getOne(@Param("id") id: string): Promise<WorkshopEntity> {

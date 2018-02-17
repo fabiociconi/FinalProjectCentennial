@@ -19,7 +19,7 @@ export class SignInComponent implements OnInit {
 	public Message = "";
 	public SignInForm: FormGroup;
 
-	constructor(private autoFormService: AutoFormService, private authService: AuthService) {  }
+	constructor(private autoFormService: AutoFormService, private authService: AuthService) { }
 
 	public SignIn(entity: ISignInEntity): void {
 		this.authService.SignIn(entity)
@@ -35,7 +35,7 @@ export class SignInComponent implements OnInit {
 			});
 	}
 
-	public ngOnInit(): void	{
+	public ngOnInit(): void {
 
 		if (this.authService.IsAuthenticated()) {
 			this.authService.InitialRedirect();
@@ -44,25 +44,23 @@ export class SignInComponent implements OnInit {
 
 		const autoForm = this.autoFormService.CreateNew<ISignInEntity>();
 
-		var Email = "";
-		var Password = "";
-		var RememberMe = false;
+		const model = {
+			Email: "",
+			Password: "",
+			RememberMe: false
+		};
 
 		if (localStorage.getItem("RememberMe") === "true") {
-			Email = localStorage.getItem("Email");
-			Password = localStorage.getItem("Password");
-			RememberMe = true;
+			model.Email = localStorage.getItem("Email");
+			model.Password = localStorage.getItem("Password");
+			model.RememberMe = true;
 		}
 
 		this.SignInForm = autoForm
 			.AddValidator(c => c.Email, Validators.email)
 			.AddValidator(c => c.Email, Validators.required)
 			.AddValidator(c => c.Password, Validators.required)
-			.Build({
-				Email: Email,
-				Password: Password,
-				RememberMe: RememberMe
-			});
+			.Build(model);
 
 		this.Ready = true;
 	}

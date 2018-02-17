@@ -29,14 +29,20 @@ export class CustomerService {
 		return result ? result.cars : null;
 	}
 
-	public async saveCars(_id: string, car: CarEntity): Promise<CarEntity> {
+	public async findCar(_id: string, _idCar): Promise<CarEntity> {
+		const result = await this.customerModel.findOne({ _id, "cars._id": _idCar }, { "cars.$": 1 }).exec();
+		return result && result.cars ? result.cars[0] : null;
+	}
 
-		if (car._id) {
-			await this.customerModel.findOneAndUpdate({ _id, "cars._id": car._id }, { $set: { "cars.$": car } }).exec();
+	public async saveCar(_id: string, car: CarEntity): Promise<CarEntity> {
+
+		if (!car._id) {
+			delete car._id;
+			await this.customerModel.update({ _id }, { $push: { cars: car } }).exec();
 			return car;
 		}
 
-		await this.customerModel.update({ _id }, { $push: { cars : car } }).exec();
+		await this.customerModel.update({ _id, "cars._id": car._id }, { $set: { "cars.$": car } }).exec();
 		return car;
 	}
 }
