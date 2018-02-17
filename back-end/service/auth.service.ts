@@ -18,9 +18,9 @@ export class AuthService {
 		private customerService: CustomerService,
 		private workshopService: WorkshopService) { }
 
-	public async signup(singUp: SingUpEntity): Promise<Execute<TokenResultEntity>> {
+	public async signup(signUp: SingUpEntity): Promise<Execute<TokenResultEntity>> {
 		const result = new Execute<TokenResultEntity>();
-		const check = await this.userModel.findById(singUp.email).exec();
+		const check = await this.userModel.findById(signUp.email).exec();
 
 		if (check) {
 			result.addMessage(MessageType.Error, "User already exists");
@@ -28,21 +28,22 @@ export class AuthService {
 		}
 
 		const user: UserEntity = {
-			_id: singUp.email,
-			role: singUp.role,
-			name: `${singUp.firstName} ${singUp.lastName}`,
-			passowrd: singUp.passowrd
+			_id: signUp.email,
+			role: signUp.role,
+			name: `${signUp.firstName} ${signUp.lastName}`,
+			password: signUp.passowrd
 		};
 
 		const userSaveResult = await new this.userModel(user).save();
 
-		if (singUp.role === 2) {
+		if (signUp.role === 2) {
 			const customerSaveResult = await this.customerService.create({
-				_id: singUp.email,
+				_id: signUp.email,
 				person: {
-					firstName: singUp.firstName,
-					lastName: singUp.lastName,
-					email: singUp.email,
+					firstName: signUp.firstName,
+					lastName: signUp.lastName,
+					email: signUp.email,
+					phone: signUp.phone,
 					birthDay: new Date()
 				},
 				address: [],
@@ -50,21 +51,21 @@ export class AuthService {
 			});
 		}
 
-		if (singUp.role === 3) {
+		if (signUp.role === 3) {
 			const workshopSaveResult = await this.workshopService.create({
-				_id: singUp.email,
+				_id: signUp.email,
 				company: {
-					legalName: singUp.firstName,
-					comertialName: singUp.lastName
+					legalName: signUp.firstName,
+					comertialName: signUp.lastName
 				},
 				address: []
 			});
 		}
 
 		result.entity = await this.createToken({
-			email: singUp.email,
-			name: singUp.firstName,
-			role: singUp.role
+			email: signUp.email,
+			name: signUp.firstName,
+			role: signUp.role
 		});
 
 		return result;
@@ -75,7 +76,7 @@ export class AuthService {
 		const result = new Execute<TokenResultEntity>();
 		const user = await this.userModel.findById(login.email).exec();
 
-		if (!user || user.passowrd !== login.password) {
+		if (!user || user.password !== login.password) {
 			result.addMessage(MessageType.Error, "Invalid user name and/or passowrd");
 			return result;
 		}

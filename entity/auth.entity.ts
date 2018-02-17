@@ -28,7 +28,7 @@ export class UserEntity {
 	name: string;
 
 	@ApiModelProperty()
-	passowrd: string;
+	password: string;
 
 	@ApiModelProperty()
 	role: RoleType;
@@ -37,6 +37,9 @@ export class UserEntity {
 export class SingUpEntity {
 	@ApiModelProperty()
 	email: string;
+
+	@ApiModelProperty()
+	phone: number;
 
 	@ApiModelProperty()
 	firstName: string;

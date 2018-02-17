@@ -7,16 +7,22 @@ export abstract class EntityBase {
 
 export class AddressEntity extends EntityBase {
 	@ApiModelProperty()
-	street: string;
+	unity: Number;
 
 	@ApiModelProperty()
-	number: string;
+	number: Number;
+	
+	@ApiModelProperty()
+	street: string;
 
 	@ApiModelProperty()
 	city: string;
 
 	@ApiModelProperty()
 	province: string;
+
+	@ApiModelProperty()
+	country: string;
 
 	@ApiModelProperty()
 	postalcode: string;
