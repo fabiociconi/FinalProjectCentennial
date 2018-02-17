@@ -20,7 +20,7 @@ export class CustomerService {
 	}
 
 	public async save(_id: string, person: PersonEntity): Promise<PersonEntity> {
-		await this.customerModel.updateOne({ _id }, { person });
+		await this.customerModel.update({ _id }, { person });
 		return person;
 	}
 
@@ -38,11 +38,11 @@ export class CustomerService {
 
 		if (!car._id) {
 			delete car._id;
-			await this.customerModel.update({ _id }, { $push: { cars: car } }).exec();
+			const x = await this.customerModel.update({ _id }, { $push: { cars: car } }).exec();
 			return car;
 		}
 
-		await this.customerModel.update({ _id, "cars._id": car._id }, { $set: { "cars.$": car } }).exec();
+		const y = await this.customerModel.update({ _id, "cars._id": car._id }, { $set: { "cars.$": car } }).exec();
 		return car;
 	}
 }
