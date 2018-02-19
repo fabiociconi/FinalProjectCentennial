@@ -30,7 +30,7 @@ export class AuthService {
 			_id: singUp.email,
 			role: singUp.role,
 			name: `${singUp.firstName} ${singUp.lastName}`,
-			passowrd: singUp.passowrd
+			password: singUp.password
 		};
 
 		const userSaveResult = await new this.userModel(user).save();
@@ -74,7 +74,7 @@ export class AuthService {
 		const result = new Execute<TokenResultEntity>();
 		const user = await this.userModel.findById(login.email).exec();
 
-		if (!user || user.passowrd !== login.password) {
+		if (!user || user.password !== login.password) {
 			result.addMessage(MessageType.Error, 'Invalid user name and/or passowrd');
 			return result;
 		}
