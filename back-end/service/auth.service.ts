@@ -1,15 +1,14 @@
-import * as jwt from "jsonwebtoken";
-import { Model, Document } from "mongoose";
-import { Component } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
+import * as jwt from 'jsonwebtoken';
+import { Model, Document } from 'mongoose';
+import { Component } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 
-import { UserEntity, TokenResultEntity, SingUpEntity, SingInEntity, TokenPayload } from "../../entity";
-import { Execute, MessageType, RoleType } from "../../entity";
-import { ApplicationConfig } from "../../params";
-import { UserSchema } from "../schema/";
-import { CustomerService } from "./customer.service";
-import { WorkshopService } from "./workshop.service";
-import { ExecuteMessageType } from "xcommon";
+import { UserEntity, TokenResultEntity, SingUpEntity, SingInEntity, TokenPayload } from '../../entity';
+import { Execute, MessageType, RoleType } from '../../entity';
+import { environment } from '../../environments/environment';
+import { UserSchema } from '../schema/';
+import { CustomerService } from './customer.service';
+import { WorkshopService } from './workshop.service';
 
 @Component()
 export class AuthService {
@@ -23,7 +22,7 @@ export class AuthService {
 		const check = await this.userModel.findById(singUp.email).exec();
 
 		if (check) {
-			result.addMessage(MessageType.Error, "User already exists");
+			result.addMessage(MessageType.Error, 'User already exists');
 			return result;
 		}
 
@@ -76,7 +75,7 @@ export class AuthService {
 		const user = await this.userModel.findById(login.email).exec();
 
 		if (!user || user.passowrd !== login.password) {
-			result.addMessage(MessageType.Error, "Invalid user name and/or passowrd");
+			result.addMessage(MessageType.Error, 'Invalid user name and/or passowrd');
 			return result;
 		}
 
@@ -93,7 +92,7 @@ export class AuthService {
 
 		return new Promise<TokenResultEntity>((resolve, reject) => {
 			const expires = 60 * 60;
-			const token = jwt.sign(payload, ApplicationConfig.TokenSecret, { expiresIn: expires });
+			const token = jwt.sign(payload, environment.tokenSecret, { expiresIn: expires });
 
 			resolve({
 				expires,

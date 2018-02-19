@@ -1,13 +1,13 @@
-import { Get, Post, Controller, Param, Body, Req } from "@nestjs/common";
-import { ApiBearerAuth, ApiUseTags, ApiResponse } from "@nestjs/swagger";
+import { Get, Post, Controller, Param, Body, Req } from '@nestjs/common';
+import { ApiBearerAuth, ApiUseTags, ApiResponse, ApiImplicitBody } from '@nestjs/swagger';
 
-import { TokenPayload } from "../../entity";
-import { PersonEntity, CarEntity, AddressEntity } from "../../entity";
-import { CustomerService } from "../service/customer.service";
+import { TokenPayload } from '../../entity';
+import { PersonEntity, CarEntity, AddressEntity } from '../../entity';
+import { CustomerService } from '../service/customer.service';
 
 @ApiBearerAuth()
-@ApiUseTags("customer")
-@Controller("api/customer")
+@ApiUseTags('customer')
+@Controller('api/customer')
 export class ProfilerController {
 	constructor(private customerService: CustomerService) {
 	}
@@ -20,28 +20,30 @@ export class ProfilerController {
 	}
 
 	@Post()
+	@ApiImplicitBody({ name: 'person', type: PersonEntity })
 	@ApiResponse({ status: 200, type: PersonEntity })
 	public async save(@Req() req: any, @Body() customer: PersonEntity): Promise<PersonEntity> {
 		const user: TokenPayload = req.user;
 		return this.customerService.save(user.email, customer);
 	}
 
-	@Get("car")
+	@Get('car')
 	@ApiResponse({ status: 200, type: CarEntity })
 	public async getCars(@Req() req: any): Promise<CarEntity[]> {
 		const user: TokenPayload = req.user;
 		return this.customerService.findCars(user.email);
 	}
 
-	@Get("car/:id")
+	@Get('car/:id')
 	@ApiResponse({ status: 200, type: CarEntity })
-	public async getCar(@Req() req: any, @Param("id") idCar: string): Promise<CarEntity> {
+	public async getCar(@Req() req: any, @Param('id') idCar: string): Promise<CarEntity> {
 		const user: TokenPayload = req.user;
 		return this.customerService.findCar(user.email, idCar);
 	}
 
-	@Post("car")
+	@Post('car')
 	@ApiResponse({ status: 200, type: CarEntity })
+	@ApiImplicitBody({ name: 'car', type: CarEntity })
 	public async postCar(@Req() req: any, @Body() car: CarEntity): Promise<CarEntity> {
 		const user: TokenPayload = req.user;
 		return this.customerService.saveCar(user.email, car);

@@ -1,5 +1,5 @@
-import { ApiModelProperty } from "@nestjs/swagger";
-import { EntityBase, AddressEntity } from "./";
+import { ApiModelProperty } from '@nestjs/swagger';
+import { EntityBase, AddressEntity } from './';
 
 export class PersonEntity extends EntityBase {
 	@ApiModelProperty()

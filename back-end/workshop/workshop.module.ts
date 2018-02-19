@@ -1,8 +1,8 @@
-import { Module, NestModule, MiddlewaresConsumer } from "@nestjs/common";
-import { MongooseModule } from "@nestjs/mongoose";
+import { Module, NestModule, MiddlewaresConsumer } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 
-import { WorkshopController } from "./workshop.controller";
-import { ServiceModule } from "../service/service.module";
+import { WorkshopController } from './workshop.controller';
+import { ServiceModule } from '../service/service.module';
 
 @Module({
 	controllers: [WorkshopController],

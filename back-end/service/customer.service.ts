@@ -1,9 +1,9 @@
-import { Model, Document } from "mongoose";
-import { Component } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
+import { Model, Document } from 'mongoose';
+import { Component } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 
-import { CustomerSchema } from "../schema/";
-import { CustomerEntity, PersonEntity, CarEntity } from "../../entity";
+import { CustomerSchema } from '../schema/';
+import { CustomerEntity, PersonEntity, CarEntity } from '../../entity';
 
 @Component()
 export class CustomerService {
@@ -30,7 +30,7 @@ export class CustomerService {
 	}
 
 	public async findCar(_id: string, _idCar): Promise<CarEntity> {
-		const result = await this.customerModel.findOne({ _id, "cars._id": _idCar }, { "cars.$": 1 }).exec();
+		const result = await this.customerModel.findOne({ _id, 'cars._id': _idCar }, { 'cars.$': 1 }).exec();
 		return result && result.cars ? result.cars[0] : null;
 	}
 
@@ -42,7 +42,7 @@ export class CustomerService {
 			return car;
 		}
 
-		const y = await this.customerModel.update({ _id, "cars._id": car._id }, { $set: { "cars.$": car } }).exec();
+		const y = await this.customerModel.update({ _id, 'cars._id': car._id }, { $set: { 'cars.$': car } }).exec();
 		return car;
 	}
 }

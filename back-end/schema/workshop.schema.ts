@@ -1,5 +1,5 @@
-import * as mongoose from "mongoose";
-import { AddressSchema } from "./";
+import * as mongoose from 'mongoose';
+import { AddressSchema } from './';
 
 export const CompanySchema = new mongoose.Schema({
 	legalName: String,

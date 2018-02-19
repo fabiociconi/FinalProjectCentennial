@@ -1,9 +1,9 @@
-import * as passport from "passport";
-import { ExtractJwt, Strategy, VerifiedCallback, StrategyOptions } from "passport-jwt";
-import { Component, Inject } from "@nestjs/common";
-import { AuthService } from "../../service/auth.service";
-import { ApplicationConfig } from "../../../params";
-import { NextFunction } from "express-serve-static-core";
+import * as passport from 'passport';
+import { ExtractJwt, Strategy, VerifiedCallback, StrategyOptions } from 'passport-jwt';
+import { Component, Inject } from '@nestjs/common';
+import { AuthService } from '../../service/auth.service';
+import { environment } from '../../../environments/environment';
+import { NextFunction } from 'express-serve-static-core';
 
 @Component()
 export class JwtStrategy extends Strategy {
@@ -12,7 +12,7 @@ export class JwtStrategy extends Strategy {
 		super({
 			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 			passReqToCallback: true,
-			secretOrKey: ApplicationConfig.TokenSecret
+			secretOrKey: environment.tokenSecret
 		},
 			(req, payload, done) => this.verify(req, payload, done)
 		);
@@ -24,7 +24,7 @@ export class JwtStrategy extends Strategy {
 		const isValid = this.authService.validateUser(payload);
 
 		if (!isValid) {
-			return done("Unauthorized", false);
+			return done('Unauthorized', false);
 		}
 
 		done(null, payload);

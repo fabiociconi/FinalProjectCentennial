@@ -1,14 +1,14 @@
-import * as passport from "passport";
-import { Module, NestModule, MiddlewaresConsumer, RequestMethod } from "@nestjs/common";
-import { MongooseModule } from "@nestjs/mongoose";
+import * as passport from 'passport';
+import { Module, NestModule, MiddlewaresConsumer, RequestMethod } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { CorsMiddleware } from '@nest-middlewares/cors';
+import { ServeStaticMiddleware } from '@nest-middlewares/serve-static';
 
-import { ServeStaticMiddleware } from "@nest-middlewares/serve-static";
-
-import { AuthModule } from "./auth/auth.module";
-import { CustomerModule } from "./customer/customer.module";
-import { WorkshopModule } from "./workshop/workshop.module";
-import { ServiceModule } from "./service/service.module";
-import { FallbackMiddleware } from "./app-middleware/fallback.middleware";
+import { AuthModule } from './auth/auth.module';
+import { CustomerModule } from './customer/customer.module';
+import { WorkshopModule } from './workshop/workshop.module';
+import { ServiceModule } from './service/service.module';
+import { FallbackMiddleware } from './app-middleware/fallback.middleware';
 
 @Module({
 	imports: [
@@ -21,22 +21,28 @@ import { FallbackMiddleware } from "./app-middleware/fallback.middleware";
 export class ApplicationModule implements NestModule {
 
 	public configure(consumer: MiddlewaresConsumer): MiddlewaresConsumer | void {
+		CorsMiddleware.configure({});
+
 		ServeStaticMiddleware
-			.configure("./wwwroot", { index: ["index.html"], fallthrough: true });
+			.configure('./wwwroot', { index: ['index.html'], fallthrough: true });
 
 		FallbackMiddleware
-			.configure("./wwwroot/index.html");
+			.configure('./wwwroot/index.html');
 
 		consumer
 			.apply(ServeStaticMiddleware)
-			.forRoutes({ path: "*", method: RequestMethod.ALL });
+			.forRoutes({ path: '*', method: RequestMethod.ALL });
 
 		consumer
-			.apply(passport.authenticate("jwt", { session: false }))
-			.forRoutes({ path: "/api/**", method: RequestMethod.ALL });
+			.apply(passport.authenticate('jwt', { session: false }))
+			.forRoutes({ path: '/api/**', method: RequestMethod.ALL });
+
+		consumer
+			.apply(CorsMiddleware)
+			.forRoutes({ path: '/api/**', method: RequestMethod.ALL });
 
 		consumer
 			.apply(FallbackMiddleware)
-			.forRoutes({ path: "*", method: RequestMethod.GET });
+			.forRoutes({ path: '*', method: RequestMethod.GET });
 	}
 }

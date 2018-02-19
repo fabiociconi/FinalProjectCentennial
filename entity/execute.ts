@@ -1,4 +1,4 @@
-import { Utils } from "./extesions";
+import { Utils } from './extesions';
 
 export class Execute<TEntity> {
 

@@ -1,5 +1,5 @@
-import { ApiModelProperty } from "@nestjs/swagger";
-import { RoleType, EntityBase } from "./";
+import { ApiModelProperty } from '@nestjs/swagger';
+import { RoleType, EntityBase } from './';
 
 export class TokenPayload {
 	@ApiModelProperty()
@@ -47,7 +47,7 @@ export class SingUpEntity {
 	@ApiModelProperty()
 	passowrd: string;
 
-	@ApiModelProperty()
+	@ApiModelProperty({ type: Number })
 	role: RoleType;
 }
 
