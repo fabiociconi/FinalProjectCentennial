@@ -1,14 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { CustomerModule } from './customer/customer.module';
 import { PublicModule } from './public/public.module';
 import { WorkshopModule } from './workshop/workshop.module';
 import { ServiceModule } from './service/service.module';
-import { MaterialModule } from './/material.module';
+import { CustomerModule } from './customer/customer.module';
 
 
 @NgModule({
@@ -17,12 +17,12 @@ import { MaterialModule } from './/material.module';
 	],
 	imports: [
 		BrowserModule,
+		BrowserAnimationsModule,
 		AppRoutingModule,
-		CustomerModule,
 		PublicModule,
 		WorkshopModule,
 		ServiceModule,
-		MaterialModule
+		CustomerModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

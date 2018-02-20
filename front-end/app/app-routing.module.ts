@@ -17,6 +17,7 @@ const routes: Routes = [
 			}
 		]
 	},
+	{ path: 'customer', loadChildren: './customer/customer.module#CustomerModule' }
 ];
 
 @NgModule({
