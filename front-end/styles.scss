@@ -1,2 +1,41 @@
+@import "assets/css/reset";
+@import "assets/css/fonts";
+
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body {
+	height: 100%;
+
+	.fl {
+		float: left;
+	}
+	
+	.fr {
+		float: right;
+	}
+	
+	.clear {
+		clear: both
+	}
+	
+	.relative {
+		position: relative
+	}
+	
+	.absolute {
+		position: absolute
+	}
+	
+	.none {
+		display: none
+	}
+	
+	.block {
+		display: block
+	}
+	
+	.inline-block {
+		display: inline-block
+	}
+}
