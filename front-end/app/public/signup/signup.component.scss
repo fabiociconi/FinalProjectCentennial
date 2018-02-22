@@ -2,4 +2,36 @@
 	width: 62%;
 	margin: 0 auto;
 	padding: 50px;
+
+	#customer-tab, #workshop-tab {
+		padding: 15px;
+		border: 0;
+		width: 100%;
+		box-sizing: border-box;
+		text-align: center;
+		border: 2px solid #ECF0F1;
+
+		.account-type-image {
+			vertical-align: middle;
+		}
+		.account-type-label {
+			margin-left: 15px;
+		}
+
+		&:hover {
+			cursor: pointer;
+		}
+
+		&.tab-selected {
+			background-color: #ECF0F1;
+		}
+	}
+
+	#customer-tab {
+		border-radius: 3px 0 0 3px;
+	}
+	
+	#workshop-tab {
+		border-radius: 0 3px 3px 0;
+	}
 }

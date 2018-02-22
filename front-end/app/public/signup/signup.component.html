@@ -3,12 +3,35 @@
 	<div class="box-separator colour-green"></div>
 	
 	<form method="POST">
-		<label>First name</label>
+		<table width="100%">
+			<tr>
+				<td>
+					<label>Account type</label>
+				</td>
+				<td align="right">
+					<div id="customer-tab" [className]="customerTabSelected" (click)="customerAccount()" >
+						<img class="account-type-image" src="assets/img/profile-black-icon.png" height="24" />
+						<span class="account-type-label">Customer</span>
+					</div>
+				</td>
+				<td align="right">
+					<div id="workshop-tab" [className]="workshopTabSelected" (click)="workshopAccount()">
+						<img class="account-type-image" src="assets/img/car-black-icon.png" height="24" />
+						<span class="account-type-label">Workshop</span>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" name="account-type" value="{{ accountType }}">
+		
+		<div class="form-separator"></div>
+
+		<label>{{ label1 }}</label>
 		<input name="first-name" required />
 		
 		<div class="form-separator"></div>
 
-		<label>Last name</label>
+		<label>{{ label2 }}</label>
 		<input name="last-name" required />
 		
 		<div class="form-separator"></div>
