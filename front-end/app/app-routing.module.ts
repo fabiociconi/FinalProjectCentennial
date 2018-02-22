@@ -7,17 +7,32 @@ import { PublicLayoutComponent } from './public/public-layout/public-layout.comp
 
 const routes: Routes = [
 	{
-		path: '', children: [
+		path: '',
+		children: [
 			{
-				path: '', component: PublicLayoutComponent, children:
-					[
-						{ path: 'sign-in', component: SigninComponent },
-						{ path: 'sign-up', component: SignupComponent }
-					]
+				path: '',
+				component: PublicLayoutComponent,
+				children: [
+					{
+						path: '',
+						component: SigninComponent
+					},
+					{
+						path: 'sign-in',
+						component: SigninComponent
+					},
+					{
+						path: 'sign-up',
+						component: SignupComponent
+					}
+				]
 			}
 		]
 	},
-	{ path: 'customer', loadChildren: './customer/customer.module#CustomerModule' }
+	{
+		path: 'customer',
+		loadChildren: './customer/customer.module#CustomerModule'
+	}
 ];
 
 @NgModule({
