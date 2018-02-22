@@ -1,3 +1,49 @@
-<p>
-  signup works!
-</p>
+<div class="container">
+	<h1>Sign up</h1>
+	<div class="box-separator colour-green"></div>
+	
+	<form method="POST">
+		<label>First name</label>
+		<input name="first-name" required />
+		
+		<div class="form-separator"></div>
+
+		<label>Last name</label>
+		<input name="last-name" required />
+		
+		<div class="form-separator"></div>
+
+		<label>Telephone</label>
+		<input name="telephone" required />
+		
+		<div class="form-separator"></div>
+
+		<label>Email</label>
+		<input name="email" type="email" required />
+
+		<div class="form-separator"></div>
+
+		<label>Password</label>
+		<input type="password" name="password" required />
+
+		<div class="form-separator"></div>
+
+		<label>Confirm password</label>
+		<input type="password" name="confirm-password" required />
+
+		<div class="form-separator"></div>
+
+		<table width="100%">
+			<tr>
+				<td>
+					<button type="submit">Sign up</button>
+				</td>
+
+				<td align="right">
+					Already have an account?<br />
+					<a class="green-link" routerLink="/sign-in">Sign in</a>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
