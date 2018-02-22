@@ -2,30 +2,32 @@
 	<h1>Sign in</h1>
 	<div class="box-separator colour-green"></div>
 	
-	<label>Email</label>
-	<input name="email" />
+	<form method="POST">
+		<label>Email</label>
+		<input name="email" type="email" required />
 
-	<div class="form-separator"></div>
+		<div class="form-separator"></div>
 
-	<label>Password</label>
-	<input name="password" />
+		<label>Password</label>
+		<input type="password" name="password" required />
 
-	<div class="form-separator"></div>
+		<div class="form-separator"></div>
 
-	<mat-checkbox>Remember me</mat-checkbox>
+		<mat-checkbox>Remember me</mat-checkbox>
 
-	<div class="form-separator"></div>
+		<div class="form-separator"></div>
 
-	<table width="100%">
-		<tr>
-			<td>
-				<button>Sign in</button>
-			</td>
+		<table width="100%">
+			<tr>
+				<td>
+					<button type="submit">Sign in</button>
+				</td>
 
-			<td align="right">
-				Don't have an account?<br />
-				<a class="green-link" routerLink="/sign-up">Sign up</a>
-			</td>
-		</tr>
-	</table>
+				<td align="right">
+					Don't have an account?<br />
+					<a class="green-link" routerLink="/sign-up">Sign up</a>
+				</td>
+			</tr>
+		</table>
+	</form>
 </div>
