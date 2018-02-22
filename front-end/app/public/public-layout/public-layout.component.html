@@ -1,5 +1,7 @@
 <div class="left-container">
-	<img class="logo" src="assets/img/logo-large.png" width="270" />
+	<div class="logo">
+		<a routerLink="/"><img src="assets/img/logo-large.png" width="270" /></a>
+	</div>
 
 	<div class="quote-container">
 		<img class="quote" src="assets/img/quote-gray-icon.png" width="40" />
@@ -8,4 +10,6 @@
 	</div>
 </div>
 
-<router-outlet></router-outlet>
+<div class="right-container">
+	<router-outlet></router-outlet>
+</div>

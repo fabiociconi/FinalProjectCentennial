@@ -1,0 +1,35 @@
+label {
+	display: block;
+	margin-bottom: 10px;
+}
+
+input, button {
+	border-radius: 3px;
+	font-family: "AmsiPro-Regular", Sans-Serif;
+	font-size: 16px;
+}
+
+input {
+	background-color: #ECF0F1;
+	padding: 15px;
+	border: 0;
+	width: 100%;
+	box-sizing: border-box;
+	color: #444444;
+}
+
+button {
+	padding: 15px 45px;
+	color: white;
+	background-color: #00B98A;
+	border: 0;
+
+	&:hover {
+		cursor: pointer;
+		background-color: rgb(0, 160, 120);
+	}
+}
+
+.form-separator {
+	height: 35px;
+}

@@ -1,41 +1,39 @@
 @import "assets/css/reset";
 @import "assets/css/fonts";
-
-/* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "assets/css/helpers";
+@import "assets/css/form";
+@import "assets/css/theme";
 
 html, body {
 	height: 100%;
+	font-family: "AmsiPro-Regular", Sans-Serif;
+	font-size: 16px;
+	color: #444444;
+	line-height: 24px;
 
-	.fl {
-		float: left;
+	h1 {
+		font-size: 26px;
 	}
-	
-	.fr {
-		float: right;
+
+	.box-separator {
+		width: 28px;
+		height: 4px;
+		margin: 34px 0 58px;
+		
+		&.colour-green {
+			background-color: #00B98A;
+		}
 	}
-	
-	.clear {
-		clear: both
-	}
-	
-	.relative {
-		position: relative
-	}
-	
-	.absolute {
-		position: absolute
-	}
-	
-	.none {
-		display: none
-	}
-	
-	.block {
-		display: block
-	}
-	
-	.inline-block {
-		display: inline-block
+
+	a {
+		text-decoration: none;
+
+		&.green-link {
+			color: #00B98A;
+		}
+
+		&:hover {
+			text-decoration: underline;
+		}
 	}
 }
