@@ -7,8 +7,8 @@
 		"build": "rimraf ./dist && npm run build:backend && npm run build:frontend",
 		"build:backend": "cd back-end && npm run build && cd .. && cpx \"./back-end/package.json\" \"./dist\"",
 		"build:frontend": "cd front-end && npm run build",
-		"start:frontend": "cd front-end && npm run start:dev",
-		"start:backend": "cd back-end && npm run start:dev",
+		"start:frontend": "cd front-end && npm run start",
+		"start:backend": "cd back-end && npm run start",
 		"start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
 		"install:all": "npm i && cd ./front-end && npm i && cd .. && cd ./back-end && npm i && cd ..",
 		"clean:all": "rimraf ./dist ./node_modules ./front-end/node_modules/ ./back-end/node_modules"

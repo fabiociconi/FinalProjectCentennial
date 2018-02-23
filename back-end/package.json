@@ -4,9 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start:dev": "nodemon",
-		"build": "tsc",
-		"start": "npm run env NODE_ENV=production && node index.js"
+		"start": "nodemon",
+		"build": "tsc"
 	},
 	"dependencies": {
 		"@nest-middlewares/cors": "^1.1.1",
