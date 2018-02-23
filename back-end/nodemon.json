@@ -1,0 +1,12 @@
+{
+	"watch": [
+		"src",
+		"../entity"
+	],
+	"ext": "ts",
+	"ignore": [
+		"src/**/*.spec.ts"
+	],
+	"exec": "node --inspect ./index",
+	"delay": "2500"
+}

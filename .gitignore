@@ -172,7 +172,8 @@ ClientBin/
 *.pfx
 *.jfm
 *.publishsettings
-node_modules/
+**/node_modules
+**/etc
 orleans.codegen.cs
 
 # RIA/Silverlight projects

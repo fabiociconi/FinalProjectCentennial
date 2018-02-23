@@ -1,0 +1,72 @@
+<div class="container">
+	<h1>Sign up</h1>
+	<div class="box-separator colour-green"></div>
+	
+	<form *ngIf="ready" [formGroup]="singUpForm" (ngSubmit)="signUp(singUpForm.value)">
+		<table width="100%">
+			<tr>
+				<td>
+					<label>Account type</label>
+				</td>
+				<td align="right">
+					<div id="customer-tab" [className]="customerTabSelected" (click)="customerAccount()" >
+						<img class="account-type-image" src="assets/img/profile-black-icon.png" height="24" />
+						<span class="account-type-label">Customer</span>
+					</div>
+				</td>
+				<td align="right">
+					<div id="workshop-tab" [className]="workshopTabSelected" (click)="workshopAccount()">
+						<img class="account-type-image" src="assets/img/car-black-icon.png" height="24" />
+						<span class="account-type-label">Workshop</span>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" name="account-type" value="{{ accountType }}">
+		
+		<div class="form-separator"></div>
+
+		<label>{{ label1 }}</label>
+		<input name="first-name" formControlName="firstName" required />
+		
+		<div class="form-separator"></div>
+
+		<label>{{ label2 }}</label>
+		<input name="last-name" formControlName="lastName" required />
+		
+		<div class="form-separator"></div>
+
+		<label>Telephone</label>
+		<input name="telephone" required />
+		
+		<div class="form-separator"></div>
+
+		<label>Email</label>
+		<input name="email" type="email" formControlName="email" required />
+
+		<div class="form-separator"></div>
+
+		<label>Password</label>
+		<input type="password" name="password" formControlName="password" required />
+
+		<div class="form-separator"></div>
+
+		<label>Confirm password</label>
+		<input type="password" name="confirm-password" required />
+
+		<div class="form-separator"></div>
+
+		<table width="100%">
+			<tr>
+				<td>
+					<button type="submit">Sign up</button>
+				</td>
+
+				<td align="right">
+					Already have an account?<br />
+					<a class="green-link" routerLink="/sign-in">Sign in</a>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>

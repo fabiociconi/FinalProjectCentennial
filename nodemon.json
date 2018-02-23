@@ -1,7 +1,0 @@
-{
-  "watch": ["back-end"],
-  "ext": "ts",
-  "ignore": ["back-end/**/*.spec.ts"],
-  "exec": "node --inspect ./index",
-  "delay": "2500"
-}

@@ -4,9 +4,14 @@
 	"description": "Software Development Project 2",
 	"main": "index.js",
 	"scripts": {
+		"build": "rimraf ./dist && npm run build:backend && npm run build:frontend",
+		"build:backend": "cd back-end && npm run build && cd .. && cpx \"./back-end/package.json\" \"./dist\"",
+		"build:frontend": "cd front-end && npm run build",
+		"start:frontend": "cd front-end && npm run start:dev",
+		"start:backend": "cd back-end && npm run start:dev",
 		"start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
-		"start:frontend": "ng serve --proxy-config proxy.config.json --aot --open",
-		"start:backend": "nodemon"
+		"install:all": "npm i && cd ./front-end && npm i && cd .. && cd ./back-end && npm i && cd ..",
+		"clean:all": "rimraf ./dist ./node_modules ./front-end/node_modules/ ./back-end/node_modules"
 	},
 	"repository": {
 		"type": "git",
@@ -18,47 +23,9 @@
 		"url": "https://github.com/fabiociconi/FinalProjectCentennial/issues"
 	},
 	"homepage": "https://github.com/fabiociconi/FinalProjectCentennial#readme",
-	"dependencies": {
-		"@angular/animations": "^5.2.5",
-		"@angular/cdk": "^5.2.1",
-		"@angular/common": "5.2.5",
-		"@angular/compiler": "5.2.5",
-		"@angular/core": "5.2.5",
-		"@angular/forms": "5.2.5",
-		"@angular/http": "5.2.5",
-		"@angular/material": "^5.2.1",
-		"@angular/platform-browser": "5.2.5",
-		"@angular/platform-browser-dynamic": "5.2.5",
-		"@angular/router": "5.2.5",
-		"@nest-middlewares/cors": "^1.1.1",
-		"@nest-middlewares/serve-static": "1.1.1",
-		"@nestjs/common": "4.6.4",
-		"@nestjs/core": "4.6.4",
-		"@nestjs/mongoose": "3.0.1",
-		"@nestjs/swagger": "1.1.4",
-		"core-js": "2.5.3",
-		"hammerjs": "^2.0.8",
-		"mongoose": "5.0.6",
-		"passport": "0.4.0",
-		"passport-jwt": "3.0.1",
-		"rxjs": "5.5.6",
-		"zone.js": "0.8.20"
-	},
 	"devDependencies": {
-		"@angular/cli": "1.7.0",
-		"@angular/compiler-cli": "5.2.5",
-		"@angular/language-service": "5.2.5",
-		"@types/express": "4.11.1",
-		"@types/mongoose": "5.0.2",
-		"@types/node": "9.4.6",
-		"@types/passport": "0.4.3",
-		"@types/passport-jwt": "3.0.1",
-		"codelyzer": "4.1.0",
-		"concurrently": "3.5.1",
-		"nodemon": "1.15.1",
-		"reflect-metadata": "0.1.10",
-		"ts-node": "4.1.0",
-		"tslint": "5.9.1",
-		"typescript": "2.6.2"
+		"concurrently": "^3.5.1",
+		"cpx": "^1.5.0",
+		"rimraf": "^2.6.2"
 	}
 }
