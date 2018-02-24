@@ -1,7 +1,7 @@
 <div class="container">
 	<h1>Sign in</h1>
 	<div class="box-separator colour-green"></div>
-	
+
 	<form *ngIf="ready" [formGroup]="singInForm" (ngSubmit)="signIn(singInForm.value)">
 		<label>Email</label>
 		<input name="email" formControlName="email" type="email" required />
@@ -20,11 +20,12 @@
 		<table width="100%">
 			<tr>
 				<td>
-					<button type="submit">Sign in</button>
+					<button type="submit" [disabled]="!this.singInForm.valid">Sign in</button>
 				</td>
 
 				<td align="right">
-					Don't have an account?<br />
+					Don't have an account?
+					<br />
 					<a class="green-link" routerLink="/sign-up">Sign up</a>
 				</td>
 			</tr>

@@ -20,10 +20,10 @@ export class SigninComponent implements OnInit {
 
 	public ngOnInit(): void {
 		this.singInForm = this.autoFormService.CreateNew<SingInEntity>()
-			// .AddValidator(c => c.email, Validators.required)
-			// .AddValidator(c => c.email, Validators.email)
-			// .AddValidator(c => c.password, Validators.required)
-			.Build({
+			.addValidator(c => c.email, Validators.required)
+			.addValidator(c => c.email, Validators.email)
+			.addValidator(c => c.password, Validators.required)
+			.build({
 				email: '',
 				password: ''
 			});

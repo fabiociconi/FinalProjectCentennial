@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
 import { AutoFormService } from 'xcommon';
 import { Router } from '@angular/router';
@@ -25,10 +25,12 @@ export class SignupComponent implements OnInit {
 
 	ngOnInit() {
 		this.singUpForm = this.autoFormService.CreateNew<SingUpEntity>()
-			// .AddValidator(c => c.email, Validators.required)
-			// .AddValidator(c => c.email, Validators.email)
-			// .AddValidator(c => c.password, Validators.required)
-			.Build({
+			.addValidator(c => c.firstName, Validators.required)
+			.addValidator(c => c.lastName, Validators.required)
+			.addValidator(c => c.email, Validators.required)
+			.addValidator(c => c.email, Validators.email)
+			.addValidator(c => c.password, Validators.required)
+			.build({
 				password: '',
 				role: 1,
 				email: '',
