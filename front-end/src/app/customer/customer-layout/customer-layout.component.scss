@@ -5,9 +5,39 @@
 	width: 283px;
 	height: 100%;
 	background-color: #0C1618;
+	font-size: 15px;
 
 	.logo {
 		background-color: #091011;
 		padding: 30px 37px;
+	}
+	.menu {
+		a.menu-item {
+			text-decoration: none;
+			display: block;
+			color: white;
+			padding: 3px 32px;
+			margin: 40px 0;
+			border-left: 4px solid transparent;
+
+			&:hover {
+				cursor: pointer;
+				border-left: 4px solid #FF464A;
+			}
+
+			&.logout {
+				background-color: #00B98A;
+				padding: 20px 32px;
+
+				&:hover {
+					border-left: 4px solid #00B98A;
+				}
+			}
+
+			img {
+				vertical-align: middle;
+				margin: -4px 15px 0 0;
+			}
+		}
 	}
 }
