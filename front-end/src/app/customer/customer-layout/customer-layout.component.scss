@@ -114,4 +114,8 @@ $left-menu-width: 283px;
 .main-container {
 	top: $top-bar-height;
 	bottom: 0;
+
+	&.standard-spacing {
+		padding: 32px;
+	}
 }
