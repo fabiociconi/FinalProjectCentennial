@@ -14,35 +14,4 @@
 	</div>
 </div>
 
-<div class="top-bar search-page">
-	<div class="title-container">
-		<h1>Home</h1>
-	</div>
-
-	<div class="fr">
-		<table width="100%">
-			<tr>
-				<!--<td width="35%">
-					<div class="quick-search-container">
-						<form>
-							<button type="submit"><img src="assets/img/search-gray-icon.png" width="20" /></button>
-							<input class="quick-search" name="quick-search" placeholder="Quick Search" required  />
-							<div class="clear"></div>
-						</form>
-					</div>
-				</td>-->
-				<td width="20"></td>
-				<td align="right">Bruno Campos</td>
-				<td align="right" width="80"><a routerLink="/customer/profile"><img class="circle" src="assets/img/user-picture.png" width="60" style="vertical-align: middle;" /></a></td>
-				<td align="right" width="35"><a routerLink="/customer/profile"><img src="assets/img/down-arrow-icon.png" width="15" /></a></td>
-			</tr>
-		</table>
-	</div>
-
-	<div class="clear"></div>
-</div>
-
-// TODO: Relocate content to its own component
-<div class="main-container standard-spacing">
-	
-</div>
+<router-outlet></router-outlet>
