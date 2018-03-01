@@ -2,8 +2,8 @@ import { Model, Document } from 'mongoose';
 import { Component } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { CustomerSchema } from '../../schema/';
-import { CustomerEntity, PersonEntity, CarEntity } from '../../../../entity';
+import { CustomerSchema } from '@app/schema';
+import { CustomerEntity, PersonEntity, CarEntity } from '@app/entity';
 
 @Component()
 export class CustomerService {

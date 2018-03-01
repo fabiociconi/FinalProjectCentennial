@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SingInEntity, SingUpEntity, Execute, TokenResultEntity } from '../../../../entity';
 import { Observable } from 'rxjs/Observable';
+
+import { Execute } from 'xcommon/entity';
+import { SingInEntity, SingUpEntity, TokenResultEntity } from '@app/entity';
 
 
 @Injectable()

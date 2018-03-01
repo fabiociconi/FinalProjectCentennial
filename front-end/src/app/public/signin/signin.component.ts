@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup } from '@angular/forms';
-import { AutoFormService } from 'xcommon';
-
-import { SingInEntity } from '../../../../../entity';
-import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
+import { AutoFormService } from 'xcommon/autoform';
+
+import { SingInEntity } from '@app/entity';
+import { AuthService } from '@app/service/auth.service';
 
 @Component({
 	selector: 'app-signin',
@@ -19,7 +19,7 @@ export class SigninComponent implements OnInit {
 	constructor(private authService: AuthService, private autoFormService: AutoFormService, private router: Router) { }
 
 	public ngOnInit(): void {
-		this.singInForm = this.autoFormService.CreateNew<SingInEntity>()
+		this.singInForm = this.autoFormService.createNew<SingInEntity>()
 			.addValidator(c => c.email, Validators.required)
 			.addValidator(c => c.email, Validators.email)
 			.addValidator(c => c.password, Validators.required)

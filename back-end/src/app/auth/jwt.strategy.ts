@@ -1,9 +1,10 @@
 import * as passport from 'passport';
+import { NextFunction } from 'express-serve-static-core';
 import { ExtractJwt, Strategy, VerifiedCallback, StrategyOptions } from 'passport-jwt';
 import { Component, Inject } from '@nestjs/common';
-import { AuthService } from '../service/auth.service';
-import { environment } from '../../environments/environment';
-import { NextFunction } from 'express-serve-static-core';
+
+import { AuthService } from '@app/service/auth.service';
+import { environment } from '@app/env';
 
 @Component()
 export class JwtStrategy extends Strategy {

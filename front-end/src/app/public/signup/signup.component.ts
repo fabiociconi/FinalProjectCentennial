@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../service/auth.service';
-import { AutoFormService } from 'xcommon';
 import { Router } from '@angular/router';
-import { SingUpEntity } from '../../../../../entity';
+import { AutoFormService } from 'xcommon/autoform';
+
+import { SingUpEntity } from '@app/entity';
+import { AuthService } from '@app/service/auth.service';
 
 @Component({
 	selector: 'app-signup',
@@ -24,7 +25,7 @@ export class SignupComponent implements OnInit {
 	constructor(private authService: AuthService, private autoFormService: AutoFormService, private router: Router) { }
 
 	ngOnInit() {
-		this.singUpForm = this.autoFormService.CreateNew<SingUpEntity>()
+		this.singUpForm = this.autoFormService.createNew<SingUpEntity>()
 			.addValidator(c => c.firstName, Validators.required)
 			.addValidator(c => c.lastName, Validators.required)
 			.addValidator(c => c.email, Validators.required)

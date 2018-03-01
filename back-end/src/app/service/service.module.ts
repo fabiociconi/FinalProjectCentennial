@@ -1,11 +1,11 @@
 import { Module, NestModule, MiddlewaresConsumer } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { DataBaseSchemas } from '../../schema/';
-import { CustomerService } from './customer.service';
-import { WorkshopService } from './workshop.service';
-import { AuthService } from './auth.service';
-import { environment } from '../../environments/environment';
+import { DataBaseSchemas } from '@app/schema';
+import { CustomerService } from '@app/service/customer.service';
+import { WorkshopService } from '@app/service/workshop.service';
+import { AuthService } from '@app/service/auth.service';
+import { environment } from '@app/env';
 
 @Module({
 	imports: [

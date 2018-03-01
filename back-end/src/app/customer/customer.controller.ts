@@ -1,9 +1,8 @@
 import { Get, Post, Controller, Param, Body, Req } from '@nestjs/common';
 import { ApiBearerAuth, ApiUseTags, ApiResponse, ApiImplicitBody } from '@nestjs/swagger';
 
-import { TokenPayload } from '../../../../entity';
-import { PersonEntity, CarEntity, AddressEntity } from '../../../../entity';
-import { CustomerService } from '../service/customer.service';
+import { TokenPayload, PersonEntity, CarEntity, AddressEntity } from '@app/entity';
+import { CustomerService } from '@app/service/customer.service';
 
 @ApiBearerAuth()
 @ApiUseTags('customer')
@@ -24,21 +23,21 @@ export class ProfilerController {
 	@ApiResponse({ status: 200, type: PersonEntity })
 	public async save(@Req() req: any, @Body() customer: PersonEntity): Promise<PersonEntity> {
 		const user: TokenPayload = req.user;
-		return this.customerService.save(user.email, customer);
+		return await this.customerService.save(user.email, customer);
 	}
 
 	@Get('car')
 	@ApiResponse({ status: 200, type: CarEntity })
 	public async getCars(@Req() req: any): Promise<CarEntity[]> {
 		const user: TokenPayload = req.user;
-		return this.customerService.findCars(user.email);
+		return await this.customerService.findCars(user.email);
 	}
 
 	@Get('car/:id')
 	@ApiResponse({ status: 200, type: CarEntity })
 	public async getCar(@Req() req: any, @Param('id') idCar: string): Promise<CarEntity> {
 		const user: TokenPayload = req.user;
-		return this.customerService.findCar(user.email, idCar);
+		return await this.customerService.findCar(user.email, idCar);
 	}
 
 	@Post('car')
@@ -46,6 +45,6 @@ export class ProfilerController {
 	@ApiImplicitBody({ name: 'car', type: CarEntity })
 	public async postCar(@Req() req: any, @Body() car: CarEntity): Promise<CarEntity> {
 		const user: TokenPayload = req.user;
-		return this.customerService.saveCar(user.email, car);
+		return await this.customerService.saveCar(user.email, car);
 	}
 }

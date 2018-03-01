@@ -2,13 +2,16 @@ import * as jwt from 'jsonwebtoken';
 import { Model, Document } from 'mongoose';
 import { Component } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { Execute, ExecuteMessageType } from 'xcommon/entity';
 
-import { UserEntity, TokenResultEntity, SingUpEntity, SingInEntity, TokenPayload } from '../../../../entity';
-import { Execute, MessageType, RoleType } from '../../../../entity';
-import { environment } from '../../environments/environment';
-import { UserSchema } from '../../schema/';
-import { CustomerService } from './customer.service';
-import { WorkshopService } from './workshop.service';
+import { environment } from '@app/env';
+import { UserSchema } from '@app/schema';
+
+import { CustomerService } from '@app/service/customer.service';
+import { WorkshopService } from '@app/service/workshop.service';
+
+import { UserEntity, SingUpEntity, SingInEntity, RoleType } from '@app/entity';
+import { TokenResultEntity, TokenPayload } from '@app/entity';
 
 @Component()
 export class AuthService {
@@ -22,7 +25,7 @@ export class AuthService {
 		const check = await this.userModel.findById(singUp.email).exec();
 
 		if (check) {
-			result.addMessage(MessageType.Error, 'User already exists');
+			result.addMessage(ExecuteMessageType.Error, 'User already exists');
 			return result;
 		}
 
@@ -75,7 +78,7 @@ export class AuthService {
 		const user = await this.userModel.findById(login.email).exec();
 
 		if (!user || user.password !== login.password) {
-			result.addMessage(MessageType.Error, 'Invalid user name and/or passowrd');
+			result.addMessage(ExecuteMessageType.Error, 'Invalid user name and/or passowrd');
 			return result;
 		}
 

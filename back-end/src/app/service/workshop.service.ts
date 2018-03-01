@@ -1,8 +1,9 @@
 import { Model, Document } from 'mongoose';
 import { Component } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { AddressEntity, WorkshopEntity } from '../../../../entity';
-import { WorkshopSchema, AddressSchema } from '../../schema';
+
+import { AddressEntity, WorkshopEntity } from '@app/entity';
+import { WorkshopSchema, AddressSchema } from '@app/schema';
 
 @Component()
 export class WorkshopService {

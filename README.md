@@ -18,14 +18,15 @@
 `git clone https://github.com/fabiociconi/FinalProjectCentennial.git`
 
 2. **Install the NPM packages**  
-`npm i`
+`npm run install:all`
 
 3. **Start the application**  
 `npm start`
 
-4. **Open the browser**  
-`http://localhost:3000`
+4. **Open the browser (If it doesn't open automatically)**  
+`http://localhost:4200`
 
 > It's required to have the mongodb running before start the application.  
 
 > It's recommend to use VSCode as editor.
+

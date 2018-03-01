@@ -2,7 +2,7 @@
     "files.exclude": {
         "**/.editorconfig": true,
         "dist": true,
-        "**/tsconfig*.json": true,
+        "**/tsconfig*.json": false,
         "**/.git*": true,
         "**/.svn": true,
 		"**/.hg": true,
@@ -10,8 +10,8 @@
         "**/node_modules/": true,
         "**/tslint.json": true,
 		"**/package-lock.json": true,
-		"**/nodemon.json": true,
-		"README.md": true
+		"**/nodemon.json": false,
+		"README.md": false
     },
     "editor.autoIndent": true,
     "editor.insertSpaces": false,
