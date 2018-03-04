@@ -19,28 +19,28 @@
 
 <div class="main-container standard-spacing">
 	<div class="single-form-container">
-		<form>
+		<form *ngIf="ready" [formGroup]="customerForm" (ngSubmit)="save(customerForm.getRawValue())">
 			<label>First name</label>
-			<input name="first-name" required value="" />
+			<input name="first-name" formControlName="firstName" required value="" />
 			
 			<div class="form-separator"></div>
 
 			<label>Last name</label>
-			<input name="last-name" required value="" />
+			<input name="last-name" formControlName="lastName" required value="" />
 			
 			<div class="form-separator"></div>
 
 			<label>Email</label>
-			<input name="email" type="email" required value="" />
+			<input name="email" formControlName="email" type="email" required value="" />
 
 			<div class="form-separator"></div>
 			
 			<label>Telephone</label>
-			<input name="telephone" value="" />
+			<input name="telephone" formControlName="phone" value="" />
 			
 			<div class="form-separator"></div>
 
-			<button type="submit">Save</button>
+			<button type="submit" [disabled]="!customerForm.valid">Save</button>
 		</form>
 	</div>
 </div>

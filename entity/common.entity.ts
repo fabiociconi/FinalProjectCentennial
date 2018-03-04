@@ -8,4 +8,6 @@ export class AddressEntity extends EntityBase {
 	city: string;
 	province: string;
 	postalcode: string;
+	createdAt?: Date;
+	updatedAt?: Date;
 }

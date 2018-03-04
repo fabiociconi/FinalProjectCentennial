@@ -1,10 +1,11 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, Reflector } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ApplicationModule } from './app.module';
 import * as express from 'express';
 
 import { environment } from './environments';
 import { NotFoundExceptionFilter } from './filters/not-found-exception';
+import { RolesGuard } from '@app/guards';
 
 async function bootstrap() {
 	const app = await NestFactory.create(ApplicationModule);
@@ -21,7 +22,12 @@ async function bootstrap() {
 		SwaggerModule.setup('/swagger', app, document);
 	}
 
-	app.useGlobalFilters(new NotFoundExceptionFilter());
+	app
+		.useGlobalFilters(new NotFoundExceptionFilter());
+
+	app
+		.useGlobalGuards(new RolesGuard(new Reflector()));
+
 	await app.listen(process.env.PORT || 3000);
 }
 

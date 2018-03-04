@@ -4,6 +4,8 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { CustomerSchema } from '@app/schema';
 import { CustomerEntity, PersonEntity, CarEntity } from '@app/entity';
+import { Execute } from 'xcommon/entity';
+import { PreSaveDateCheck } from '@app/service/date.helper';
 
 @Component()
 export class CustomerService {
@@ -19,9 +21,14 @@ export class CustomerService {
 		return result ? result.person : null;
 	}
 
-	public async save(_id: string, person: PersonEntity): Promise<PersonEntity> {
-		await this.customerModel.update({ _id }, { person });
-		return person;
+	public async save(_id: string, person: PersonEntity): Promise<Execute<PersonEntity>> {
+		const result = new Execute<PersonEntity>();
+
+		PreSaveDateCheck(person);
+		
+		const x = await this.customerModel.update({ _id }, { person });
+		result.entity = await this.find(_id);
+		return result;
 	}
 
 	public async findCars(_id: string): Promise<CarEntity[]> {

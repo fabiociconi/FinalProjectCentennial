@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
+import { CustomerGuard } from './guard/customer.guard';
+import { WorkshopGuard } from './guard/workshop.guard';
 import { AppComponent } from './app.component';
 import { SigninComponent } from './public/signin/signin.component';
 import { SignupComponent } from './public/signup/signup.component';
@@ -31,7 +34,13 @@ const routes: Routes = [
 	},
 	{
 		path: 'customer',
-		loadChildren: './customer/customer.module#CustomerModule'
+		loadChildren: './customer/customer.module#CustomerModule',
+		canActivate: [CustomerGuard]
+	},
+	{
+		path: 'workshop',
+		loadChildren: './workshop/workshop.module#WorkshopModule',
+		canActivate: [WorkshopGuard]
 	}
 ];
 

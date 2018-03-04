@@ -6,10 +6,10 @@ import { WorkshopLayoutComponent } from './workshop-layout/workshop-layout.compo
 import { WorkshopHomeComponent } from './workshop-home/workshop-home.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    WorkshopRoutingModule
-  ],
-  declarations: [WorkshopLayoutComponent, WorkshopHomeComponent]
+	imports: [
+		CommonModule,
+		WorkshopRoutingModule
+	],
+	declarations: [WorkshopLayoutComponent, WorkshopHomeComponent]
 })
 export class WorkshopModule { }

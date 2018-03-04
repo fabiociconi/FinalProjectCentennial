@@ -1,11 +1,13 @@
-import { Get, Post, Controller, Param, Body, Req } from '@nestjs/common';
+import { Get, Post, Controller, Param, Body, Req, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiUseTags, ApiResponse, ApiImplicitBody } from '@nestjs/swagger';
 
-import { TokenPayload, PersonEntity, CarEntity, AddressEntity } from '@app/entity';
+import { TokenPayload, PersonEntity, CarEntity, AddressEntity, RoleType } from '@app/entity';
 import { CustomerService } from '@app/service/customer.service';
+import { RolesGuard, Roles } from '@app/guards';
 
 @ApiBearerAuth()
 @ApiUseTags('customer')
+@Roles(RoleType.Customer)
 @Controller('api/customer')
 export class ProfilerController {
 	constructor(private customerService: CustomerService) {

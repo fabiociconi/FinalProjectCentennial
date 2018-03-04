@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { CustomerRoutingModule } from './customer-routing.module';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
@@ -9,6 +10,7 @@ import { CustomerProfileComponent } from './customer-profile/customer-profile.co
 @NgModule({
 	imports: [
 		CommonModule,
+		ReactiveFormsModule,
 		CustomerRoutingModule
 	],
 	declarations: [CustomerHomeComponent, CustomerLayoutComponent, CustomerProfileComponent]

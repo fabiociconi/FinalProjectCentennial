@@ -20,6 +20,7 @@ export class UserEntity {
 
 export class SingUpEntity {
 	email: string;
+	phone: string;
 	firstName: string;
 	lastName: string;
 	password: string;
@@ -29,4 +30,5 @@ export class SingUpEntity {
 export class SingInEntity {
 	email: string;
 	password: string;
+	remember?: boolean;
 }

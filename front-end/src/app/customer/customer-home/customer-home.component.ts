@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../service';
+import { TokenPayload } from '@app/entity';
 
 @Component({
 	selector: 'app-customer-home',
@@ -9,9 +11,12 @@ import { Component, OnInit } from '@angular/core';
 export class CustomerHomeComponent implements OnInit {
 
 	public title = 'Home';
+	public User: TokenPayload;
 
-	constructor() { }
+	constructor(private auth: AuthService) { }
 
-	ngOnInit() { }
+	ngOnInit() {
+		this.User = this.auth.user;
+	}
 
 }

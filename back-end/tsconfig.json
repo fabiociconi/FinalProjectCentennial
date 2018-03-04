@@ -13,6 +13,7 @@
 		"@app/entity": ["../entity"],
 		"@app/service/*": ["./src/app/service/*"],
 		"@app/schema": ["./src/schema"],
+		"@app/guards": ["./src/guards"],
 		"@app/env": ["./src/environments"]
 
 	},

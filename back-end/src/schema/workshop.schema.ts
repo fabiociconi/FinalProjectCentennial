@@ -3,7 +3,11 @@ import { AddressSchema } from './';
 
 export const CompanySchema = new mongoose.Schema({
 	legalName: String,
-	comertialName: String
+	comertialName: String,
+	phone: String,
+	createdAt: Date,
+	updatedAt: Date,
+	__v: Number
 });
 
 export const WorkshopSchema = new mongoose.Schema(

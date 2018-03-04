@@ -31,6 +31,10 @@ export class ApplicationModule implements NestModule {
 			.forRoutes({ path: '*', method: RequestMethod.ALL });
 
 		consumer
+			.apply(passport.authenticate('jwt', { session: false }))
+			.forRoutes({ path: '/api/**', method: RequestMethod.ALL });
+
+		consumer
 			.apply(CorsMiddleware)
 			.forRoutes(
 				{ path: '/api/**', method: RequestMethod.ALL },
