@@ -17,6 +17,8 @@ export const AddressSchema = new mongoose.Schema(
 		number: String,
 		city: String,
 		province: String,
-		postalcode: String
-	}
-);
+		postalcode: String,
+		createdAt: Date,
+		updatedAt: Date,
+		__v: Number
+	});

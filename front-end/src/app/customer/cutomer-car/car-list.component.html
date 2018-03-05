@@ -1,0 +1,12 @@
+<div class="main-container standard-spacing">
+	car-list works!
+
+	<a routerLink="new">Add new car</a>
+
+	<ul>
+		<li *ngFor="let car of cars">
+			<span>{{ car.model }} - {{ car.licencePlate }}</span>
+			<a [routerLink]="[car._id]">Edit</a>
+		</li>
+	</ul>
+</div>

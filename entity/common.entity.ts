@@ -1,5 +1,8 @@
 export abstract class EntityBase {
-	_id?: string;
+	_id?: string | any;
+	createdAt?: Date;
+	updatedAt?: Date;
+	__v?: number;
 }
 
 export class AddressEntity extends EntityBase {

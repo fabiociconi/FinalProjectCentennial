@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../service';
+import { TokenPayload } from '@app/entity';
+import { LayoutService } from '@app/service/layout.service';
 
 @Component({
 	selector: 'app-customer-home',
@@ -8,10 +11,10 @@ import { Component, OnInit } from '@angular/core';
 
 export class CustomerHomeComponent implements OnInit {
 
-	public title = 'Home';
+	constructor(private layout: LayoutService) { }
 
-	constructor() { }
-
-	ngOnInit() { }
+	ngOnInit() {
+		this.layout.setTitle('Home');
+	}
 
 }

@@ -15,36 +15,45 @@ import { TokenResultEntity, TokenPayload } from '@app/entity';
 
 @Component()
 export class AuthService {
+
+	private validRoles = [RoleType.Customer, RoleType.Workshop];
+
 	constructor(
 		@InjectModel(UserSchema) private userModel: Model<UserEntity & Document>,
 		private customerService: CustomerService,
 		private workshopService: WorkshopService) { }
 
-	public async signup(singUp: SingUpEntity): Promise<Execute<TokenResultEntity>> {
+	public async signup(entity: SingUpEntity): Promise<Execute<TokenResultEntity>> {
 		const result = new Execute<TokenResultEntity>();
-		const check = await this.userModel.findById(singUp.email).exec();
+		const check = await this.userModel.findById(entity.email).exec();
 
 		if (check) {
 			result.addMessage(ExecuteMessageType.Error, 'User already exists');
 			return result;
 		}
 
+		if (!this.validRoles.find(c => c === entity.role)) {
+			result.addMessage(ExecuteMessageType.Error, 'Invalid user role');
+			return result;
+		}
+
 		const user: UserEntity = {
-			_id: singUp.email,
-			role: singUp.role,
-			name: `${singUp.firstName} ${singUp.lastName}`,
-			password: singUp.password
+			_id: entity.email,
+			role: entity.role,
+			name: `${entity.firstName} ${entity.lastName}`,
+			password: entity.password
 		};
 
 		const userSaveResult = await new this.userModel(user).save();
 
-		if (singUp.role === 2) {
+		if (entity.role === 2) {
 			const customerSaveResult = await this.customerService.create({
-				_id: singUp.email,
+				_id: entity.email,
 				person: {
-					firstName: singUp.firstName,
-					lastName: singUp.lastName,
-					email: singUp.email,
+					firstName: entity.firstName,
+					lastName: entity.lastName,
+					email: entity.email,
+					phone: entity.phone,
 					birthDay: new Date()
 				},
 				address: [],
@@ -52,37 +61,38 @@ export class AuthService {
 			});
 		}
 
-		if (singUp.role === 3) {
+		if (entity.role === 3) {
 			const workshopSaveResult = await this.workshopService.create({
-				_id: singUp.email,
+				_id: entity.email,
 				company: {
-					legalName: singUp.firstName,
-					comertialName: singUp.lastName
+					legalName: entity.firstName,
+					comertialName: entity.lastName,
+					phone: entity.phone
 				},
 				address: []
 			});
 		}
 
-		result.entity = await this.createToken({
-			email: singUp.email,
-			name: singUp.firstName,
-			role: singUp.role
+		result.entity = this.createToken({
+			email: entity.email,
+			name: entity.firstName,
+			role: entity.role
 		});
 
 		return result;
 	}
 
-	public async signin(login: SingInEntity): Promise<Execute<TokenResultEntity>> {
+	public async signin(entity: SingInEntity): Promise<Execute<TokenResultEntity>> {
 
 		const result = new Execute<TokenResultEntity>();
-		const user = await this.userModel.findById(login.email).exec();
+		const user = await this.userModel.findById(entity.email).exec();
 
-		if (!user || user.password !== login.password) {
+		if (!user || user.password !== entity.password) {
 			result.addMessage(ExecuteMessageType.Error, 'Invalid user name and/or passowrd');
 			return result;
 		}
 
-		result.entity = await this.createToken({
+		result.entity = this.createToken({
 			email: user._id,
 			role: user.role,
 			name: user.name
@@ -91,20 +101,18 @@ export class AuthService {
 		return result;
 	}
 
-	private createToken(payload: TokenPayload): Promise<TokenResultEntity> {
+	private createToken(payload: TokenPayload): TokenResultEntity {
 
-		return new Promise<TokenResultEntity>((resolve, reject) => {
-			const expires = 60 * 60;
-			const token = jwt.sign(payload, environment.tokenSecret, { expiresIn: expires });
+		const expires = 7 * 60 * 60;
+		const token = jwt.sign(payload, environment.secret, { expiresIn: expires });
 
-			resolve({
-				expires,
-				token
-			});
-		});
+		return {
+			expires,
+			token
+		};
 	}
 
-	async validateUser(signedUser): Promise<boolean> {
+	public async validateUser(signedUser): Promise<boolean> {
 		return true;
 	}
 }

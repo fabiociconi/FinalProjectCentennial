@@ -2,7 +2,16 @@
 	<h1>Sign in</h1>
 	<div class="box-separator colour-green"></div>
 
-	<form *ngIf="ready" [formGroup]="singInForm" (ngSubmit)="signIn(singInForm.value)">
+	<div *ngIf="ready && authenticated">
+		<p>Hi, {{user.name }}</p>
+		<a routerLink="/customer">Click here to access you account</a>
+		
+		<p>
+			It's not your account? <a (click)="singOut()">Click here to log out.</a>
+		</p>
+	</div>
+
+	<form *ngIf="ready && !authenticated" [formGroup]="singInForm" (ngSubmit)="signIn(singInForm.value)">
 		<label>Email</label>
 		<input name="email" formControlName="email" type="email" required />
 
@@ -13,7 +22,7 @@
 
 		<div class="form-separator"></div>
 
-		<mat-checkbox>Remember me</mat-checkbox>
+		<mat-checkbox formControlName="remember">Remember me</mat-checkbox>
 
 		<div class="form-separator"></div>
 

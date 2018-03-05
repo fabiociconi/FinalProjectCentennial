@@ -6,12 +6,31 @@
 	<div class="menu">
 		<a class="menu-item" routerLink="/customer"><img src="assets/img/dashboard-white-icon.png" width="20" />Home</a>
 		<a class="menu-item" routerLink="/customer/profile"><img src="assets/img/profile-white-icon.png" width="20" />Profile</a>
-		<a class="menu-item" routerLink="/customer/cars"><img src="assets/img/car-white-icon.png" width="20" />Cars</a>
+		<a class="menu-item" routerLink="/customer/car"><img src="assets/img/car-white-icon.png" width="20" />Cars</a>
 		<a class="menu-item" routerLink="/customer/appointments"><img src="assets/img/appointments-white-icon.png" width="20" />Appointments<span class="notification">1</span></a>
 		<a class="menu-item" routerLink="/customer/search"><img src="assets/img/search-white-icon.png" width="20" />Search</a>
 		<a class="menu-item" routerLink="/customer/address"><img src="assets/img/address-white-icon.png" width="18" />Address</a>
-		<a class="menu-item logout" routerLink="/logout"><img src="assets/img/logout-white-icon.png" width="20" />Logout</a>
+		<a class="menu-item logout" (click)="singOut()"><img src="assets/img/logout-white-icon.png" width="20" />Logout</a>
 	</div>
+</div>
+
+<div class="top-bar search-page">
+	<div class="title-container">
+		<h1>{{ title }}</h1>
+	</div>
+
+	<div class="fr">
+		<table width="100%">
+			<tr>
+				<td width="20"></td>
+				<td align="right">{{user.name}}</td>
+				<td align="right" width="80"><a routerLink="/customer/profile"><img class="circle" src="assets/img/user-picture.png" width="60" style="vertical-align: middle;" /></a></td>
+				<td align="right" width="35"><a routerLink="/customer/profile"><img src="assets/img/down-arrow-icon.png" width="15" /></a></td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="clear"></div>
 </div>
 
 <router-outlet></router-outlet>

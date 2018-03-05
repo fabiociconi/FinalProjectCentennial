@@ -1,46 +1,27 @@
-<div class="top-bar search-page">
-	<div class="title-container">
-		<h1>{{ title }}</h1>
-	</div>
-
-	<div class="fr">
-		<table width="100%">
-			<tr>
-				<td width="20"></td>
-				<td align="right">Bruno Campos</td>
-				<td align="right" width="80"><a routerLink="/customer/profile"><img class="circle" src="assets/img/user-picture.png" width="60" style="vertical-align: middle;" /></a></td>
-				<td align="right" width="35"><a routerLink="/customer/profile"><img src="assets/img/down-arrow-icon.png" width="15" /></a></td>
-			</tr>
-		</table>
-	</div>
-
-	<div class="clear"></div>
-</div>
-
 <div class="main-container standard-spacing">
 	<div class="single-form-container">
-		<form>
+		<form *ngIf="ready" [formGroup]="customerForm" (ngSubmit)="save(customerForm.getRawValue())">
 			<label>First name</label>
-			<input name="first-name" required value="" />
+			<input name="first-name" formControlName="firstName" required value="" />
 			
 			<div class="form-separator"></div>
 
 			<label>Last name</label>
-			<input name="last-name" required value="" />
+			<input name="last-name" formControlName="lastName" required value="" />
 			
 			<div class="form-separator"></div>
 
 			<label>Email</label>
-			<input name="email" type="email" required value="" />
+			<input name="email" formControlName="email" type="email" required value="" />
 
 			<div class="form-separator"></div>
 			
 			<label>Telephone</label>
-			<input name="telephone" value="" />
+			<input name="telephone" formControlName="phone" value="" />
 			
 			<div class="form-separator"></div>
 
-			<button type="submit">Save</button>
+			<button type="submit" [disabled]="!(customerForm.valid && customerForm.dirty)">Save</button>
 		</form>
 	</div>
 </div>

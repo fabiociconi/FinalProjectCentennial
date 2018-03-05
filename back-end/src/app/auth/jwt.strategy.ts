@@ -13,7 +13,7 @@ export class JwtStrategy extends Strategy {
 		super({
 			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 			passReqToCallback: true,
-			secretOrKey: environment.tokenSecret
+			secretOrKey: environment.secret
 		},
 			(req, payload, done) => this.verify(req, payload, done)
 		);

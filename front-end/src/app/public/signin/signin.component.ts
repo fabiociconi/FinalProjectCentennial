@@ -3,7 +3,7 @@ import { Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AutoFormService } from 'xcommon/autoform';
 
-import { SingInEntity } from '@app/entity';
+import { SingInEntity, TokenPayload } from '@app/entity';
 import { AuthService } from '@app/service/auth.service';
 
 @Component({
@@ -15,8 +15,13 @@ export class SigninComponent implements OnInit {
 
 	public singInForm: FormGroup;
 	public ready = false;
+	public authenticated: boolean;
+	public user: TokenPayload;
 
-	constructor(private authService: AuthService, private autoFormService: AutoFormService, private router: Router) { }
+	constructor(private auth: AuthService, private autoFormService: AutoFormService, private router: Router) {
+		this.authenticated = auth.authenticated;
+		this.user = auth.user;
+	}
 
 	public ngOnInit(): void {
 		this.singInForm = this.autoFormService.createNew<SingInEntity>()
@@ -25,18 +30,24 @@ export class SigninComponent implements OnInit {
 			.addValidator(c => c.password, Validators.required)
 			.build({
 				email: '',
-				password: ''
+				password: '',
+				remember: false
 			});
 
 		this.ready = true;
 	}
 
+	public singOut(): void {
+		this.auth.signOut(false);
+		this.authenticated = false;
+		this.user = null;
+	}
+
 	public signIn(entity: SingInEntity): void {
-		this.authService.signIn(entity)
+		this.auth.signIn(entity)
 			.subscribe(res => {
-				if (!res.hasError) {
-					console.log(res.entity.token);
-					this.router.navigate(['/customer']);
+				if (res.hasError) {
+
 				}
 			});
 	}

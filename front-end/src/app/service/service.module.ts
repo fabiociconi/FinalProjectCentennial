@@ -3,13 +3,17 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AuthService } from './auth.service';
+import { RouterModule } from '@angular/router';
+import { CustomerService } from './customer.service';
+import { LayoutService } from './layout.service';
 
 @NgModule({
 	imports: [
 		CommonModule,
-		HttpClientModule
+		HttpClientModule,
+		RouterModule
 	],
 	declarations: [],
-	providers: [AuthService]
+	providers: [AuthService, CustomerService, LayoutService]
 })
 export class ServiceModule { }
