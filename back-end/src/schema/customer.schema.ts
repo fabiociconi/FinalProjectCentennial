@@ -3,10 +3,10 @@ import { AddressSchema } from './';
 
 export const PersonSchema = new mongoose.Schema(
 	{
-		firstName: String,
-		lastName: String,
-		email: { type: String, required: true, unique: true },
-		phone: String,
+		firstName: { type: String, required: true, trim: true },
+		lastName: { type: String, required: true, trim: true },
+		email: { type: String, required: true, trim: true, unique: true },
+		phone:  { type: String, required: true, trim: true },
 		birthDay: Date,
 		createdAt: Date,
 		updatedAt: Date,
@@ -16,9 +16,9 @@ export const PersonSchema = new mongoose.Schema(
 export const CarSchema = new mongoose.Schema(
 	{
 		licencePlate: String,
-		brand: String,
-		color: String,
-		model: String,
+		brand:  { type: String, required: true, trim: true },
+		color:  { type: String, required: true, trim: true },
+		model:  { type: String, required: true, trim: true },
 		createdAt: Date,
 		updatedAt: Date,
 		__v: Number

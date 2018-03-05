@@ -3,6 +3,8 @@ import { CustomerService } from '@app/service/customer.service';
 import { PersonEntity } from '@app/entity';
 import { FormGroup, Validators } from '@angular/forms';
 import { AutoFormService, AutoForm } from 'xcommon/autoform';
+import { MatSnackBar } from '@angular/material';
+import { LayoutService } from '@app/service/layout.service';
 
 @Component({
 	selector: 'app-customer-profile',
@@ -12,26 +14,38 @@ import { AutoFormService, AutoForm } from 'xcommon/autoform';
 
 export class CustomerProfileComponent implements OnInit {
 
-	public title = 'Profile';
 	public customerForm: FormGroup;
 	public ready = false;
 	private customerAutoForm: AutoForm<PersonEntity>;
 
-	constructor(private customer: CustomerService, private autoForm: AutoFormService) { }
+	constructor(
+		private layout: LayoutService,
+		private customer: CustomerService,
+		private autoForm: AutoFormService,
+		private snackBar: MatSnackBar) { }
 
 	ngOnInit() {
+		this.layout.setTitle('Profile');
 		this.customer.getProfile().subscribe(res => this.buildForm(res));
 	}
 
 	public save(entity: PersonEntity): void {
 		this.customer.saveProfile(entity)
-		.subscribe(res => {
-			if (res.hasError) {
+			.subscribe(res => {
+				if (res.hasError) {
+					this.snackBar.open('Something went strnage ...', null, {
+						duration: 2000
+					});
 
-			}
+					return;
+				}
 
-			this.buildForm(res.entity);
-		});
+				this.snackBar.open('Data saved.', null, {
+					duration: 2000
+				});
+
+				this.buildForm(res.entity);
+			});
 	}
 
 	private buildForm(entity: PersonEntity): void {
