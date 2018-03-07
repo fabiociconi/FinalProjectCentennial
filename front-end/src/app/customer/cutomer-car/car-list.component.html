@@ -1,6 +1,7 @@
 <div class="main-container standard-spacing">
 	<table class="custom-table">
 		<tr>
+			<th>#</th>
 			<th>Brand</th>
 			<th>Model</th>
 			<th>Colour</th>
@@ -8,7 +9,8 @@
 			<th width="10%" align="center">Edit</th>
 		</tr>
 
-		<tr *ngFor="let car of cars">
+		<tr *ngFor="let car of cars; let i = index">
+			<td>{{ i + 1 }}</td>
 			<td>{{ car.brand }}</td>
 			<td>{{ car.model }}</td>
 			<td>{{ car.color }}</td>
