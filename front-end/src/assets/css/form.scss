@@ -52,3 +52,34 @@ button {
 .form-separator {
 	height: 35px;
 }
+
+table {
+	&.custom-table {
+		width: 100%;
+		text-align: left;
+
+		th, td {
+			padding: 20px 30px;
+		}
+
+		td {
+			border-bottom: 2px solid #ECF0F1;
+		}
+
+		th {
+			font-family: "AmsiPro-Bold";
+			background: #d9dee0;
+		}
+
+		tr {
+			&:nth-child(odd) {
+				background-color: #f2f6f7;
+			}
+
+			img {
+				opacity: 0.70;
+    			filter: alpha(opacity=70);
+			}
+		}
+	}
+}

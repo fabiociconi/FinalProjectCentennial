@@ -1,12 +1,22 @@
 <div class="main-container standard-spacing">
-	car-list works!
+	<table class="custom-table">
+		<tr>
+			<th>Brand</th>
+			<th>Model</th>
+			<th>Colour</th>
+			<th>Licence Plate</th>
+			<th width="10%" align="center">Edit</th>
+		</tr>
 
-	<a routerLink="new">Add new car</a>
+		<tr *ngFor="let car of cars">
+			<td>{{ car.brand }}</td>
+			<td>{{ car.model }}</td>
+			<td>{{ car.color }}</td>
+			<td>{{ car.licencePlate }}</td>
+			<td align="center"><a [routerLink]="[car._id]"><img src="assets/img/edit-icon.png" width="25" /></a></td>
+		</tr>
+	</table>
 
-	<ul>
-		<li *ngFor="let car of cars">
-			<span>{{ car.model }} - {{ car.licencePlate }}</span>
-			<a [routerLink]="[car._id]">Edit</a>
-		</li>
-	</ul>
+	<div class="form-separator"></div>
+	<a routerLink="new"><button>Add new car</button></a>
 </div>
