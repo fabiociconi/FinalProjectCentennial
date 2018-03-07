@@ -1,26 +1,25 @@
 <div class="main-container standard-spacing">
 	<div class="single-form-container">
 		<form *ngIf="ready" [formGroup]="carForm" (ngSubmit)="save(carForm.getRawValue())">
-			<label>Model</label>
-			<input name="model" formControlName="model" />
-			<div class="form-separator"></div>
-
 			<label>Brand</label>
 			<input name="brand" formControlName="brand" />
 			<div class="form-separator"></div>
 
-			<label>LicencePlate</label>
-			<input name="licencePlate" formControlName="licencePlate" />
+			<label>Model</label>
+			<input name="model" formControlName="model" />
 			<div class="form-separator"></div>
 
-			<label>Color</label>
+			<label>Colour</label>
 			<input name="color" formControlName="color" />
 			<div class="form-separator"></div>
 
-			<button *ngIf="id !== 'new'" type="button" (click)="delete()">Delete</button>
-			<button type="button" routerLink="/customer/car">Back</button>
-			<button type="submit" [disabled]="!(carForm.valid && carForm.dirty)">Save</button>
+			<label>Licence Plate</label>
+			<input name="licencePlate" formControlName="licencePlate" />
+			<div class="form-separator"></div>			
 
+			<button type="button" routerLink="/customer/car" class="back">Back</button>
+			<button *ngIf="id !== 'new'" type="button" (click)="delete()" class="delete">Delete</button>
+			<button type="submit" [disabled]="!(carForm.valid && carForm.dirty)">Save</button>
 		</form>
 	</div>
 </div>
