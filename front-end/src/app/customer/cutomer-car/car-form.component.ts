@@ -30,7 +30,7 @@ export class CarFormComponent implements OnInit {
 		private snackBar: MatSnackBar) { }
 
 	ngOnInit() {
-		this.layout.setTitle('Car');
+		this.layout.setTitle('Cars');
 
 		this.activatedRoute.params.subscribe(param => {
 			this.id = param.id;
