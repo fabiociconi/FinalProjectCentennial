@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { RouterModule } from '@angular/router';
 import { CustomerService } from './customer.service';
+import { WorkshopService } from './workshop.service';
 import { LayoutService } from './layout.service';
 
 @NgModule({
@@ -14,6 +15,6 @@ import { LayoutService } from './layout.service';
 		RouterModule
 	],
 	declarations: [],
-	providers: [AuthService, CustomerService, LayoutService]
+	providers: [AuthService, CustomerService, LayoutService, WorkshopService]
 })
 export class ServiceModule { }

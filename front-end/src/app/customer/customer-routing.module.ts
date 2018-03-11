@@ -5,8 +5,8 @@ import { CustomerHomeComponent } from './customer-home/customer-home.component';
 import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
 import { CarListComponent } from './cutomer-car/car-list.component';
 import { CarFormComponent } from './cutomer-car/car-form.component';
-import { AddressListComponent } from './customer-address/address-list.component';
-import { AddressFormComponent } from './customer-address/address-form.component';
+import { CustomerAddressListComponent } from './customer-address/address-list.component';
+import { CustomerAddressFormComponent } from './customer-address/address-form.component';
 
 const routes: Routes = [
 	{
@@ -31,11 +31,11 @@ const routes: Routes = [
 			},
 			{
 				path: 'address',
-				component: AddressListComponent
+				component: CustomerAddressListComponent
 			},
 			{
 				path: 'address/:id',
-				component: AddressFormComponent
+				component: CustomerAddressFormComponent
 			}
 		]
 	}

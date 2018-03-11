@@ -8,8 +8,8 @@ import { CustomerLayoutComponent } from './customer-layout/customer-layout.compo
 import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
 import { CarListComponent } from './cutomer-car/car-list.component';
 import { CarFormComponent } from './cutomer-car/car-form.component';
-import { AddressListComponent } from './customer-address/address-list.component';
-import { AddressFormComponent } from './customer-address/address-form.component';
+import { CustomerAddressListComponent } from './customer-address/address-list.component';
+import { CustomerAddressFormComponent } from './customer-address/address-form.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -25,8 +25,8 @@ import { SharedModule } from '../shared/shared.module';
 		CustomerProfileComponent, 
 		CarListComponent, 
 		CarFormComponent,
-		AddressListComponent, 
-		AddressFormComponent
+		CustomerAddressListComponent, 
+		CustomerAddressFormComponent
 	]
 })
 export class CustomerModule { }

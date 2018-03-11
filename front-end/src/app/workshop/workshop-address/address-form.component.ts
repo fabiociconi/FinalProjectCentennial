@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AutoFormService, AutoForm } from 'xcommon/autoform';
 
-import { CustomerService } from '@app/service/customer.service';
+import { WorkshopService } from '@app/service/workshop.service';
 import { LayoutService } from '@app/service/layout.service';
 import { AddressEntity } from '@app/entity';
 import { MatSnackBar } from '@angular/material';
@@ -14,7 +14,7 @@ import { MatSnackBar } from '@angular/material';
 	templateUrl: './address-form.component.html',
 	styleUrls: ['./address-form.component.scss']
 })
-export class CustomerAddressFormComponent implements OnInit {
+export class WorkshopAddressFormComponent implements OnInit {
 
 	private addressAutoForm: AutoForm<AddressEntity>;
 	public id: string;
@@ -24,7 +24,7 @@ export class CustomerAddressFormComponent implements OnInit {
 
 	constructor(
 		private autoForm: AutoFormService,
-		private customer: CustomerService,
+		private workshop: WorkshopService,
 		private layout: LayoutService,
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
@@ -40,7 +40,7 @@ export class CustomerAddressFormComponent implements OnInit {
 	}
 
 	public save(address: AddressEntity): void {
-		this.customer.saveAddress(address).subscribe(res => {
+		this.workshop.saveAddress(address).subscribe(res => {
 			if (res.hasError) {
 				this.snackBar.open('Something went strange ...', null, {
 					duration: 2000
@@ -54,7 +54,7 @@ export class CustomerAddressFormComponent implements OnInit {
 			});
 
 			if (this.id !== res.entity._id) {
-				this.router.navigate(['/customer/address', res.entity._id]);
+				this.router.navigate(['/workshop/address', res.entity._id]);
 				return;
 			}
 
@@ -63,7 +63,7 @@ export class CustomerAddressFormComponent implements OnInit {
 	}
 
 	public delete(): void {
-		this.customer.deleteAddress(this.id)
+		this.workshop.deleteAddress(this.id)
 			.subscribe(res => {
 				console.log(res);
 			});
@@ -84,7 +84,7 @@ export class CustomerAddressFormComponent implements OnInit {
 			return;
 		}
 
-		this.customer.getAddress(id).subscribe(res => {
+		this.workshop.getAddress(id).subscribe(res => {
 			this.buildForm(res);
 		});
 	}
