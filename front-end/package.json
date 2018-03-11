@@ -9,6 +9,8 @@
 	},
 	"private": true,
 	"dependencies": {
+		"@agm/core": "^1.0.0-beta.2",
+		"@agm/snazzy-info-window": "^1.0.0-beta.2",
 		"@angular/animations": "^5.2.0",
 		"@angular/cdk": "^5.2.2",
 		"@angular/common": "5.2.0",
@@ -20,10 +22,12 @@
 		"@angular/platform-browser": "5.2.0",
 		"@angular/platform-browser-dynamic": "5.2.0",
 		"@angular/router": "5.2.0",
+		"@types/googlemaps": "^3.30.7",
 		"angular2-jwt-simple": "^0.5.4",
 		"core-js": "2.4.1",
 		"hammerjs": "^2.0.8",
 		"rxjs": "5.5.6",
+		"snazzy-info-window": "^1.1.1",
 		"xcommon": "0.0.28",
 		"zone.js": "0.8.19"
 	},

@@ -1,0 +1,35 @@
+<div class="main-container standard-spacing">
+	<googleMaps *ngIf="ready" [addressIn]="address" (addressOut)="buildForm($event)"></googleMaps>
+
+	<div class="single-form-container">
+		<form *ngIf="ready" [formGroup]="addressForm" (ngSubmit)="save(addressForm.getRawValue())">
+			<label>Street</label>
+			<input name="street" formControlName="street" />
+			<div class="form-separator"></div>
+
+			<label>Number</label>
+			<input name="number" formControlName="number" />
+			<div class="form-separator"></div>
+
+			<label>City</label>
+			<input name="city" formControlName="city" />
+			<div class="form-separator"></div>
+
+			<label>Province</label>
+			<input name="province" formControlName="province" />
+			<div class="form-separator"></div>	
+			
+			<label>Country</label>
+			<input name="country" formControlName="country" />
+			<div class="form-separator"></div>	
+
+			<label>Postal Code</label>
+			<input name="postalcode" formControlName="postalcode" />
+			<div class="form-separator"></div>
+
+			<button type="button" routerLink="/customer/address" class="back">Back</button>
+			<button *ngIf="id !== 'new'" type="button" (click)="delete()" class="delete">Delete</button>
+			<button type="submit" [disabled]="!(addressForm.valid)">Save</button>
+		</form>
+	</div>
+</div>

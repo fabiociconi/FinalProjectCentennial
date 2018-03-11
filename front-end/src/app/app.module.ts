@@ -12,7 +12,6 @@ import { CustomerGuard } from './guard/customer.guard';
 import { WorkshopGuard } from './guard/workshop.guard';
 import { AuthInterceptor } from './guard/http-interceptor.service';
 
-
 @NgModule({
 	declarations: [
 		AppComponent

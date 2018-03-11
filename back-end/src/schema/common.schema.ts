@@ -17,7 +17,10 @@ export const AddressSchema = new mongoose.Schema(
 		number: String,
 		city: String,
 		province: String,
+		country: String,
 		postalcode: String,
+		Latitude: Number,
+		Longitude: Number,
 		createdAt: Date,
 		updatedAt: Date,
 		__v: Number

@@ -10,5 +10,8 @@ export class AddressEntity extends EntityBase {
 	number: string;
 	city: string;
 	province: string;
+	country: string;
 	postalcode: string;
+	Latitude: number;
+	Longitude: number;
 }
