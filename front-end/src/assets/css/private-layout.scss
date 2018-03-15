@@ -88,6 +88,7 @@ $left-menu-width: 283px;
 .main-container {
 	top: $top-bar-height;
 	bottom: 0;
+	overflow-y: scroll;
 
 	&.standard-spacing {
 		padding: 32px;
