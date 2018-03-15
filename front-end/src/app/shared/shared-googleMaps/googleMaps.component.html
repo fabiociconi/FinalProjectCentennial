@@ -1,7 +1,7 @@
-<div style="margin: 10px auto;">
-	<form class="example-form" (keydown.enter)="$event.preventDefault()">
-		<input matInput placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" style="margin: 10px;" #search>
-		<agm-map [latitude]="lat" [longitude]="lng" style="height: 300px; width: 100%; margin: 10px auto;">
+<div style="position: relative;">
+	<form (keydown.enter)="$event.preventDefault()">
+		<input matInput placeholder="Search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" style="position: absolute; top: 30px; left: 30px; right: 30px; width: 50%; z-index: 1; box-sizing: border-box; background-color: white;" #search>
+		<agm-map [latitude]="lat" [longitude]="lng" style="height: 400px; width: 100%;">
 			<agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true" (dragEnd)="MarkerDragEnd($event)"></agm-marker>
 		</agm-map>
 	</form>

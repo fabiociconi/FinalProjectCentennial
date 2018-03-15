@@ -1,7 +1,7 @@
-<div class="main-container standard-spacing">
+<div class="main-container">
 	<googleMaps *ngIf="ready" [addressIn]="address" (addressOut)="buildForm($event)"></googleMaps>
 
-	<div class="single-form-container">
+	<div class="single-form-container standard-spacing">
 		<form *ngIf="ready" [formGroup]="addressForm" (ngSubmit)="save(addressForm.getRawValue())">
 			<label>Street</label>
 			<input name="street" formControlName="street" />

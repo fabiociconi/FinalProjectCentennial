@@ -11,6 +11,10 @@
 			<th width="10%" align="center">Edit</th>
 		</tr>
 
+		<tr *ngIf="addresses.length == 0">
+			<td colspan="8" align="center">No addresses registered at the moment</td>
+		</tr>
+
 		<tr *ngFor="let address of addresses; let i = index">
 			<td>{{ i + 1 }}</td>
 			<td>{{ address.street }}</td>

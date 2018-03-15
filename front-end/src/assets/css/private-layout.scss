@@ -90,11 +90,11 @@ $left-menu-width: 283px;
 	bottom: 0;
 	overflow-y: scroll;
 
-	&.standard-spacing {
-		padding: 32px;
-	}
-
 	.single-form-container {
 		width: 50%;
 	}
+}
+
+.standard-spacing {
+	padding: 32px;
 }
