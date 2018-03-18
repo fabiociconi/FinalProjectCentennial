@@ -17,6 +17,8 @@ export class SigninComponent implements OnInit {
 	public ready = false;
 	public authenticated: boolean;
 	public user: TokenPayload;
+	public errorMessage: string;
+	public error = false;
 
 	constructor(private auth: AuthService, private autoFormService: AutoFormService, private router: Router) {
 		this.authenticated = auth.authenticated;
@@ -47,7 +49,9 @@ export class SigninComponent implements OnInit {
 		this.auth.signIn(entity)
 			.subscribe(res => {
 				if (res.hasError) {
-
+					this.error = true;
+					this.errorMessage = 'Invalid User or Password';
+					return;
 				}
 			});
 	}

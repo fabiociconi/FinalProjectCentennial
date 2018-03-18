@@ -21,7 +21,7 @@
 		<input type="password" formControlName="password" name="password" required />
 
 		<div class="form-separator"></div>
-
+		
 		<mat-checkbox formControlName="remember">Remember me</mat-checkbox>
 
 		<div class="form-separator"></div>
@@ -39,5 +39,8 @@
 				</td>
 			</tr>
 		</table>
+		<div *ngIf="error" style="color:red">
+			{{errorMessage}}
+		</div>
 	</form>
 </div>
