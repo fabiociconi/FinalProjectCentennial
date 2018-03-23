@@ -1,7 +1,7 @@
 import { Req, Get, Post, Delete, Controller, Param, Body } from '@nestjs/common';
 import { ApiBearerAuth, ApiUseTags, ApiResponse, ApiImplicitBody } from '@nestjs/swagger';
 
-import { WorkshopEntity, AddressEntity, TokenPayload } from '../../../../entity';
+import { WorkshopEntity, AddressEntity, TokenPayload, CompanyEntity } from '../../../../entity';
 import { WorkshopService } from '../service/workshop.service';
 import { Execute } from 'xcommon/entity';
 
@@ -13,16 +13,17 @@ export class WorkshopController {
 	}
 
 	@Get()
-	@ApiResponse({ status: 200, type: WorkshopEntity })
-	public async get(@Req() req: any): Promise<WorkshopEntity> {
+	@ApiResponse({ status: 200, type: CompanyEntity })
+	public async get(@Req() req: any): Promise<CompanyEntity> {
 		const user: TokenPayload = req.user;
 		return await this.workshopService.find(user.email);
 	}
 
 	@Post()
-	@ApiResponse({ status: 200, type: WorkshopEntity })
-	async save(@Req() req: any, @Body() workshop: WorkshopEntity): Promise<WorkshopEntity> {
-		return this.workshopService.create(workshop);
+	@ApiResponse({ status: 200, type: CompanyEntity })
+	async save(@Req() req: any, @Body() workshop: CompanyEntity): Promise<Execute<CompanyEntity>> {
+		const user: TokenPayload = req.user;
+		return this.workshopService.save(user.email, workshop);
 	}
 
 	@Get('address')

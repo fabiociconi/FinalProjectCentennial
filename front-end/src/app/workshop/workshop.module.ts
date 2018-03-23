@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { WorkshopRoutingModule } from './workshop-routing.module';
 import { WorkshopLayoutComponent } from './workshop-layout/workshop-layout.component';
@@ -7,7 +8,7 @@ import { WorkshopHomeComponent } from './workshop-home/workshop-home.component';
 import { WorkshopAddressFormComponent } from './workshop-address/address-form.component';
 import { WorkshopAddressListComponent } from './workshop-address/address-list.component';
 import { SharedModule } from '../shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { WorkshopProfileComponent } from './workshop-profile/workshop-profile.component';
 
 @NgModule({
 	imports: [
@@ -20,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 		WorkshopLayoutComponent,
 		WorkshopHomeComponent,
 		WorkshopAddressListComponent,
-		WorkshopAddressFormComponent
+		WorkshopAddressFormComponent,
+		WorkshopProfileComponent
 	]
 })
 export class WorkshopModule { }

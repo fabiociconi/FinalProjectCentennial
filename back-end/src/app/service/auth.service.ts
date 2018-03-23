@@ -87,8 +87,13 @@ export class AuthService {
 		const result = new Execute<TokenResultEntity>();
 		const user = await this.userModel.findById(entity.email).exec();
 
+		console.log(user);
+
 		if (!user || user.password !== entity.password) {
 			result.addMessage(ExecuteMessageType.Error, 'Invalid user name and/or passowrd');
+			
+			console.log(result);
+			
 			return result;
 		}
 
@@ -97,6 +102,8 @@ export class AuthService {
 			role: user.role,
 			name: user.name
 		});
+
+		console.log(result);
 
 		return result;
 	}

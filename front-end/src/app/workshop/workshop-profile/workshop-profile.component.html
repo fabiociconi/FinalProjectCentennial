@@ -1,0 +1,22 @@
+<div class="main-container standard-spacing">
+	<div class="single-form-container">
+		<form *ngIf="ready" [formGroup]="workshopForm" (ngSubmit)="save(workshopForm.getRawValue())">
+			<label>Comertial name</label>
+			<input name="comertial-name" formControlName="comertialName" required value="" />
+			
+			<div class="form-separator"></div>
+
+			<label>Legal name</label>
+			<input name="legal-name" formControlName="legalName" required value="" />
+			
+			<div class="form-separator"></div>
+			
+			<label>Telephone</label>
+			<input name="telephone" formControlName="phone" value="" />
+			
+			<div class="form-separator"></div>
+
+			<button type="submit" [disabled]="!(workshopForm.valid && workshopForm.dirty)">Save</button>
+		</form>
+	</div>
+</div>

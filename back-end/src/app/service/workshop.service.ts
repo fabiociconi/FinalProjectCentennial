@@ -3,7 +3,7 @@ import { Component } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Execute } from 'xcommon/entity';
-import { AddressEntity, WorkshopEntity } from '@app/entity';
+import { AddressEntity, WorkshopEntity, CompanyEntity } from '@app/entity';
 import { WorkshopSchema, AddressSchema } from '@app/schema';
 import { PreSaveDateCheck } from '@app/service/date.helper';
 
@@ -16,8 +16,20 @@ export class WorkshopService {
 		return await model.save();
 	}
 
-	public async find(id: string): Promise<WorkshopEntity> {
-		return await this.workshopModel.findById(id).exec();
+	public async find(id: string): Promise<CompanyEntity> {
+		const result = await this.workshopModel.findById(id, { company: 1 }).exec();
+		return result ? result.company : null;
+	}
+
+	public async save(_id: string, workshop: CompanyEntity): Promise<Execute<CompanyEntity>> {
+		const result = new Execute<CompanyEntity>();
+
+		PreSaveDateCheck(workshop);
+
+		const dbResult = await this.workshopModel.update({ _id }, { workshop }).exec();
+		result.entity = await this.find(_id);
+
+		return result;
 	}
 
 	public async findAddresses(_id: string): Promise<AddressEntity[]> {

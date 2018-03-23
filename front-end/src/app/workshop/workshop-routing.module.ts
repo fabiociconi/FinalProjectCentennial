@@ -4,6 +4,7 @@ import { WorkshopLayoutComponent } from './workshop-layout/workshop-layout.compo
 import { WorkshopHomeComponent } from './workshop-home/workshop-home.component';
 import { WorkshopAddressFormComponent } from './workshop-address/address-form.component';
 import { WorkshopAddressListComponent } from './workshop-address/address-list.component';
+import { WorkshopProfileComponent } from './workshop-profile/workshop-profile.component';
 
 const routes: Routes = [
 	{ 
@@ -15,13 +16,17 @@ const routes: Routes = [
 				component: WorkshopHomeComponent
 			},
 			{
+				path: 'profile',
+				component: WorkshopProfileComponent
+			},
+			{
 				path: 'address',
 				component: WorkshopAddressListComponent
 			},
 			{
 				path: 'address/:id',
 				component: WorkshopAddressFormComponent
-			}
+			}			
 		] 
 	}
 ];
