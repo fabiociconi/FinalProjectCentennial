@@ -1,0 +1,21 @@
+<div class="main-container standard-spacing">
+	<div class="single-form-container">
+		<!--<form *ngIf="ready" [formGroup]="addressForm" (ngSubmit)="save(addressForm.getRawValue())">-->
+			<label>Service</label>
+			<select name="service">
+				<option value="Test">Test</option>
+			</select>
+			<div class="form-separator"></div>
+
+			<label>Price</label>
+			<input name="price" /><!-- formControlName="price" -->
+			<div class="form-separator"></div>
+
+			<button type="button" routerLink="/workshop/price" class="back">Back</button>
+			<!--<button *ngIf="id !== 'new'" type="button" (click)="delete()" class="delete">Delete</button>
+			<button type="submit" [disabled]="!(addressForm.valid)">Save</button>-->
+			<button type="button" class="delete">Delete</button>
+			<button type="submit">Save</button>
+		<!--</form>-->
+	</div>
+</div>
