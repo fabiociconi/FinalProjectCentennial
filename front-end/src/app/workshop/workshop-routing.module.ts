@@ -7,6 +7,7 @@ import { WorkshopAddressListComponent } from './workshop-address/address-list.co
 import { WorkshopProfileComponent } from './workshop-profile/workshop-profile.component';
 import { WorkshopPriceListComponent } from './workshop-price/price-list.component';
 import { WorkshopPriceFormComponent } from './workshop-price/price-form.component';
+import { WorkshopAppointmentListComponent } from './workshop-appointment/appointment-list.component';
 
 const routes: Routes = [
 	{ 
@@ -36,7 +37,11 @@ const routes: Routes = [
 			{
 				path: 'price/:id',
 				component: WorkshopPriceFormComponent
-			}		
+			},
+			{
+				path: 'appointments',
+				component: WorkshopAppointmentListComponent
+			}
 		] 
 	}
 ];
