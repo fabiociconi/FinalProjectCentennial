@@ -11,6 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { WorkshopProfileComponent } from './workshop-profile/workshop-profile.component';
 import { WorkshopPriceFormComponent } from './workshop-price/price-form.component';
 import { WorkshopPriceListComponent } from './workshop-price/price-list.component';
+import { WorkshopAppointmentListComponent } from './workshop-appointment/appointment-list.component';
 
 @NgModule({
 	imports: [
@@ -26,7 +27,8 @@ import { WorkshopPriceListComponent } from './workshop-price/price-list.componen
 		WorkshopAddressFormComponent,
 		WorkshopProfileComponent,
 		WorkshopPriceListComponent,
-		WorkshopPriceFormComponent
+		WorkshopPriceFormComponent,
+		WorkshopAppointmentListComponent
 	]
 })
 export class WorkshopModule { }
