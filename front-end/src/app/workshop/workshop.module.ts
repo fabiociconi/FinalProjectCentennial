@@ -9,6 +9,8 @@ import { WorkshopAddressFormComponent } from './workshop-address/address-form.co
 import { WorkshopAddressListComponent } from './workshop-address/address-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { WorkshopProfileComponent } from './workshop-profile/workshop-profile.component';
+import { WorkshopPriceFormComponent } from './workshop-price/price-form.component';
+import { WorkshopPriceListComponent } from './workshop-price/price-list.component';
 
 @NgModule({
 	imports: [
@@ -22,7 +24,9 @@ import { WorkshopProfileComponent } from './workshop-profile/workshop-profile.co
 		WorkshopHomeComponent,
 		WorkshopAddressListComponent,
 		WorkshopAddressFormComponent,
-		WorkshopProfileComponent
+		WorkshopProfileComponent,
+		WorkshopPriceListComponent,
+		WorkshopPriceFormComponent
 	]
 })
 export class WorkshopModule { }
