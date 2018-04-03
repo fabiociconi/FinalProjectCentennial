@@ -3,7 +3,7 @@ label {
 	margin-bottom: 10px;
 }
 
-input, button {
+input, select, button {
 	border-radius: 3px;
 	font-family: "AmsiPro-Regular", Sans-Serif;
 	font-size: 16px;
@@ -17,6 +17,15 @@ input {
 	box-sizing: border-box;
 	color: #444444;
 }
+
+select {
+	height: 50px;
+	width: 100%;
+	color: #444444;
+	border: 0;
+	background: #ECF0F1 !important;
+	padding: 15px;
+ }
 
 button {
 	padding: 15px 45px;
