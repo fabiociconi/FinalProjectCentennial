@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators } from '@angular/forms';
+import { CustomerService } from '@app/service/customer.service';
+import { LayoutService } from '@app/service/layout.service';
 
 @Component({
   selector: 'app-customer-search',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerSearchComponent implements OnInit {
 
-  constructor() { }
+  public ready = false;
+
+  constructor(private customer: CustomerService, private layout: LayoutService) { }
 
   ngOnInit() {
+	this.layout.setTitle('Search');
   }
 
 }
