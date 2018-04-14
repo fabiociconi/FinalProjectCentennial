@@ -1,0 +1,39 @@
+<div class="main-container" style="background-color: #8ec1ff; width: 100%; height: 100%;">
+	<div class="search-container standard-spacing">
+		<!--<form *ngIf="ready" [formGroup]="addressForm" (ngSubmit)="save(addressForm.getRawValue())">-->
+			<label>Workshop</label>
+			<!--<input name="workshop" formControlName="" />-->
+			<select name="workshop">
+				<option value=""></option>
+				<option value="Test">Test</option>
+			</select>
+			<div class="form-separator"></div>
+
+			<label>My current location</label>
+			<select name="currentLocation">
+				<option value=""></option>
+				<option value="Test">Test</option>
+			</select>
+			<div class="form-separator"></div>
+
+			<label>Distance from my location</label>
+			<input type="range">
+			<!--<mat-slider min="10" max="250" step="10" value="10"></mat-slider>-->
+			<div class="form-separator"></div>
+
+			<label>Services</label>
+			<input type="checkbox"> Battery test
+			<!--<mat-checkbox formControlName="">Battery test</mat-checkbox>
+			<mat-checkbox formControlName="">Brake inspection</mat-checkbox>
+			<mat-checkbox formControlName="">Engine Diagnostics</mat-checkbox>
+			<mat-checkbox formControlName="">Fuel injector</mat-checkbox>
+			<mat-checkbox formControlName="">Oil change</mat-checkbox>
+			<mat-checkbox formControlName="">Steering and suspention inspection</mat-checkbox>
+			<mat-checkbox formControlName="">Tire rotation and inflation</mat-checkbox>
+			<mat-checkbox formControlName="">Windshield washer</mat-checkbox>-->
+			<div class="form-separator"></div>
+
+			<button type="submit">Search</button>
+		<!--</form>-->
+	</div>
+</div>

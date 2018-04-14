@@ -12,6 +12,7 @@ import { CustomerAddressListComponent } from './customer-address/address-list.co
 import { CustomerAddressFormComponent } from './customer-address/address-form.component';
 import { SharedModule } from '../shared/shared.module';
 import { CustomerAppointmentListComponent } from './customer-appointment/appointment-list.component';
+import { CustomerSearchComponent } from './customer-search/customer-search.component';
 
 @NgModule({
 	imports: [
@@ -28,7 +29,8 @@ import { CustomerAppointmentListComponent } from './customer-appointment/appoint
 		CarFormComponent,
 		CustomerAddressListComponent, 
 		CustomerAddressFormComponent,
-		CustomerAppointmentListComponent
+		CustomerAppointmentListComponent,
+		CustomerSearchComponent
 	]
 })
 export class CustomerModule { }
