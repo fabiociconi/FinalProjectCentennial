@@ -8,6 +8,7 @@ import { CarFormComponent } from './cutomer-car/car-form.component';
 import { CustomerAddressListComponent } from './customer-address/address-list.component';
 import { CustomerAddressFormComponent } from './customer-address/address-form.component';
 import { CustomerAppointmentListComponent } from './customer-appointment/appointment-list.component';
+import { CustomerSearchComponent } from './customer-search/customer-search.component';
 
 const routes: Routes = [
 	{
@@ -41,6 +42,10 @@ const routes: Routes = [
 			{
 				path: 'appointments',
 				component: CustomerAppointmentListComponent
+			},
+			{
+				path: 'search',
+				component: CustomerSearchComponent
 			}
 		]
 	}
