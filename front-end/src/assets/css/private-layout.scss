@@ -89,7 +89,7 @@ $left-menu-width: 283px;
 	top: $top-bar-height;
 	bottom: 0;
 	overflow-y: scroll;
-
+	
 	.single-form-container {
 		width: 50%;
 	}
@@ -99,6 +99,15 @@ $left-menu-width: 283px;
 		width: 300px;
 		height: 100%;
 		overflow-y: scroll;
+	}
+
+	.welcome {
+		width: 100%;
+		margin-top: 25%;
+		margin-left: 0;
+		text-align: center;
+		font-family: "AmsiPro-XLight", Sans-Serif;
+		font-size: 30px;
 	}
 }
 
