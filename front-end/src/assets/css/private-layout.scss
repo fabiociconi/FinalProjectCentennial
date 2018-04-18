@@ -107,11 +107,15 @@ $left-menu-width: 283px;
 		height: 100%;
 
 		.welcome {
+			$height: 28px;
+			$padding: 10px;
+			padding: $padding;
+			white-space: nowrap;
+			height: $height;
 			position: absolute;
 			top: 50%;
 			width: 100%;
-			margin-top: -40px;
-			margin-left: 0;
+			margin-top: -($height + $padding) / 2;
 			text-align: center;
 			font-family: "AmsiPro-XLight", Sans-Serif;
 			font-size: 30px;
