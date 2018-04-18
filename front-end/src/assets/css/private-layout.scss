@@ -101,13 +101,21 @@ $left-menu-width: 283px;
 		overflow-y: scroll;
 	}
 
-	.welcome {
+	.welcome-container {
+		position: relative;
 		width: 100%;
-		margin-top: 25%;
-		margin-left: 0;
-		text-align: center;
-		font-family: "AmsiPro-XLight", Sans-Serif;
-		font-size: 30px;
+		height: 100%;
+
+		.welcome {
+			position: absolute;
+			top: 50%;
+			width: 100%;
+			margin-top: -40px;
+			margin-left: 0;
+			text-align: center;
+			font-family: "AmsiPro-XLight", Sans-Serif;
+			font-size: 30px;
+		}
 	}
 }
 
