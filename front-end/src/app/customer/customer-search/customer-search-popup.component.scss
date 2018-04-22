@@ -1,21 +1,21 @@
 .search-pop-up {
-  .name {
-    font-size: 16px;
-    font-weight: bold;
-  }
+	background: white;
+	padding: 20px;
+	font-family: "AmsiPro-Regular", Sans-Serif;
+	font-size: 14px;
+	border-radius: 3px;
 
-  .address {
-    padding-top: 10px;
-    font-size: 14px;
-  }
+	.address, .new-appointment {
+		padding-top: 12px;
+	}
 
-  .new-appointment {
-    margin: 10px 0 0;
-    text-align: center;
-  }
+	.name {
+		font-family: "AmsiPro-Bold", Sans-Serif;
+		font-size: 17px;
+	}
 
-  .description {
-    padding-top: 10px;
-    font-size: 12px;
-  }
+	.description {
+		padding-top: 4px;
+		font-size: 12px;
+	}
 }
