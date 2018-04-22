@@ -38,10 +38,9 @@
 	</div>
 	<div class="map">
 		<agm-map [latitude]="latitude" [longitude]="longitude" style="height: 100%; width: 100%;">
-			<agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
 			<ng-container *ngFor="let workshop of workshops">
-				<agm-marker *ngFor="let address of workshop.address" [iconUrl]="'/assets/img/map-marker.png'" [latitude]="address.Latitude"
-				 [longitude]="address.Longitude">
+				<!-- [iconUrl]="'/assets/img/marker2.png'" -->
+				<agm-marker *ngFor="let address of workshop.address" [latitude]="address.Latitude" [longitude]="address.Longitude">
 					<agm-snazzy-info-window [maxWidth]="300" [maxHeight]="450" [closeWhenOthersOpen]="true">
 						<ng-template>
 							<app-customer-search-popup [workshop]="workshop" [address]="address"></app-customer-search-popup>

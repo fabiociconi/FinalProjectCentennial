@@ -14,8 +14,8 @@ export class CustomerSearchComponent implements OnInit {
 
 	public ready = false;
 	public addresses: AddressEntity[] = [];
-	public longitude = 0;
-	public latitude = 0;
+	public latitude = 43.642509;
+	public longitude = -79.387039;
 	public workshops: WorkshopEntity[] = [];
 
 	constructor(
