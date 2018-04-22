@@ -8,6 +8,7 @@ import { WorkshopService } from '@app/service/workshop.service';
 import { LayoutService } from '@app/service/layout.service';
 import { AddressEntity } from '@app/entity';
 import { MatSnackBar } from '@angular/material';
+import { ConfirmModalService } from '../../shared/confirm-modal.service';
 
 @Component({
 	selector: 'app-address-form',
@@ -27,6 +28,7 @@ export class WorkshopAddressFormComponent implements OnInit {
 		private workshop: WorkshopService,
 		private layout: LayoutService,
 		private router: Router,
+		private confirmService: ConfirmModalService,
 		private activatedRoute: ActivatedRoute,
 		private snackBar: MatSnackBar) { }
 
@@ -63,9 +65,32 @@ export class WorkshopAddressFormComponent implements OnInit {
 	}
 
 	public delete(): void {
-		this.workshop.deleteAddress(this.id)
-			.subscribe(res => {
-				console.log(res);
+
+		this.confirmService.confirm('Deleting Address', 'Would you like to delete this address?')
+			.subscribe(confirm => {
+
+				if (!confirm) {
+					return;
+				}
+
+				this.workshop.deleteAddress(this.id)
+					.subscribe(res => {
+
+						if (!res.hasError) {
+							this.router.navigate(['/workshop/address']);
+
+							this.snackBar.open('Address deleted', null, {
+								duration: 2000
+							});
+
+							return;
+						}
+
+						this.snackBar.open('Something went strange ...', null, {
+							duration: 2000
+						});
+					});
+
 			});
 	}
 
@@ -100,7 +125,7 @@ export class WorkshopAddressFormComponent implements OnInit {
 			.addValidator(c => c.country, Validators.required)
 			.addValidator(c => c.postalcode, Validators.required)
 			.build(address);
-		
+
 		this.address = address;
 		this.ready = true;
 	}

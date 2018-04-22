@@ -9,4 +9,12 @@ export class CompanyEntity extends EntityBase {
 export class WorkshopEntity extends EntityBase {
 	company: CompanyEntity;
 	address: AddressEntity[];
+	priceTable: WorkshopPriceTableEntity[];
+}
+
+export class WorkshopPriceTableEntity {
+	id: number;
+	name: string;
+	description: string;
+	price: number;
 }

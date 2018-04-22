@@ -8,6 +8,7 @@ import { CustomerService } from '@app/service/customer.service';
 import { LayoutService } from '@app/service/layout.service';
 import { CarEntity } from '@app/entity';
 import { MatSnackBar } from '@angular/material';
+import { ConfirmModalService } from '../../shared/confirm-modal.service';
 
 @Component({
 	selector: 'app-car-form',
@@ -27,6 +28,7 @@ export class CarFormComponent implements OnInit {
 		private layout: LayoutService,
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
+		private confirmService: ConfirmModalService,
 		private snackBar: MatSnackBar) { }
 
 	ngOnInit() {
@@ -62,9 +64,32 @@ export class CarFormComponent implements OnInit {
 	}
 
 	public delete(): void {
-		this.customer.deleteCar(this.id)
-			.subscribe(res => {
-				console.log(res);
+
+		this.confirmService.confirm('Deleting Car', 'Would you like to delete this car')
+			.subscribe(confirm => {
+
+				if (!confirm) {
+					return;
+				}
+
+				this.customer.deleteCar(this.id)
+					.subscribe(res => {
+
+						if (!res.hasError) {
+							this.router.navigate(['/customer/car']);
+
+							this.snackBar.open('Car deleted', null, {
+								duration: 2000
+							});
+
+							return;
+						}
+
+						this.snackBar.open('Something went strange ...', null, {
+							duration: 2000
+						});
+					});
+
 			});
 	}
 

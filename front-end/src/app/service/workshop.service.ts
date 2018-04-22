@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PersonEntity, CarEntity, AddressEntity, CompanyEntity, WorkshopEntity } from '@app/entity';
+import { PersonEntity, CarEntity, AddressEntity, CompanyEntity, WorkshopEntity, WorkshopPriceTableEntity } from '@app/entity';
 import { Observable } from 'rxjs/Observable';
 import { Execute } from 'xcommon/entity';
+import { ServicesEntity } from '../../../../entity';
 
 @Injectable()
 export class WorkshopService {
@@ -13,12 +14,16 @@ export class WorkshopService {
 		return this.http.get<CompanyEntity>('/api/workshop');
 	}
 
-	public saveProfile(entity: CompanyEntity): Observable<Execute<CompanyEntity>> { 
+	public saveProfile(entity: CompanyEntity): Observable<Execute<CompanyEntity>> {
 		return this.http.post<Execute<CompanyEntity>>('/api/workshop', entity);
 	}
 
 	public getAddresses(): Observable<AddressEntity[]> {
 		return this.http.get<AddressEntity[]>('/api/workshop/address');
+	}
+
+	public getServices(): Observable<ServicesEntity[]> {
+		return this.http.get<ServicesEntity[]>('/api/workshop/services');
 	}
 
 	public getAddress(id: string): Observable<AddressEntity> {
@@ -31,5 +36,21 @@ export class WorkshopService {
 
 	public deleteAddress(id: string): Observable<Execute<AddressEntity>> {
 		return this.http.delete<Execute<AddressEntity>>(`/api/workshop/address/${id}`);
+	}
+
+	public getPricesTable(): Observable<WorkshopPriceTableEntity[]> {
+		return this.http.get<WorkshopPriceTableEntity[]>(`/api/workshop/pricetable`);
+	}
+
+	public getPriceTable(id: string): Observable<WorkshopPriceTableEntity> {
+		return this.http.get<WorkshopPriceTableEntity>(`/api/workshop/pricetable/${id}`);
+	}
+
+	public savePriceTable(entity: WorkshopPriceTableEntity): Observable<Execute<WorkshopPriceTableEntity>> {
+		return this.http.post<Execute<WorkshopPriceTableEntity>>('/api/workshop/pricetable/', entity);
+	}
+
+	public deletePriceTable(id: string): Observable<Execute<WorkshopPriceTableEntity>> {
+		return this.http.delete<Execute<WorkshopPriceTableEntity>>(`/api/workshop/pricetable/${id}`);
 	}
 }

@@ -7,20 +7,27 @@
 			<th width="10%" align="center">Edit</th>
 		</tr>
 
-		<tr><!-- <tr *ngIf="prices.length == 0"> -->
-			<td colspan="4" align="center">No prices registered at the moment</td>
-		</tr>
+		<tr>
+			<tr *ngIf="prices.length == 0">
+				<td colspan="4" align="center">No prices registered at the moment</td>
+			</tr>
 
-		<!--
+
 			<tr *ngFor="let price of prices; let i = index">
-			<td>{{ i + 1 }}</td>
-			<td>{{ address.street }}</td>
-			<td>${{ address.number }}</td>
-			<td align="center"><a [routerLink]="[price._id]"><img src="assets/img/edit-icon.png" width="25" /></a></td>
-		</tr>
-		-->
+				<td>{{ i + 1 }}</td>
+				<td>{{ price.name }}</td>
+				<td>{{ price.price | currency }}</td>
+				<td align="center">
+					<a [routerLink]="[price.id]">
+						<img src="assets/img/edit-icon.png" width="25" />
+					</a>
+				</td>
+			</tr>
+
 	</table>
 
 	<div class="form-separator"></div>
-	<a routerLink="new"><button>Add new prices</button></a>
+	<a routerLink="new">
+		<button>Add new prices</button>
+	</a>
 </div>

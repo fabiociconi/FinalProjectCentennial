@@ -4,27 +4,27 @@
 	<div class="single-form-container standard-spacing">
 		<form *ngIf="ready" [formGroup]="addressForm" (ngSubmit)="save(addressForm.getRawValue())">
 			<label>Street</label>
-			<input name="street" formControlName="street" />
+			<input name="street" formControlName="street" readonly />
 			<div class="form-separator"></div>
 
 			<label>Number</label>
-			<input name="number" formControlName="number" />
+			<input name="number" formControlName="number" readonly />
 			<div class="form-separator"></div>
 
 			<label>City</label>
-			<input name="city" formControlName="city" />
+			<input name="city" formControlName="city" readonly />
 			<div class="form-separator"></div>
 
 			<label>Province</label>
-			<input name="province" formControlName="province" />
+			<input name="province" formControlName="province" readonly />
 			<div class="form-separator"></div>	
 			
 			<label>Country</label>
-			<input name="country" formControlName="country" />
+			<input name="country" formControlName="country" readonly />
 			<div class="form-separator"></div>	
 
 			<label>Postal Code</label>
-			<input name="postalcode" formControlName="postalcode" />
+			<input name="postalcode" formControlName="postalcode" readonly />
 			<div class="form-separator"></div>
 
 			<button type="button" routerLink="/customer/address" class="back">Back</button>

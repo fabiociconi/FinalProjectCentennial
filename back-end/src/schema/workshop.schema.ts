@@ -10,11 +10,23 @@ export const CompanySchema = new mongoose.Schema({
 	__v: Number
 });
 
+export const PriceTable = new mongoose.Schema(
+	{
+		id: Number,
+		name: String,
+		description: String,
+		price: Number
+	},
+	{
+		_id: false
+	});
+
 export const WorkshopSchema = new mongoose.Schema(
 	{
 		_id: String,
 		company: CompanySchema,
-		address: [AddressSchema]
+		address: [AddressSchema],
+		priceTable: [PriceTable]
 	},
 	{
 		_id: false

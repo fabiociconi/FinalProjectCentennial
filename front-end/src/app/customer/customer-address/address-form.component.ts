@@ -8,6 +8,7 @@ import { CustomerService } from '@app/service/customer.service';
 import { LayoutService } from '@app/service/layout.service';
 import { AddressEntity } from '@app/entity';
 import { MatSnackBar } from '@angular/material';
+import { ConfirmModalService } from '../../shared/confirm-modal.service';
 
 @Component({
 	selector: 'app-address-form',
@@ -27,6 +28,7 @@ export class CustomerAddressFormComponent implements OnInit {
 		private customer: CustomerService,
 		private layout: LayoutService,
 		private router: Router,
+		private confirmService: ConfirmModalService,
 		private activatedRoute: ActivatedRoute,
 		private snackBar: MatSnackBar) { }
 
@@ -63,10 +65,34 @@ export class CustomerAddressFormComponent implements OnInit {
 	}
 
 	public delete(): void {
-		this.customer.deleteAddress(this.id)
-			.subscribe(res => {
-				console.log(res);
+
+		this.confirmService.confirm('Deleting Address', 'Would you like to delete this address?')
+			.subscribe(confirm => {
+
+				if (!confirm) {
+					return;
+				}
+
+				this.customer.deleteAddress(this.id)
+					.subscribe(res => {
+
+						if (!res.hasError) {
+							this.router.navigate(['/customer/address']);
+
+							this.snackBar.open('Address deleted', null, {
+								duration: 2000
+							});
+
+							return;
+						}
+
+						this.snackBar.open('Something went strange ...', null, {
+							duration: 2000
+						});
+					});
+
 			});
+
 	}
 
 	private load(id: string): void {
@@ -100,7 +126,7 @@ export class CustomerAddressFormComponent implements OnInit {
 			.addValidator(c => c.country, Validators.required)
 			.addValidator(c => c.postalcode, Validators.required)
 			.build(address);
-		
+
 		this.address = address;
 		this.ready = true;
 	}

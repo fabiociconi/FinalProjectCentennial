@@ -15,3 +15,9 @@ export class AddressEntity extends EntityBase {
 	Latitude: number;
 	Longitude: number;
 }
+
+export class ServicesEntity {
+	id: number;
+	name: string;
+	description: string;
+}

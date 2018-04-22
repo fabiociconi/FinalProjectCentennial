@@ -1,21 +1,31 @@
 <div class="main-container standard-spacing">
 	<div class="single-form-container">
-		<!--<form *ngIf="ready" [formGroup]="addressForm" (ngSubmit)="save(addressForm.getRawValue())">-->
-			<label>Service</label>
-			<select name="service">
-				<option value="Test">Test</option>
-			</select>
-			<div class="form-separator"></div>
+		<form *ngIf="ready" [formGroup]="priceTableForm" (ngSubmit)="save(priceTableForm.getRawValue())">
+			<div *ngIf="id === 'new'">
+				<label>Service</label>
+				<select name="service" (change)="onChange($event.target.value)">
+					<option *ngFor="let item of Services" value="{{ item.id }}">{{ item.name }}</option>
+				</select>
+				<div class="form-separator"></div>
+			</div>
+
+			<div *ngIf="id !== 'new'">
+				<label>Service name</label>
+				<input formControlName="name" readonly />
+				<div class="form-separator"></div>
+			</div>
 
 			<label>Price</label>
-			<input name="price" /><!-- formControlName="price" -->
+			<input formControlName="price" />
+			<div class="form-separator"></div>
+
+			<label>Description</label>
+			<input formControlName="description" readonly />
 			<div class="form-separator"></div>
 
 			<button type="button" routerLink="/workshop/price" class="back">Back</button>
-			<!--<button *ngIf="id !== 'new'" type="button" (click)="delete()" class="delete">Delete</button>
-			<button type="submit" [disabled]="!(addressForm.valid)">Save</button>-->
-			<button type="button" class="delete">Delete</button>
-			<button type="submit">Save</button>
-		<!--</form>-->
+			<button *ngIf="id !== 'new'" type="button" (click)="delete()" class="delete">Delete</button>
+			<button type="submit" [disabled]="!(priceTableForm.valid)">Save</button>
+		</form>
 	</div>
 </div>
