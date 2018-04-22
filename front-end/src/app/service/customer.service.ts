@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PersonEntity, CarEntity, AddressEntity } from '@app/entity';
+import { PersonEntity, CarEntity, AddressEntity, WorkshopEntity } from '@app/entity';
 import { Observable } from 'rxjs/Observable';
 import { Execute } from 'xcommon/entity';
 
@@ -47,5 +47,9 @@ export class CustomerService {
 
 	public deleteAddress(id: string): Observable<Execute<AddressEntity>> {
 		return this.http.delete<Execute<AddressEntity>>(`/api/customer/address/${id}`);
+	}
+
+	public findworkshop(): Observable<WorkshopEntity[]> {
+		return this.http.get<WorkshopEntity[]>('/api/customer/findworkshop');
 	}
 }

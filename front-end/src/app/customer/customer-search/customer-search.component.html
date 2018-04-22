@@ -1,29 +1,29 @@
 <div class="main-container" style="background-color: #8ec1ff; width: 100%; height: 100%;">
 	<div class="search-container standard-spacing">
 		<!--<form *ngIf="ready" [formGroup]="addressForm" (ngSubmit)="save(addressForm.getRawValue())">-->
-			<label>Workshop</label>
-			<!--<input name="workshop" formControlName="" />-->
-			<select name="workshop">
-				<option value=""></option>
-				<option value="Test">Test</option>
-			</select>
-			<div class="form-separator"></div>
+		<label>Workshop</label>
+		<!--<input name="workshop" formControlName="" />-->
+		<select name="workshop">
+			<option value="-1">Select</option>
+			<option *ngFor="let workshop of workshops" value="{{ workshop._id }}">{{ workshop.company.comertialName }}</option>
+		</select>
+		<div class="form-separator"></div>
 
-			<label>My current location</label>
-			<select name="currentLocation">
-				<option value=""></option>
-				<option value="Test">Test</option>
-			</select>
-			<div class="form-separator"></div>
+		<label>My current location</label>
+		<select name="currentLocation" (change)="setLocation($event.target.value)">
+			<option value="-1">Select</option>
+			<option *ngFor="let address of addresses" value="{{ address._id }}">{{ address.number }}, {{ address.street }} - {{ address.province }}</option>
+		</select>
+		<div class="form-separator"></div>
 
-			<label>Distance from my location</label>
-			<input type="range">
-			<!--<mat-slider min="10" max="250" step="10" value="10"></mat-slider>-->
-			<div class="form-separator"></div>
+		<label>Distance from my location</label>
+		<input type="range">
+		<!--<mat-slider min="10" max="250" step="10" value="10"></mat-slider>-->
+		<div class="form-separator"></div>
 
-			<label>Services</label>
-			<input type="checkbox"> Battery test
-			<!--<mat-checkbox formControlName="">Battery test</mat-checkbox>
+		<label>Services</label>
+		<input type="checkbox"> Battery test
+		<!--<mat-checkbox formControlName="">Battery test</mat-checkbox>
 			<mat-checkbox formControlName="">Brake inspection</mat-checkbox>
 			<mat-checkbox formControlName="">Engine Diagnostics</mat-checkbox>
 			<mat-checkbox formControlName="">Fuel injector</mat-checkbox>
@@ -31,9 +31,24 @@
 			<mat-checkbox formControlName="">Steering and suspention inspection</mat-checkbox>
 			<mat-checkbox formControlName="">Tire rotation and inflation</mat-checkbox>
 			<mat-checkbox formControlName="">Windshield washer</mat-checkbox>-->
-			<div class="form-separator"></div>
+		<div class="form-separator"></div>
 
-			<button type="submit">Search</button>
+		<button type="submit">Search</button>
 		<!--</form>-->
+	</div>
+	<div class="map">
+		<agm-map [latitude]="latitude" [longitude]="longitude" style="height: 100%; width: 100%;">
+			<agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+			<ng-container *ngFor="let workshop of workshops">
+				<agm-marker *ngFor="let address of workshop.address" [iconUrl]="'/assets/img/map-marker.png'" [latitude]="address.Latitude"
+				 [longitude]="address.Longitude">
+					<agm-snazzy-info-window [maxWidth]="300" [maxHeight]="450" [closeWhenOthersOpen]="true">
+						<ng-template>
+							<app-customer-search-popup [workshop]="workshop" [address]="address"></app-customer-search-popup>
+						</ng-template>
+					</agm-snazzy-info-window>
+				</agm-marker>
+			</ng-container>
+		</agm-map>
 	</div>
 </div>

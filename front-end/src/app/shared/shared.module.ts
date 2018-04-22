@@ -18,7 +18,7 @@ import { MatDialogModule } from '@angular/material';
 		AgmSnazzyInfoWindowModule
 	],
 	declarations: [GoogleMaps, ConfirmModalComponent],
-	exports: [GoogleMaps],
+	exports: [GoogleMaps, AgmCoreModule, AgmSnazzyInfoWindowModule],
 	providers: [ConfirmModalService],
 	entryComponents: [ConfirmModalComponent]
 })

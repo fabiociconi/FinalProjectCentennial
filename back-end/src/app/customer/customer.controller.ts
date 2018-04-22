@@ -1,17 +1,18 @@
 import { Get, Post, Controller, Param, Body, Req, UseGuards, Delete } from '@nestjs/common';
 import { ApiBearerAuth, ApiUseTags, ApiResponse, ApiImplicitBody } from '@nestjs/swagger';
 
-import { TokenPayload, PersonEntity, CarEntity, AddressEntity, RoleType } from '@app/entity';
+import { TokenPayload, PersonEntity, CarEntity, AddressEntity, RoleType, WorkshopEntity } from '@app/entity';
 import { CustomerService } from '@app/service/customer.service';
 import { RolesGuard, Roles } from '@app/guards';
 import { Execute } from 'xcommon/entity';
+import { WorkshopService } from '../service';
 
 @ApiBearerAuth()
 @ApiUseTags('customer')
 @Roles(RoleType.Customer)
 @Controller('api/customer')
 export class ProfilerController {
-	constructor(private customerService: CustomerService) {
+	constructor(private customerService: CustomerService, private workshopService: WorkshopService) {
 	}
 
 	@Get()
@@ -85,5 +86,11 @@ export class ProfilerController {
 	public async deleteAddress(@Req() req: any, @Param('id') idAddress: string): Promise<Execute<AddressEntity>> {
 		const user: TokenPayload = req.user;
 		return await this.customerService.deleteAddress(user.email, idAddress);
+	}
+
+	@Get('findworkshop')
+	@ApiResponse({ status: 200, type: WorkshopEntity, isArray: true })
+	public async findWorkshop(@Req() req: any): Promise<WorkshopEntity[]> {
+		return await this.workshopService.findAll();
 	}
 }

@@ -32,6 +32,11 @@ export class WorkshopService {
 		return result;
 	}
 
+	public async findAll(): Promise<WorkshopEntity[]> {
+		const result = await this.workshopModel.find({ }, { company: 1, address: 1, priceTable: 1,  }).exec();
+		return result;
+	}
+
 	public async findPricesTable(_id: string): Promise<WorkshopPriceTableEntity[]> {
 		const result = await this.workshopModel.findById(_id, { priceTable: 1 }).exec();
 		return result ? result.priceTable : null;

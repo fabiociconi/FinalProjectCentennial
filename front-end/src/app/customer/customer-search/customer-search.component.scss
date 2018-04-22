@@ -1,0 +1,12 @@
+.main-container {
+	display: flex;
+	flex-direction: row;
+
+	.search-container {
+		
+	}
+
+	.map {
+		flex: 1 0 auto;
+	}
+}
