@@ -1,18 +1,22 @@
-import { Get, Post, Controller, Param, Body, Req, UseGuards, Delete } from '@nestjs/common';
+import { Get, Post, Controller, Param, Body, Req, UseGuards, Delete, Query } from '@nestjs/common';
 import { ApiBearerAuth, ApiUseTags, ApiResponse, ApiImplicitBody } from '@nestjs/swagger';
 
-import { TokenPayload, PersonEntity, CarEntity, AddressEntity, RoleType, WorkshopEntity } from '@app/entity';
+import { TokenPayload, PersonEntity, CarEntity, AddressEntity, RoleType, WorkshopEntity, SearchFilter, AppointmentEntity } from '@app/entity';
 import { CustomerService } from '@app/service/customer.service';
 import { RolesGuard, Roles } from '@app/guards';
 import { Execute } from 'xcommon/entity';
 import { WorkshopService } from '../service';
+import { AppoitmentService } from '@app/service/appointment.service';
 
 @ApiBearerAuth()
 @ApiUseTags('customer')
 @Roles(RoleType.Customer)
 @Controller('api/customer')
 export class ProfilerController {
-	constructor(private customerService: CustomerService, private workshopService: WorkshopService) {
+	constructor(
+		private customerService: CustomerService, 
+		private workshopService: WorkshopService,
+		private appointmentService: AppoitmentService) {
 	}
 
 	@Get()
@@ -88,9 +92,29 @@ export class ProfilerController {
 		return await this.customerService.deleteAddress(user.email, idAddress);
 	}
 
-	@Get('findworkshop')
+	@Post('findworkshop')
 	@ApiResponse({ status: 200, type: WorkshopEntity, isArray: true })
-	public async findWorkshop(@Req() req: any): Promise<WorkshopEntity[]> {
-		return await this.workshopService.findAll();
+	public async findWorkshop(@Body() filter: SearchFilter): Promise<WorkshopEntity[]> {
+		return await this.workshopService.findAll(filter);
+	}
+
+	@Get('appoitment')
+	@ApiResponse({ status: 200, type: WorkshopEntity, isArray: true })
+	public async getAppointments(@Req() req: any): Promise<AppointmentEntity[]> {
+		const user: TokenPayload = req.user;
+		return await this.appointmentService.findByCustomer(user.email);
+	}
+
+	@Get('appoitment/:id')
+	@ApiResponse({ status: 200, type: WorkshopEntity, isArray: true })
+	public async getAppointment(@Req() req: any, @Param() id: string): Promise<AppointmentEntity> {
+		const user: TokenPayload = req.user;
+		return await this.appointmentService.findById(id);
+	}
+
+	@Post('appoitment')
+	@ApiResponse({ status: 200, type: WorkshopEntity, isArray: true })
+	public async saveAppointment(@Req() req: any, @Body() entity: AppointmentEntity): Promise<Execute<AppointmentEntity>> {
+		return await this.appointmentService.save(entity);
 	}
 }

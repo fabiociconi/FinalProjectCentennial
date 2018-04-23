@@ -1,8 +1,6 @@
 <div class="main-container" style="background-color: #8ec1ff; width: 100%; height: 100%;">
 	<div class="search-container standard-spacing">
-		<!--<form *ngIf="ready" [formGroup]="addressForm" (ngSubmit)="save(addressForm.getRawValue())">-->
 		<label>Workshop</label>
-		<!--<input name="workshop" formControlName="" />-->
 		<select name="workshop">
 			<option value="-1">Select</option>
 			<option *ngFor="let workshop of workshops" value="{{ workshop._id }}">{{ workshop.company.comertialName }}</option>
@@ -17,30 +15,18 @@
 		<div class="form-separator"></div>
 
 		<label>Distance from my location</label>
-		<input type="range">
-		<!--<mat-slider min="10" max="250" step="10" value="10"></mat-slider>-->
+		<mat-slider min="0" max="300" step="5" thumb-label="true" [value]="filter.distance" [(ngModel)]="filter.distance"></mat-slider>
 		<div class="form-separator"></div>
 
-		<label>Services</label>
-		<input type="checkbox"> Battery test
-		<!--<mat-checkbox formControlName="">Battery test</mat-checkbox>
-			<mat-checkbox formControlName="">Brake inspection</mat-checkbox>
-			<mat-checkbox formControlName="">Engine Diagnostics</mat-checkbox>
-			<mat-checkbox formControlName="">Fuel injector</mat-checkbox>
-			<mat-checkbox formControlName="">Oil change</mat-checkbox>
-			<mat-checkbox formControlName="">Steering and suspention inspection</mat-checkbox>
-			<mat-checkbox formControlName="">Tire rotation and inflation</mat-checkbox>
-			<mat-checkbox formControlName="">Windshield washer</mat-checkbox>-->
-		<div class="form-separator"></div>
-
-		<button type="submit">Search</button>
+		<button type="button" (click)="Search()">Search</button>
 		<!--</form>-->
 	</div>
 	<div class="map">
-		<agm-map [latitude]="latitude" [longitude]="longitude" style="height: 100%; width: 100%;">
+		<agm-map [latitude]="filter.latitude" [longitude]="filter.longitude" style="height: 100%; width: 100%;">
+			<agm-marker [latitude]="filter.latitude" [longitude]="filter.longitude"></agm-marker>
 			<ng-container *ngFor="let workshop of workshops">
-				<!-- [iconUrl]="'/assets/img/marker2.png'" -->
-				<agm-marker *ngFor="let address of workshop.address" [latitude]="address.Latitude" [longitude]="address.Longitude">
+				<agm-marker [iconUrl]="'/assets/img/marker2.png'" *ngFor="let address of workshop.address" [latitude]="address.Latitude"
+				 [longitude]="address.Longitude">
 					<agm-snazzy-info-window [maxWidth]="300" [maxHeight]="450" [closeWhenOthersOpen]="true">
 						<ng-template>
 							<app-customer-search-popup [workshop]="workshop" [address]="address"></app-customer-search-popup>

@@ -25,3 +25,14 @@ export const AddressSchema = new mongoose.Schema(
 		updatedAt: Date,
 		__v: Number
 	});
+
+export const AppointmentSchema = new mongoose.Schema(
+	{
+		idPerson: String,
+		idworkshop: String,
+		idCar: String,
+		status: Number,
+		createdAt: Date,
+		updatedAt: Date,
+		__v: Number
+	});

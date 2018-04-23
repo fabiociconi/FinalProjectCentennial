@@ -3,9 +3,10 @@ import { Component } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Execute } from 'xcommon/entity';
-import { AddressEntity, WorkshopEntity, CompanyEntity, ServicesEntity, WorkshopPriceTableEntity } from '@app/entity';
+import { AddressEntity, WorkshopEntity, CompanyEntity, ServicesEntity, WorkshopPriceTableEntity, SearchFilter } from '@app/entity';
 import { WorkshopSchema, AddressSchema } from '@app/schema';
 import { PreSaveDateCheck } from '@app/service/date.helper';
+import * as geodist from "geodist";
 
 @Component()
 export class WorkshopService {
@@ -32,8 +33,38 @@ export class WorkshopService {
 		return result;
 	}
 
-	public async findAll(): Promise<WorkshopEntity[]> {
-		const result = await this.workshopModel.find({ }, { company: 1, address: 1, priceTable: 1,  }).exec();
+	public async findAll(filter: SearchFilter): Promise<WorkshopEntity[]> {
+
+		const base = { lat: filter.latitude, lon: filter.longitude };
+		const result: WorkshopEntity[] = [];
+		const workshops = await this.workshopModel.find({}, { company: 1, address: 1, priceTable: 1, }).exec();
+
+		workshops.forEach(workshop => {
+
+			let item: WorkshopEntity = null;
+
+			workshop.address.forEach(address => {
+				const local = { lat: address.Latitude, lon: address.Longitude };
+
+				if (geodist(base, local, { limit: filter.distance })) {
+					if (item === null) {
+						item = {
+							_id: workshop._id,
+							company: workshop.company,
+							priceTable: workshop.priceTable,
+							address: []
+						};
+					}
+
+					item.address.push(address);
+				}
+			});
+
+			if (item !== null) {
+				result.push(item);
+			}
+		});
+
 		return result;
 	}
 

@@ -1,15 +1,17 @@
 import { Req, Get, Post, Delete, Controller, Param, Body } from '@nestjs/common';
 import { ApiBearerAuth, ApiUseTags, ApiResponse, ApiImplicitBody } from '@nestjs/swagger';
 
-import { WorkshopEntity, AddressEntity, TokenPayload, CompanyEntity, ServicesEntity, WorkshopPriceTableEntity } from '../../../../entity';
+import { WorkshopEntity, AddressEntity, TokenPayload, CompanyEntity, ServicesEntity, WorkshopPriceTableEntity, AppointmentEntity } from '../../../../entity';
 import { WorkshopService } from '../service/workshop.service';
 import { Execute } from 'xcommon/entity';
+import { AppoitmentService } from '@app/service/appointment.service';
+import { Query } from 'mongoose';
 
 @ApiBearerAuth()
 @ApiUseTags('workshop')
 @Controller('api/workshop')
 export class WorkshopController {
-	constructor(private workshopService: WorkshopService) {
+	constructor(private workshopService: WorkshopService, private appointmentService: AppoitmentService) {
 	}
 
 	@Get()
@@ -89,5 +91,25 @@ export class WorkshopController {
 	public async deletePriceTable(@Req() req: any, @Param('id') idAddress: number): Promise<Execute<WorkshopPriceTableEntity>> {
 		const user: TokenPayload = req.user;
 		return await this.workshopService.deletePriceTable(user.email, idAddress);
+	}
+
+	@Get('appoitment')
+	@ApiResponse({ status: 200, type: WorkshopEntity, isArray: true })
+	public async getAppointments(@Req() req: any): Promise<AppointmentEntity[]> {
+		const user: TokenPayload = req.user;
+		return await this.appointmentService.findByCustomer(user.email);
+	}
+
+	@Get('appoitment/:id')
+	@ApiResponse({ status: 200, type: WorkshopEntity, isArray: true })
+	public async getAppointment(@Req() req: any, @Param() id: string): Promise<AppointmentEntity> {
+		const user: TokenPayload = req.user;
+		return await this.appointmentService.findById(id);
+	}
+
+	@Post('appoitment')
+	@ApiResponse({ status: 200, type: WorkshopEntity, isArray: true })
+	public async saveAppointment(@Req() req: any, @Body() entity: AppointmentEntity): Promise<Execute<AppointmentEntity>> {
+		return await this.appointmentService.save(entity);
 	}
 }

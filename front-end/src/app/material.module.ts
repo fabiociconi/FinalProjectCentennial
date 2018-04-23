@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatCheckboxModule, MatSnackBarModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatSnackBarModule, MatSliderModule } from '@angular/material';
 
-const modules = [MatButtonModule, MatCheckboxModule, MatSnackBarModule];
+const modules = [MatButtonModule, MatSliderModule, MatCheckboxModule, MatSnackBarModule];
 
 @NgModule({
 	imports: modules,

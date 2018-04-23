@@ -3,10 +3,13 @@
 	flex-direction: row;
 
 	.search-container {
-		
+		mat-slider {
+			width: 100%;
+		}
 	}
 
 	.map {
 		flex: 1 0 auto;
+		clear: both;
 	}
 }

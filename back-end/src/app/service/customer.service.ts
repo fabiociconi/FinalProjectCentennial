@@ -32,8 +32,8 @@ export class CustomerService {
 		return result;
 	}
 
-	public async findCars(_id: string): Promise<CarEntity[]> {
-		const result = await this.customerModel.findById(_id, { cars: 1 }).exec();
+	public async findCars(idPerson: string): Promise<CarEntity[]> {
+		const result = await this.customerModel.findById(idPerson, { cars: 1 }).exec();
 		return result ? result.cars : null;
 	}
 

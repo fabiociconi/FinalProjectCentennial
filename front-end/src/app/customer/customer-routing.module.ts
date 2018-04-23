@@ -9,6 +9,7 @@ import { CustomerAddressListComponent } from './customer-address/address-list.co
 import { CustomerAddressFormComponent } from './customer-address/address-form.component';
 import { CustomerAppointmentListComponent } from './customer-appointment/appointment-list.component';
 import { CustomerSearchComponent } from './customer-search/customer-search.component';
+import { AppoinmentFormComponent } from './customer-appointment/appoinment-form.component';
 
 const routes: Routes = [
 	{
@@ -42,6 +43,14 @@ const routes: Routes = [
 			{
 				path: 'appointments',
 				component: CustomerAppointmentListComponent
+			},
+			{
+				path: 'appointment/:id',
+				component: AppoinmentFormComponent
+			},
+			{
+				path: 'appointment/:id/:workshop/:address',
+				component: AppoinmentFormComponent
 			},
 			{
 				path: 'search',
