@@ -26,7 +26,7 @@ export class WorkshopProfileComponent implements OnInit {
 
 	ngOnInit() {
 		this.layout.setTitle('Profile');
-		this.workshop.getProfile().subscribe(res => this.buildForm(res));
+		this.workshop.getProfile().subscribe(res => this.buildForm(res.company));
 	}
 
 	public save(entity: CompanyEntity): void {
@@ -56,7 +56,7 @@ export class WorkshopProfileComponent implements OnInit {
 			.addValidator(c => c.legalName, Validators.required)
 			.addValidator(c => c.phone, Validators.required)
 			.build(entity);
-		
+
 		this.ready = true;
 	}
 }

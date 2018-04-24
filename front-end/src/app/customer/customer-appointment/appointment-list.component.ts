@@ -20,7 +20,6 @@ export class CustomerAppointmentListComponent implements OnInit {
 		this.layout.setTitle('Appointments');
 		this.customer.findAppointments().subscribe(res => {
 			this.appointments = res;
-			console.log(res);
 		});
 	}
 

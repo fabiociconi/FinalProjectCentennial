@@ -8,13 +8,14 @@ import { WorkshopProfileComponent } from './workshop-profile/workshop-profile.co
 import { WorkshopPriceListComponent } from './workshop-price/price-list.component';
 import { WorkshopPriceFormComponent } from './workshop-price/price-form.component';
 import { WorkshopAppointmentListComponent } from './workshop-appointment/appointment-list.component';
+import { WorkshopAppointmentFormComponent } from './workshop-appointment/appoinment-form.component';
 
 const routes: Routes = [
-	{ 
-		path: '', 
-		component: WorkshopLayoutComponent, 
+	{
+		path: '',
+		component: WorkshopLayoutComponent,
 		children: [
-			{ 
+			{
 				path: '',
 				component: WorkshopHomeComponent
 			},
@@ -41,8 +42,12 @@ const routes: Routes = [
 			{
 				path: 'appointments',
 				component: WorkshopAppointmentListComponent
+			},
+			{
+				path: 'appointments/:id',
+				component: WorkshopAppointmentFormComponent
 			}
-		] 
+		]
 	}
 ];
 

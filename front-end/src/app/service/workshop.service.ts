@@ -10,8 +10,8 @@ export class WorkshopService {
 
 	constructor(private http: HttpClient) { }
 
-	public getProfile(): Observable<CompanyEntity> {
-		return this.http.get<CompanyEntity>('/api/workshop');
+	public getProfile(): Observable<WorkshopEntity> {
+		return this.http.get<WorkshopEntity>('/api/workshop');
 	}
 
 	public saveProfile(entity: CompanyEntity): Observable<Execute<CompanyEntity>> {
@@ -54,15 +54,15 @@ export class WorkshopService {
 		return this.http.delete<Execute<WorkshopPriceTableEntity>>(`/api/workshop/pricetable/${id}`);
 	}
 
-	public findAppointments(filter: SearchFilter): Observable<AppointmentEntity[]> {
-		return this.http.get<AppointmentEntity[]>('/api/customer/appoitment');
+	public findAppointments(): Observable<AppointmentEntity[]> {
+		return this.http.get<AppointmentEntity[]>('/api/workshop/appoitment');
 	}
 
 	public findAppointment(id: string): Observable<AppointmentEntity> {
-		return this.http.get<AppointmentEntity>(`/api/customer/appoitment/${id}`);
+		return this.http.get<AppointmentEntity>(`/api/workshop/appoitment/${id}`);
 	}
 
 	public saveAppointment(entity: AppointmentEntity): Observable<Execute<AppointmentEntity>> {
-		return this.http.post<Execute<AppointmentEntity>>(`/api/customer/appoitment/`, entity);
+		return this.http.post<Execute<AppointmentEntity>>(`/api/workshop/appoitment/`, entity);
 	}
 }

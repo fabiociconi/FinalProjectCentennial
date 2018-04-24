@@ -65,20 +65,6 @@ export class AppoitmentService {
 				item.services[x].selected = true;
 			}
 
-			for (let x = 0; x < workshop.priceTable.length; x++) {
-				const price = workshop.priceTable[x];
-
-				if (!item.services.find(x => x.id === price.id)) {
-					item.services.push({
-						description: price.description,
-						id: price.id,
-						name: price.name,
-						price: price.price,
-						selected: false
-					});
-				}
-			}
-
 			item.person = await this.customerService.find(item.idPerson);
 			item.workshop = workshop.company;
 			item.car = await this.customerService.findCar(item.idPerson, item.idCar);
