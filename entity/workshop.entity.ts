@@ -16,5 +16,6 @@ export class WorkshopPriceTableEntity {
 	id: number;
 	name: string;
 	description: string;
+	selected?: boolean;
 	price: number;
 }

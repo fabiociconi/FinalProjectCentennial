@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PersonEntity, CarEntity, AddressEntity, WorkshopEntity, SearchFilter } from '@app/entity';
+import { PersonEntity, CarEntity, AddressEntity, WorkshopEntity, SearchFilter, AppointmentEntity, CompanyEntity } from '@app/entity';
 import { Observable } from 'rxjs/Observable';
 import { Execute } from 'xcommon/entity';
 
@@ -49,7 +49,23 @@ export class CustomerService {
 		return this.http.delete<Execute<AddressEntity>>(`/api/customer/address/${id}`);
 	}
 
+	public findworkshopById(id: string, idAddress: string): Observable<WorkshopEntity> {
+		return this.http.get<WorkshopEntity>(`/api/customer/findworkshop/${id}/${idAddress}`);
+	}
+
 	public findworkshop(filter: SearchFilter): Observable<WorkshopEntity[]> {
 		return this.http.post<WorkshopEntity[]>('/api/customer/findworkshop', filter);
+	}
+
+	public findAppointments(): Observable<AppointmentEntity[]> {
+		return this.http.get<AppointmentEntity[]>('/api/customer/appoitment');
+	}
+
+	public findAppointment(id: string): Observable<AppointmentEntity> {
+		return this.http.get<AppointmentEntity>(`/api/customer/appoitment/${id}`);
+	}
+
+	public saveAppointment(entity: AppointmentEntity): Observable<Execute<AppointmentEntity>> {
+		return this.http.post<Execute<AppointmentEntity>>(`/api/customer/appoitment/`, entity);
 	}
 }

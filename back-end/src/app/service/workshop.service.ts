@@ -17,9 +17,20 @@ export class WorkshopService {
 		return await model.save();
 	}
 
-	public async find(id: string): Promise<CompanyEntity> {
-		const result = await this.workshopModel.findById(id, { company: 1 }).exec();
-		return result ? result.company : null;
+	public async find(_id: string, idaddress: string = null): Promise<WorkshopEntity> {
+		const result = await this.workshopModel.find({ _id }, { company: 1, priceTable: 1 }).exec();
+
+		if (result) {
+
+			if (idaddress) {
+				result[0].address = [];
+				result[0].address.push(await this.findAddress(_id, idaddress));
+			}
+
+			return result[0];
+		}
+
+		return null;
 	}
 
 	public async save(_id: string, company: CompanyEntity): Promise<Execute<CompanyEntity>> {
@@ -28,7 +39,8 @@ export class WorkshopService {
 		PreSaveDateCheck(company);
 
 		const dbResult = await this.workshopModel.update({ _id }, { company }).exec();
-		result.entity = await this.find(_id);
+		const x = await this.find(_id);
+		result.entity = x.company;
 
 		return result;
 	}

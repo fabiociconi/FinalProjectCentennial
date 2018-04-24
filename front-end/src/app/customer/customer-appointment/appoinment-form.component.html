@@ -1,3 +1,46 @@
 <div class="main-container standard-spacing">
-  appoinment-form works!
+	<div class="single-form-container">
+		<form *ngIf="ready" [formGroup]="appointmentForm" (ngSubmit)="save(appointmentForm.getRawValue())">
+
+			<div formGroupName="workshop">
+				<label>Workshop</label>
+				<input name="model" formControlName="comertialName" readonly />
+				<div class="form-separator"></div>
+			</div>
+
+			<div formGroupName="workshop">
+				<label>Workshop (Legal name)</label>
+				<input name="model" formControlName="legalName" readonly />
+				<div class="form-separator"></div>
+			</div>
+
+			<div formGroupName="workshop">
+				<label>Phone</label>
+				<input name="model" formControlName="phone" readonly />
+				<div class="form-separator"></div>
+			</div>
+
+			<div formGroupName="address">
+				<label>Address</label>
+				<input name="model" formControlName="street" readonly />
+				<div class="form-separator"></div>
+			</div>
+
+			<label>Car</label>
+			<select formControlName="idCar">
+				<option *ngFor="let item of cars" value="{{ item._id }}">{{ item.licencePlate }} - {{ item.brand }}</option>
+			</select>
+			<div class="form-separator"></div>
+
+			<div formArrayName="services">
+				<div *ngFor="let hotel of appointmentForm.controls.services.controls; let i = index" [formGroupName]="i">
+					<mat-checkbox formControlName="selected">{{ appointmentForm.controls.services.controls[i].get('name').value }} {{ appointmentForm.controls.services.controls[i].get('price').value | currency }}</mat-checkbox>
+				</div>
+			</div>
+
+			<button type="button" routerLink="/customer/appointments" class="back">Back</button>
+			<button *ngIf="id !== 'new'" type="button" (click)="delete()" class="delete">Delete</button>
+			<button type="submit" [disabled]="!(appointmentForm.valid && appointmentForm.dirty)">Save</button>
+		</form>
+	</div>
 </div>

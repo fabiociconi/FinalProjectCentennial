@@ -45,7 +45,7 @@ const routes: Routes = [
 				component: CustomerAppointmentListComponent
 			},
 			{
-				path: 'appointment/:id',
+				path: 'appointments/:id',
 				component: AppoinmentFormComponent
 			},
 			{

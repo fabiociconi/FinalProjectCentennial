@@ -13,7 +13,7 @@ import { AppoitmentService } from './appointment.service';
 		MongooseModule.forRoot(environment.database),
 		DataBaseSchemas],
 	components: [WorkshopService, CustomerService, AuthService, AppoitmentService],
-	exports: [WorkshopService, CustomerService, AuthService]
+	exports: [WorkshopService, CustomerService, AuthService, AppoitmentService]
 })
 export class ServiceModule implements NestModule {
 	public configure(consumer: MiddlewaresConsumer): MiddlewaresConsumer | void {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PersonEntity, CarEntity, AddressEntity, CompanyEntity, WorkshopEntity, WorkshopPriceTableEntity } from '@app/entity';
+import { PersonEntity, CarEntity, AddressEntity, CompanyEntity, WorkshopEntity, WorkshopPriceTableEntity, AppointmentEntity, SearchFilter } from '@app/entity';
 import { Observable } from 'rxjs/Observable';
 import { Execute } from 'xcommon/entity';
 import { ServicesEntity } from '../../../../entity';
@@ -52,5 +52,17 @@ export class WorkshopService {
 
 	public deletePriceTable(id: string): Observable<Execute<WorkshopPriceTableEntity>> {
 		return this.http.delete<Execute<WorkshopPriceTableEntity>>(`/api/workshop/pricetable/${id}`);
+	}
+
+	public findAppointments(filter: SearchFilter): Observable<AppointmentEntity[]> {
+		return this.http.get<AppointmentEntity[]>('/api/customer/appoitment');
+	}
+
+	public findAppointment(id: string): Observable<AppointmentEntity> {
+		return this.http.get<AppointmentEntity>(`/api/customer/appoitment/${id}`);
+	}
+
+	public saveAppointment(entity: AppointmentEntity): Observable<Execute<AppointmentEntity>> {
+		return this.http.post<Execute<AppointmentEntity>>(`/api/customer/appoitment/`, entity);
 	}
 }

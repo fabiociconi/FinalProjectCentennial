@@ -11,22 +11,22 @@
 			<th width="10%" align="center">Edit</th>
 		</tr>
 
-		<tr><!-- *ngIf="appointments.length == 0" -->
+		<tr *ngIf="appointments.length == 0">
 			<td colspan="8" align="center">No appointments registered at the moment</td>
 		</tr>
 
-		<!--
-		<tr *ngFor="let address of addresses; let i = index">
+		
+		<tr *ngFor="let appointment of appointments; let i = index">
 			<td>{{ i + 1 }}</td>
-			<td>{{ address.street }}</td>
-			<td>{{ address.number }}</td>
-			<td>{{ address.city }}</td>
-			<td>{{ address.province }}</td>
-			<td>{{ address.country }}</td>
-			<td>{{ address.postalcode }}</td>
-			<td align="center"><a [routerLink]="[address._id]"><img src="assets/img/edit-icon.png" width="25" /></a></td>
+			<td>{{ appointment.createdAt | date }}</td>
+			<td>Scheduled</td>
+			<td>{{ appointment.car.model }} - {{ appointment.car.licencePlate }} </td>
+			<td>{{ appointment.workshop.comertialName }}</td>
+			<td>{{ appointment.address.number }}, {{ appointment.address.street }}</td>
+			<td>{{ appointment.services.length }}</td>
+			<td align="center"><a [routerLink]="[appointment._id]"><img src="assets/img/edit-icon.png" width="25" /></a></td>
 		</tr>
-		-->
+		
 	</table>
 
 	<div class="form-separator"></div>

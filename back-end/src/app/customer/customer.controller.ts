@@ -1,7 +1,7 @@
 import { Get, Post, Controller, Param, Body, Req, UseGuards, Delete, Query } from '@nestjs/common';
 import { ApiBearerAuth, ApiUseTags, ApiResponse, ApiImplicitBody } from '@nestjs/swagger';
 
-import { TokenPayload, PersonEntity, CarEntity, AddressEntity, RoleType, WorkshopEntity, SearchFilter, AppointmentEntity } from '@app/entity';
+import { TokenPayload, PersonEntity, CarEntity, AddressEntity, RoleType, WorkshopEntity, SearchFilter, AppointmentEntity, CompanyEntity } from '@app/entity';
 import { CustomerService } from '@app/service/customer.service';
 import { RolesGuard, Roles } from '@app/guards';
 import { Execute } from 'xcommon/entity';
@@ -14,7 +14,7 @@ import { AppoitmentService } from '@app/service/appointment.service';
 @Controller('api/customer')
 export class ProfilerController {
 	constructor(
-		private customerService: CustomerService, 
+		private customerService: CustomerService,
 		private workshopService: WorkshopService,
 		private appointmentService: AppoitmentService) {
 	}
@@ -98,23 +98,56 @@ export class ProfilerController {
 		return await this.workshopService.findAll(filter);
 	}
 
+	@Get('findworkshop/:id/:idaddress')
+	@ApiResponse({ status: 200, type: WorkshopEntity })
+	public async findWorkshopById(@Param('id') id: string, @Param('idaddress') idaddress: string): Promise<WorkshopEntity> {
+		const x = id;
+		return await this.workshopService.find(id, idaddress);
+	}
+
 	@Get('appoitment')
 	@ApiResponse({ status: 200, type: WorkshopEntity, isArray: true })
 	public async getAppointments(@Req() req: any): Promise<AppointmentEntity[]> {
 		const user: TokenPayload = req.user;
-		return await this.appointmentService.findByCustomer(user.email);
+		return this.parseList(await this.appointmentService.findByCustomer(user.email));
 	}
 
 	@Get('appoitment/:id')
 	@ApiResponse({ status: 200, type: WorkshopEntity, isArray: true })
-	public async getAppointment(@Req() req: any, @Param() id: string): Promise<AppointmentEntity> {
+	public async getAppointment(@Req() req: any, @Param('id') id: string): Promise<AppointmentEntity> {
 		const user: TokenPayload = req.user;
-		return await this.appointmentService.findById(id);
+		return this.parse(await this.appointmentService.findById(id));
 	}
 
 	@Post('appoitment')
 	@ApiResponse({ status: 200, type: WorkshopEntity, isArray: true })
 	public async saveAppointment(@Req() req: any, @Body() entity: AppointmentEntity): Promise<Execute<AppointmentEntity>> {
 		return await this.appointmentService.save(entity);
+	}
+
+	private parseList(entity: any[]): AppointmentEntity[] {
+		const result: AppointmentEntity[] = [];
+		entity.forEach(res => result.push(this.parse(res)));
+		return result;
+	} 
+
+	private parse(entity: any): AppointmentEntity {
+		const a: AppointmentEntity = {
+			__v: entity.__v,
+			_id: entity._id,
+			createdAt: entity.createdAt,
+			updatedAt: entity.updatedAt,
+			idPerson: entity.idPerson,
+			idworkshop: entity.idworkshop,
+			idAddress: entity.idAddress,
+			idCar: entity.idCar,
+			status: entity.status,
+			person: entity.person,
+			workshop: entity.workshop,
+			address: entity.address,
+			car: entity.car,
+			services: entity.services
+		};
+		return a;
 	}
 }

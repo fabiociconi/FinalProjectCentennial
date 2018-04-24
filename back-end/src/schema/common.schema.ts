@@ -26,11 +26,26 @@ export const AddressSchema = new mongoose.Schema(
 		__v: Number
 	});
 
+
+export const AppointmentServicesSchema = new mongoose.Schema(
+	{
+		id: Number,
+		name: String,
+		description: String,
+		price: Number,
+		selected: { type: Boolean, default: true }
+	},
+	{
+		_id: false
+	});
+
 export const AppointmentSchema = new mongoose.Schema(
 	{
 		idPerson: String,
 		idworkshop: String,
+		idAddress: String,
 		idCar: String,
+		services: [AppointmentServicesSchema],
 		status: Number,
 		createdAt: Date,
 		updatedAt: Date,
